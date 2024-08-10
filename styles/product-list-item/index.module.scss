@@ -1,0 +1,210 @@
+.list {
+  &__item {
+    min-height: 453px;
+    position: relative;
+    padding: 16px;
+    transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 800px) {
+      background-color: #b7d2b4;
+    }
+
+    @media (max-width: 590px) {
+      padding-bottom: 75px;
+      min-height: 490px;
+    }
+
+    &__label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 0 8px;
+      z-index: 1;
+    }
+
+    &__new {
+      background-color: #FF5E2D;
+    }
+
+    &__bestseller {
+      background-color: #16D9A6;
+    }
+
+    &__actions {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+      z-index: 1;
+
+      @media (max-width: 800px) {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &__img {
+      margin: auto;
+      display: block;
+
+      img {
+        max-height: 332px;
+        max-width: 352px;
+        margin: 0 auto;
+        background: radial-gradient(52.53% 52.53% at 50% 47.47%, #74b589 0%, rgba(29, 37, 51, 0.00) 90%);
+        transition: background .2s ease-in-out;
+        object-fit: contain;
+      }
+    }
+
+    &__inner {
+      align-self: flex-start;
+    }
+
+    &__title {
+      margin: 0;
+      margin-bottom: 4px;
+
+      a {
+        color: #489765;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
+
+    &__price {
+      color: #489765;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    &__cart {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 32px;
+      background-color: #489765;
+      padding: 12px 24px !important;
+      transition: background-color .2s ease-in-out, opacity .2s ease-in-out, visibility .2s ease-in-out;
+
+      @media (max-width: 800px) {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      @media (max-width: 590px) {
+        left: 16px;
+      }
+
+      &:hover {
+        background-color: #D76F30;
+        transition: background-color .2s ease-in-out;
+      }
+
+      &_added {
+        opacity: 1;
+        visibility: visible;
+        background-color: #16D9A6 !important;
+        pointer-events: none !important;
+        cursor: none !important;
+
+        &:hover {
+          background-color: #16D9A6;
+        }
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+    }
+
+    &:hover {
+      background-color: #b7d2b4;
+      box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.20), 0px 0px 20px 0px rgba(0, 0, 0, 0.10);
+      transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+    }
+
+    &:hover &__actions, &:hover &__cart {
+      opacity: 1;
+      visibility: visible;
+      transition: background-color .2s ease-in-out, opacity .2s ease-in-out, visibility .2s ease-in-out;
+    }
+
+    &:hover &__img img {
+      transition: background .2s ease-in-out;
+      background: radial-gradient(52.53% 52.53% at 50% 47.47%, #dcdddf 0%, rgba(42, 50, 63, 0.00) 100%);
+    }
+  }
+
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  @media (max-width: 590px) {
+    margin-bottom: 16px;
+  }
+
+  &__stock {
+    margin-right: 16px;
+    padding-left: 8px;
+    font-size: 12px;
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    &__green {
+      color: #489765;
+      background-image: url('/img/green-ellipse.svg');
+    }
+
+    &__red {
+      color: #FF4747;
+      background-image: url('/img/red-ellipse.svg');
+    }
+  }
+
+  &__code {
+    color: #A5A8AD;
+    font-size: 12px;
+  }
+
+  &__color, &__composition {
+    display: block;
+    margin-bottom: 24px;
+    color: #6ab471;
+    font-size: 14px;
+  }
+
+  &__size_title {
+    color: #6ab471;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  &__count_title {
+    display: block;
+    margin-bottom: 12px;
+    color: #6ab471;
+    font-size: 14px;
+  }
+}
