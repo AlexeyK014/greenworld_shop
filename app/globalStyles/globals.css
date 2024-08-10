@@ -227,15 +227,15 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
 }
 
-/* .not-empty-mobile {
+.not-empty-mobile {
   top: 12px;
-  right: 15px;
-} */
+  right: 20px;
+}
 
-/* .not-empty-mobile-favorite {
+.not-empty-mobile-favorite {
   top: 12px;
   right: 25px;
-} */
+}
 
 .quick-modal-dots li.slick-active button {
   background-image: url(/img/white-ellipse.svg) !important;
