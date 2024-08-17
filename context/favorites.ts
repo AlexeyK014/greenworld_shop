@@ -179,6 +179,9 @@ export const $favorites = favorites
   )
 
 // избранные товары для LS, добавляютяс когда юзер не залогинен
+// export const $favoritesFromLS = favorites
+//   .createStore<IFavoriteItem[]>([])
+//   .on(setFavoritesFromLS, (_, favorites) => favorites)
 export const $favoritesFromLS = favorites
   .createStore<IFavoriteItem[]>([])
   .on(setFavoritesFromLS, (_, favorites) => favorites)
