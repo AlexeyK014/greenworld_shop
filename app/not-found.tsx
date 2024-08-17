@@ -16,7 +16,7 @@ const NotFound = () => {
             bgClassName={styles.empty_bg}
             emptyWord={translations[lang].common.not_found_bg}
             bgWorldClassName={styles.not_found_bg}
-            oopsWord={translations[lang].common.ops}
+            oopsWord={translations[lang].common.oh}
             title={translations[lang].common.not_found_title}
           />
         </div>

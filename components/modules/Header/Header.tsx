@@ -17,21 +17,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { loginCheckFx } from '@/api/auth'
 import { useEffect } from 'react'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
 import {
   addProductsFromLSToCart,
   setCartFromLS,
   setShouldShowEmpty,
 } from '@/context/cart'
 import { setLang } from '@/context/lang'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import {
+  $favorites,
+  $favoritesFromLS,
+  addProductsFromLSToFavorites,
+  setFavoritesFromLS,
+  setShouldShowEmptyFavorites,
+} from '@/context/favorites'
 
 const Header = () => {
   const { lang, translations } = useLang()
   const isAuth = useUnit($isAuth) // проверяем залогинен юзер или нет
   const loginChekSpinner = useUnit(loginCheckFx.pending)
-  const currentCartByAuth = useCartByAuth()
-
-  console.log(currentCartByAuth)
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
 
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
@@ -48,6 +53,9 @@ const Header = () => {
     const lang = JSON.parse(localStorage.getItem('lang') as string)
     // при первом рендере получаем данные из LS в состояние
     const cart = JSON.parse(localStorage.getItem('cart') as string)
+    const favoritesFromLS = JSON.parse(
+      localStorage.getItem('favorites') as string
+    )
 
     // устанавливаем язык
     if (lang) {
@@ -58,6 +66,14 @@ const Header = () => {
 
     triggerLoginCheck() // если токен не валидный
 
+    // проверяем, если нет - тогда true
+    if (!favoritesFromLS || !favoritesFromLS?.length) {
+      setShouldShowEmptyFavorites(true)
+    }
+    if (!cart || !cart?.length) {
+      setShouldShowEmpty(true)
+    }
+
     if (auth?.accessToken) {
       return
     }
@@ -65,14 +81,22 @@ const Header = () => {
     if (cart && Array.isArray(cart)) {
       if (!cart.length) {
         setShouldShowEmpty(true)
-        return
+      } else {
+        setCartFromLS(cart)
       }
-      setCartFromLS(cart)
+    }
+
+    if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+      if (!favoritesFromLS.length) {
+        setShouldShowEmptyFavorites(true)
+      } else {
+        setCartFromLS(cart)
+      }
     }
 
     // на первый рендер вызываем фун-ю и смотрим есть ли токен в LS
     // если есть токены то получаем данные юзера
-    triggerLoginCheck()
+    setFavoritesFromLS(favoritesFromLS)
   }, [])
 
   // если юзер авторизируется, чтобы мы синронизировались с сервером
@@ -80,6 +104,9 @@ const Header = () => {
   useEffect(() => {
     if (isAuth) {
       const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
+      const favoritesFromLS = JSON.parse(
+        localStorage.getItem('favorites') as string
+      )
       const auth = JSON.parse(localStorage.getItem('auth') as string)
 
       // если есть данные корзины и если данные в массиве
@@ -87,6 +114,13 @@ const Header = () => {
         addProductsFromLSToCart({
           jwt: auth.accessToken,
           cartItems: cartFromLS,
+        })
+      }
+
+      if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
+        addProductsFromLSToFavorites({
+          jwt: auth.accessToken,
+          favoriteItems: favoritesFromLS,
         })
       }
     }
@@ -113,7 +147,11 @@ const Header = () => {
             <Link
               href='/favorites'
               className='header__links__item__btn header__links__item__btn--favorites'
-            />
+            >
+              {!!currentFavoritesByAuth.length && (
+                <span className='not-empty' />
+              )}
+            </Link>
           </li>
           <li className='header__links__item'>
             <Link

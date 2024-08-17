@@ -6,6 +6,7 @@ export interface IProductItemActionBtnProps {
   callback?: VoidFunction
   withTooltip?: boolean
   marginBottom?: number
+  spinner?: boolean
 }
 
 export interface IProductAvailableProps {
@@ -21,4 +22,12 @@ export interface IHeadingWithCount {
   count: number
   title: string
   spinner?: boolean
+}
+
+export interface IAddToCartIconProps {
+  isProductInCart: boolean
+  addedClassName: string
+  className: string
+  addToCartSpinner: boolean
+  callback: VoidFunction
 }

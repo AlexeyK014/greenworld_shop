@@ -19,7 +19,7 @@ const EmptyPageContent = ({
   const isMedia950 = useMediaQuery(950)
   const isMedia500 = useMediaQuery(500)
   const currentTitle = title ? title : translations[lang].common.empty_text
-  const currentOopsWord = oopsWord ? oopsWord : translations[lang].common.ops
+  const currentOopsWord = oopsWord ? oopsWord : translations[lang].common.oh
   return (
     <div className={styles.empty_content}>
       {isMedia950 && (

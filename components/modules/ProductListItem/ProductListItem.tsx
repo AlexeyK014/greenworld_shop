@@ -19,6 +19,8 @@ import { useCartAction } from '@/hooks/useCartAction'
 import { addProductToCartBySizeTable } from '@/lib/utils/cart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { setIsAddToFavorites } from '@/context/favorites'
+import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 
 const ProductListItem = ({ item, title }: IProductListItemProps) => {
   const { lang, translations } = useLang()
@@ -27,6 +29,11 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
   const { addToCartSpinner, currentCartByAuth, setAddToCartSpinner } =
     useCartAction()
   const isProductInCart = isItemInList(currentCartByAuth, item._id)
+  const {
+    addToFavoritesSpinner,
+    isProductInFavorites,
+    handleAddProductToFavorites,
+  } = useFavoritesAction(item)
 
   const handleShowQuickViewModal = () => {
     addOverflowHiddenToBody()
@@ -34,8 +41,10 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
     setCurrentProduct(item)
   }
 
-  const addToCart = () =>
+  const addToCart = () => {
+    setIsAddToFavorites(false)
     addProductToCartBySizeTable(item, setAddToCartSpinner, 1)
+  }
 
   return (
     <>
@@ -67,8 +76,16 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
         )}
         <div className={styles.list__item__actions}>
           <ProductItemActionBtn
+            spinner={addToFavoritesSpinner}
             text={translations[lang].product.add_to_favorites}
-            iconClass='actions__btn_favorite'
+            iconClass={`${
+              addToFavoritesSpinner
+                ? 'actions__btn_spinner'
+                : isProductInFavorites
+                  ? 'actions__btn_favorite_checked'
+                  : 'actions__btn_favorite'
+            }`}
+            callback={handleAddProductToFavorites}
           />
           <ProductItemActionBtn
             text={translations[lang].product.add_to_comparison}

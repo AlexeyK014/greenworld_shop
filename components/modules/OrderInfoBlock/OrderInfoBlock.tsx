@@ -1,4 +1,5 @@
-import { useCartByAuth } from '@/hooks/useCartByAuth'
+import { $cart, $cartFromLs } from '@/context/cart'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
@@ -13,7 +14,7 @@ const OrderInfoBlock = ({
   isOrderPage, // для добавление доп информации в блок оплаты
 }: IOrderInfoBlock) => {
   const { lang, translations } = useLang()
-  const currentCartByAuth = useCartByAuth() // для получения данных корзины
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs) // для получения данных корзины
   const [isUserAgree, setIsUserAgree] = useState(false)
   const { animatedPrice } = useTotalPrice()
   const checkboxRef = useRef() as MutableRefObject<HTMLInputElement>

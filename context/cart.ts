@@ -56,7 +56,7 @@ export const loadCartItems = cart.createEvent<{ jwt: string }>()
 // добавление товара для неавторизованного
 export const setCartFromLS = cart.createEvent<ICartItem[]>()
 
-// получение тех полей которые необходимо для добавление товара на СЕРВЕРЕ
+// получение тех полей которые необходимо для добавление товара на СЕРВЕР
 export const addProductToCart = cart.createEvent<IAddProductToCartFx>()
 
 export const addProductsFromLSToCart =

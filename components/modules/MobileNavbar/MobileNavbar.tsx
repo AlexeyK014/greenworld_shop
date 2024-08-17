@@ -11,12 +11,15 @@ import { addOverflowHiddenToBody } from '@/lib/utils/common'
 import Link from 'next/link'
 import React from 'react'
 import CatalogMenu from '../Header/CatalogMenu'
-import { useCartByAuth } from '@/hooks/useCartByAuth'
+import { $cart, $cartFromLs } from '@/context/cart'
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { $favorites, $favoritesFromLS } from '@/context/favorites'
 // import Profile from '../Profile/Profile'
 
 const MobileNavbar = () => {
   const { lang, translations } = useLang()
-  const currentCartByAuth = useCartByAuth()
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
 
   const handleOpenMenu = () => {
     addOverflowHiddenToBody()
@@ -51,6 +54,9 @@ const MobileNavbar = () => {
           {translations[lang].breadcrumbs.catalog}
         </button>
         <Link href='/favorites' className='btn-reset mobile-navbar__btn'>
+          {!!currentFavoritesByAuth.length && (
+            <span className='not-empty not-empty-mobile-favorite' />
+          )}
           {translations[lang].breadcrumbs.favorites}
         </Link>
         <Link href='/cart' className='btn-reset mobile-navbar__btn'>

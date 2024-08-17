@@ -1,12 +1,12 @@
-import { $totalPrice, setTotalPrice } from '@/context/cart'
+import { $cart, $cartFromLs, $totalPrice, setTotalPrice } from '@/context/cart'
 import { useUnit } from 'effector-react'
-import { useCartByAuth } from './useCartByAuth'
 import { usePriceAnimation } from './usePriceAnimation'
 import { useEffect } from 'react'
+import { useGoodsByAuth } from './useGoodsByAuth'
 
 export const useTotalPrice = () => {
   const totalPrice = useUnit($totalPrice)
-  const currentCartByAuth = useCartByAuth() // эл-ты корзины чтобы подсчитывать TotlaPrice
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs) // эл-ты корзины чтобы подсчитывать TotlaPrice
 
   // фун-я выщитывает TotalPrice
   //  прозодимся по корзине, преобразовываем массив в значение резльтатов умн price на count
