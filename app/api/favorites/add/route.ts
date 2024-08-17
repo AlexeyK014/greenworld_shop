@@ -1,9 +1,9 @@
 // добавление в избранное
 
-import clientPromise from "@/lib/mongodb";
-import { getAuthRouteData, parseJwt } from "@/lib/utils/api-routes";
-import { ObjectId } from "mongodb";
-import { NextResponse } from "next/server";
+import clientPromise from '@/lib/mongodb'
+import { getAuthRouteData, parseJwt } from '@/lib/utils/api-routes'
+import { ObjectId } from 'mongodb'
+import { NextResponse } from 'next/server'
 
 // когда юзер тригеррит этот эндпоинт, значит он АВТОРИЗОВАЛСЯ
 // значит нам нужно понимать какой именно пользователь добавляет товары в корзину
