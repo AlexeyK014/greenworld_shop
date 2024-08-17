@@ -150,25 +150,12 @@ export const addProductsFromLSToFavorites =
 export const deleteProductFromFavorites =
   favorites.createEvent<IDeleteFavoriteItemsFx>()
 
-export const $favorites = favorites
-  .createStore<IFavoriteItem[]>([])
-  .on(getFavoriteItemsFx.done, (_, { result }) => result)
-  .on(addProductToFavoriteFx.done, (cart, { result }) => [
-    // для добавления эл-ов в избранное на сервере
-    // чтобы не дублировались объекты у которых одно и тоже поле
-    ...new Map(
-      [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
-    ).values(),
-  ])
-  .on(addProductsFromLSToFavoritesFx.done, (_, { result }) => result.items)
-  .on(deleteFavoriteItemFx.done, (state, { result }) =>
-    state.filter((item) => item._id !== result.id)
-  )
-
 // export const $favorites = favorites
 //   .createStore<IFavoriteItem[]>([])
 //   .on(getFavoriteItemsFx.done, (_, { result }) => result)
 //   .on(addProductToFavoriteFx.done, (cart, { result }) => [
+//     // для добавления эл-ов в избранное на сервере
+//     // чтобы не дублировались объекты у которых одно и тоже поле
 //     ...new Map(
 //       [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
 //     ).values(),
@@ -177,6 +164,19 @@ export const $favorites = favorites
 //   .on(deleteFavoriteItemFx.done, (state, { result }) =>
 //     state.filter((item) => item._id !== result.id)
 //   )
+
+export const $favorites = favorites
+  .createStore<IFavoriteItem[]>([])
+  .on(getFavoriteItemsFx.done, (_, { result }) => result)
+  .on(addProductToFavoriteFx.done, (cart, { result }) => [
+    ...new Map(
+      [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
+    ).values(),
+  ])
+  .on(addProductsFromLSToFavoritesFx.done, (_, { result }) => result.items)
+  .on(deleteFavoriteItemFx.done, (state, { result }) =>
+    state.filter((item) => item._id !== result.id)
+  )
 
 // избранные товары для LS, добавляютяс когда юзер не залогинен
 export const $favoritesFromLS = favorites
