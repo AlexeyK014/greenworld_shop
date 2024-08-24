@@ -21,8 +21,8 @@ import EmptyPageContent from '@/components/modules/EmptyPageContent/EmptyPageCon
 import { basePropsForMotion } from '@/constants/motion'
 import { motion } from 'framer-motion'
 import FavoritesList from '@/components/modules/FavoritesPage/FavoritesList'
-import { loginCheckFx } from '@/api/auth'
 import { isUserAuth } from '@/lib/utils/common'
+import { loginCheckFx } from '@/context/user'
 
 const FavoritesPage = () => {
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS) // для получения товаров

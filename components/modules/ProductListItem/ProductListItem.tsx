@@ -12,7 +12,6 @@ import {
   isItemInList,
 } from '@/lib/utils/common'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { showQuickModal } from '@/context/modals'
 import { setCurrentProduct } from '@/context/goods'
 import { productsWithoutSizes } from '@/constants/product'
 import { useCartAction } from '@/hooks/useCartAction'
@@ -21,6 +20,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { setIsAddToFavorites } from '@/context/favorites'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+import { useComparisonAction } from '@/hooks/useComparisonAction'
+import { showQuickModal } from '@/context/modals'
 
 const ProductListItem = ({ item, title }: IProductListItemProps) => {
   const { lang, translations } = useLang()
@@ -40,6 +41,12 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
     showQuickModal()
     setCurrentProduct(item)
   }
+
+  const {
+    handleAddToComparison,
+    isProductInComparison,
+    addToComparisonSpinner,
+  } = useComparisonAction(item)
 
   const addToCart = () => {
     setIsAddToFavorites(false)
@@ -88,8 +95,16 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
             callback={handleAddProductToFavorites}
           />
           <ProductItemActionBtn
+            spinner={addToComparisonSpinner}
             text={translations[lang].product.add_to_comparison}
-            iconClass='actions__btn_comparison'
+            callback={handleAddToComparison}
+            iconClass={`${
+              addToComparisonSpinner
+                ? 'actions__btn_spinner'
+                : isProductInComparison
+                  ? 'actions__btn_comparison_checked'
+                  : 'actions__btn_comparison'
+            }`}
           />
           {!isMedia800 && (
             <ProductItemActionBtn

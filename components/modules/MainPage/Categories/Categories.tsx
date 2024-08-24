@@ -3,10 +3,10 @@ import AllLink from '@/components/elements/AllLink/AllLink'
 import useImagePreloader from '@/hooks/useImagePreloader'
 import { useLang } from '@/hooks/useLang'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import img1 from '@/public/img/categories-img-1.png'
-import img2 from '@/public/img/categories-img-2.png'
-import img3 from '@/public/img/categories-img-3.png'
-import img4 from '@/public/img/categories-img-4.png'
+import img1 from '@/public/img/categories-img-5.jpg'
+import img2 from '@/public/img/categories-img-6.jpg'
+import img3 from '@/public/img/categories-img-7.jpg'
+import img4 from '@/public/img/categories-img-8.png'
 import styles from '@/styles/main-page/index.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,18 +19,26 @@ const Categories = () => {
   const imgSpinnerClass = imgSpinner ? styles.img_loading : ''
 
   const images = [
-    { src: img1, id: 1, title: translations[lang].main_page.category_cloth },
+    {
+      src: img1,
+      id: 1,
+      title: translations[lang].main_page.category_microgreen,
+    },
     {
       src: img2,
       id: 2,
-      title: translations[lang].main_page.category_accessories,
+      title: translations[lang].main_page.category_sprouts,
     },
     {
       src: img3,
       id: 3,
-      title: translations[lang].main_page.category_souvenirs,
+      title: translations[lang].main_page.category_seeds,
     },
-    { src: img4, id: 4, title: translations[lang].main_page.category_office },
+    {
+      src: img4,
+      id: 4,
+      title: translations[lang].main_page.category_equipment,
+    },
   ]
   return (
     <section className={styles.categories}>
@@ -43,7 +51,7 @@ const Categories = () => {
           {!isMedia490 && (
             <>
               <Link
-                href='/catalog/cloth'
+                href='/catalog/microgreen'
                 className={`${styles.categories__right} ${styles.categories__img} ${imgSpinnerClass}`}
               >
                 <Image
@@ -52,12 +60,12 @@ const Categories = () => {
                   className='transition-opacity opacity-0 duration'
                   onLoad={handleLoadingImageComplete}
                 />
-                <span>{translations[lang].main_page.category_cloth}</span>
+                <span>{translations[lang].main_page.category_microgreen}</span>
               </Link>
               <div className={styles.categories__left}>
                 <div className={styles.categories__left__top}>
                   <Link
-                    href='/catalog/accessories'
+                    href='/catalog/sprouts'
                     className={`${styles.categories__left__top__right} ${styles.categories__img} ${imgSpinnerClass}`}
                   >
                     <Image
@@ -66,12 +74,10 @@ const Categories = () => {
                       className='transition-opacity opacity-0 duration'
                       onLoad={handleLoadingImageComplete}
                     />
-                    <span>
-                      {translations[lang].main_page.category_accessories}
-                    </span>
+                    <span>{translations[lang].main_page.category_sprouts}</span>
                   </Link>
                   <Link
-                    href='/catalog/souvenirs'
+                    href='/catalog/seeds'
                     className={`${styles.categories__left__top__left} ${styles.categories__img} ${imgSpinnerClass}`}
                   >
                     <Image
@@ -80,13 +86,11 @@ const Categories = () => {
                       className='transition-opacity opacity-0 duration'
                       onLoad={handleLoadingImageComplete}
                     />
-                    <span>
-                      {translations[lang].main_page.category_souvenirs}
-                    </span>
+                    <span>{translations[lang].main_page.category_seeds}</span>
                   </Link>
                 </div>
                 <Link
-                  href='/catalog/office'
+                  href='/catalog/equipment'
                   className={`${styles.categories__left__bottom} ${styles.categories__img} ${imgSpinnerClass}`}
                 >
                   <Image
@@ -95,7 +99,7 @@ const Categories = () => {
                     className='transition-opacity opacity-0 duration'
                     onLoad={handleLoadingImageComplete}
                   />
-                  <span>{translations[lang].main_page.category_office}</span>
+                  <span>{translations[lang].main_page.category_equipment}</span>
                 </Link>
               </div>
             </>

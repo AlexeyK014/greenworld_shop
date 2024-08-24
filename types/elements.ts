@@ -31,3 +31,10 @@ export interface IAddToCartIconProps {
   addToCartSpinner: boolean
   callback: VoidFunction
 }
+
+export interface ISkeletonProps {
+  styles: {
+    readonly [key: string]: string
+  }
+  count?: number
+}

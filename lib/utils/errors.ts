@@ -2,25 +2,37 @@
 // обрабатываем ошибку протухание токена
 // если в login-check появиться сообщение что токен протух, нам необходимо повторить запрос
 
-import { loginCheckFx, refreshTokenFx } from '@/api/auth'
 import {
   addProductToCartFx,
   deleteCartItemFx,
   getCartItemsFx,
 } from '@/api/cart'
 import { JWTError } from '@/constants/jwt'
+import { refreshTokenFx } from '@/context/auth'
 import { addProductsFromLSToCartFx } from '@/context/cart'
+import {
+  addProductFromLSToComparisonFx,
+  addProductToComparisonFx,
+  deleteComparisonItemFx,
+  getComparisonItemsFx,
+} from '@/context/comparison'
 import {
   addProductsFromLSToFavoritesFx,
   addProductToFavoriteFx,
   deleteFavoriteItemFx,
   getFavoriteItemsFx,
 } from '@/context/favorites'
+import { loginCheckFx } from '@/context/user'
 import {
   IAddProductsFromLSToCartFx,
   IAddProductToCartFx,
   IDeleteCartItemsFx,
 } from '@/types/cart'
+import {
+  IAddProductsFromLSToComparisonFx,
+  IAddProductToComparisonFx,
+  IDeleteComparisonItemsFx,
+} from '@/types/comparison'
 import { IAddProductsFromLSToFavoriteFx } from '@/types/favorites'
 
 // после того как мы обновим токен
@@ -79,6 +91,25 @@ export const handleJWTError = async (
         case 'addProductsFromLSToFavoritesFx':
           return addProductsFromLSToFavoritesFx({
             ...(payload as IAddProductsFromLSToFavoriteFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'addProductToComparisonFx':
+          return addProductToComparisonFx({
+            ...(payload as IAddProductToComparisonFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'getComparisonItemsFx':
+          return getComparisonItemsFx({
+            jwt: newTokens.accessToken,
+          })
+        case 'addProductsFromLSToComparisonFx':
+          return addProductFromLSToComparisonFx({
+            ...(payload as IAddProductsFromLSToComparisonFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'deleteComparisonItemFx':
+          return deleteComparisonItemFx({
+            ...(payload as IDeleteComparisonItemsFx),
             jwt: newTokens.accessToken,
           })
         case 'loginCheckFx':

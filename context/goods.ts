@@ -1,10 +1,40 @@
 'use client'
-import { loadOneProductFx } from '@/api/goods'
 import { getBestsellerProductsFx, getNewProductsFx } from '@/api/main-page'
 import { IProduct } from '@/types/common'
 import { ILoadOneProductFx } from '@/types/goods'
-import { createDomain, Effect, sample } from 'effector'
+import { createDomain, createEffect, Effect, sample } from 'effector'
 import { createGate, Gate } from 'effector-react'
+import api from '../api/apiInstance'
+import { handleShowSizeTable } from '@/lib/utils/common'
+import toast from 'react-hot-toast'
+
+export const loadOneProductFx = createEffect(
+  async ({
+    productId,
+    category,
+    setSpinner,
+    withShowingSizeTable,
+  }: ILoadOneProductFx) => {
+    try {
+      setSpinner(true)
+      const { data } = await api.post('/api/goods/one', { productId, category })
+
+      if (withShowingSizeTable) {
+        handleShowSizeTable(data.productItem)
+      }
+
+      if (data?.message === 'Wrong product id') {
+        return { productItem: { errorMessage: 'Wrong product id' } }
+      }
+
+      return data
+    } catch (error) {
+      toast.error((error as Error).message)
+    } finally {
+      setSpinner(false)
+    }
+  }
+)
 
 const goods = createDomain()
 

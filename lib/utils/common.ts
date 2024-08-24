@@ -131,7 +131,6 @@ export const triggerLoginCheck = () => {
 
   const auth = JSON.parse(localStorage.getItem('auth') as string)
 
-  // проверяем токен
   loginCheck({ jwt: auth.accessToken })
 }
 

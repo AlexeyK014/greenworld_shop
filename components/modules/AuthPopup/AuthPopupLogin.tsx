@@ -1,5 +1,4 @@
-import { signInFx } from '@/api/auth'
-import { handleSignIn } from '@/context/auth'
+import { handleSignIn, signInFx } from '@/context/auth'
 import { useAuthForm } from '@/hooks/useAuthForm'
 import { IAuthSideProps, IInputs } from '@/types/authPopup'
 import React from 'react'

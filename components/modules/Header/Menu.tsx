@@ -55,70 +55,110 @@ const Menu = () => {
     handleCloseMenu()
   }
 
-  const clothLinks = [
+  const microgreenLinks = [
     {
       id: 1,
-      text: translations[lang].comparison['t-shirts'],
-      href: '/catalog/cloth?offset=0&type=t-shirts',
+      text: translations[lang].comparison.peas,
+      href: '/catalog/cloth?offset=0&type=peas',
     },
     {
       id: 2,
-      text: translations[lang].comparison['long-sleeves'],
-      href: '/catalog/cloth?offset=0&type=long-sleeves',
+      text: translations[lang].comparison.radish,
+      href: '/catalog/cloth?offset=0&type=radish',
     },
     {
       id: 3,
-      text: translations[lang].comparison.hoodie,
-      href: '/catalog/cloth?offset=0&type=hoodie',
+      text: translations[lang].comparison.cabbage,
+      href: '/catalog/cloth?offset=0&type=cabbage',
     },
     {
       id: 4,
-      text: translations[lang].comparison.outerwear,
-      href: '/catalog/cloth?offset=0&type=outerwear',
+      text: translations[lang].comparison.sunflower,
+      href: '/catalog/cloth?offset=0&type=sunflower',
+    },
+    {
+      id: 5,
+      text: translations[lang].comparison.arugulas,
+      href: '/catalog/cloth?offset=0&type=arugulas',
     },
   ]
 
-  const accessoriesLinks = [
+  const sproutsLinks = [
     {
       id: 1,
-      text: translations[lang].comparison.bags,
-      href: '/catalog/accessories?offset=0&type=bags',
+      text: translations[lang].comparison.peas,
+      href: '/catalog/accessories?offset=0&type=peas',
     },
     {
       id: 2,
-      text: translations[lang].comparison.headdress,
-      href: '/catalog/accessories?offset=0&type=headdress',
+      text: translations[lang].comparison.radish,
+      href: '/catalog/accessories?offset=0&type=radish',
     },
     {
       id: 3,
-      text: translations[lang].comparison.umbrella,
-      href: '/catalog/accessories?offset=0&type=umbrella',
+      text: translations[lang].comparison.chickpeas,
+      href: '/catalog/accessories?offset=0&type=chickpeas',
+    },
+    {
+      id: 4,
+      text: translations[lang].comparison.sunflower,
+      href: '/catalog/accessories?offset=0&type=sunflower',
+    },
+    {
+      id: 5,
+      text: translations[lang].comparison.arugulas,
+      href: '/catalog/accessories?offset=0&type=arugulas',
     },
   ]
 
-  const souvenirsLinks = [
+  const seedsLinks = [
     {
       id: 1,
-      text: translations[lang].comparison['business-souvenirs'],
-      href: '/catalog/souvenirs?offset=0&type=business-souvenirs',
+      text: translations[lang].comparison.peas,
+      href: '/catalog/souvenirs?offset=0&type=peas',
     },
     {
       id: 2,
-      text: translations[lang].comparison['promotional-souvenirs'],
+      text: translations[lang].comparison.radish,
       href: '/catalog/souvenirs?offset=0&type=promotional-souvenirs',
     },
+    {
+      id: 3,
+      text: translations[lang].comparison.chickpeas,
+      href: '/catalog/souvenirs?offset=0&type=chickpeas',
+    },
+    {
+      id: 4,
+      text: translations[lang].comparison.sunflower,
+      href: '/catalog/souvenirs?offset=0&type=sunflower',
+    },
+    {
+      id: 5,
+      text: translations[lang].comparison.arugulas,
+      href: '/catalog/souvenirs?offset=0&type=arugulas',
+    },
   ]
 
-  const officeLinks = [
+  const equipmentsLinks = [
     {
       id: 1,
-      text: translations[lang].comparison.notebook,
-      href: '/catalog/office?offset=0&type=notebook',
+      text: translations[lang].comparison.box,
+      href: '/catalog/office?offset=0&type=box',
     },
     {
       id: 2,
-      text: translations[lang].comparison.pen,
-      href: '/catalog/office?offset=0&type=pen',
+      text: translations[lang].comparison.lamps,
+      href: '/catalog/office?offset=0&type=lamps',
+    },
+    {
+      id: 3,
+      text: translations[lang].comparison.shelf,
+      href: '/catalog/office?offset=0&type=shelf',
+    },
+    {
+      id: 2,
+      text: translations[lang].comparison.agrovata,
+      href: '/catalog/office?offset=0&type=agrovata',
     },
   ]
 
@@ -169,11 +209,11 @@ const Menu = () => {
                   >
                     <li className='nav-menu__accordion__item'>
                       <Accordion
-                        title={translations[lang].main_menu.cloth}
+                        title={translations[lang].main_menu.microgreen}
                         titleClass='btn-reset nav-menu__accordion__item__title'
                       >
                         <ul className='list-reset nav-menu__accordion__item__list'>
-                          {clothLinks.map((item) => (
+                          {microgreenLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
                               item={item}
@@ -185,11 +225,11 @@ const Menu = () => {
                     </li>
                     <li className='nav-menu__accordion__item'>
                       <Accordion
-                        title={translations[lang].main_menu.accessories}
+                        title={translations[lang].main_menu.sprouts}
                         titleClass='btn-reset nav-menu__accordion__item__title'
                       >
                         <ul className='list-reset nav-menu__accordion__item__list'>
-                          {accessoriesLinks.map((item) => (
+                          {sproutsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
                               item={item}
@@ -201,11 +241,11 @@ const Menu = () => {
                     </li>
                     <li className='nav-menu__accordion__item'>
                       <Accordion
-                        title={translations[lang].main_menu.souvenirs}
+                        title={translations[lang].main_menu.seeds}
                         titleClass='btn-reset nav-menu__accordion__item__title'
                       >
                         <ul className='list-reset nav-menu__accordion__item__list'>
-                          {souvenirsLinks.map((item) => (
+                          {seedsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
                               item={item}
@@ -217,11 +257,11 @@ const Menu = () => {
                     </li>
                     <li className='nav-menu__accordion__item'>
                       <Accordion
-                        title={translations[lang].main_menu.office}
+                        title={translations[lang].main_menu.equipment}
                         titleClass='btn-reset nav-menu__accordion__item__title'
                       >
                         <ul className='list-reset nav-menu__accordion__item__list'>
-                          {officeLinks.map((item) => (
+                          {equipmentsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
                               item={item}
