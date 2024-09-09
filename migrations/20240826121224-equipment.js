@@ -7,10 +7,10 @@ const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
 const equipmentTypes = ['box', 'lamps', 'shelf', 'agrovata']
 
 const images = [
-  '/img/equipment/box.png',
-  '/img/equipment/lamps.png',
-  '/img/equipment/shelf.png',
-  '/img/equipment/agrovata.png',
+  '/img/equipment/box-equipment.png',
+  '/img/equipment/lamps-equipment.png',
+  '/img/equipment/shelf-equipment.png',
+  '/img/equipment/agrovata-equipment.png',
 ]
 
 const power = ['10 W', '14 W', '18 W']

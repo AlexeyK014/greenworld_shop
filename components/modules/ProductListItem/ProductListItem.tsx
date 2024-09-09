@@ -55,14 +55,6 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
 
   return (
     <>
-      {/* {item.characteristics.collection === 'line' &&
-      item.type === 't-shirts' ? (
-        <li>
-
-        </li>
-      ) : (
-        <></>
-      )} */}
       <li className={styles.list__item}>
         {title ? (
           <span

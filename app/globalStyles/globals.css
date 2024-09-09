@@ -295,18 +295,25 @@ body::-webkit-scrollbar-thumb:hover {
   padding-right: 8px;
 }
 
-/* .catalog-pagination-prev.disabled, .catalog-pagination-next.disabled {
+.catalog-pagination-prev.disabled, .catalog-pagination-next.disabled {
   display: none;
 }
 
 .catalog-pagination-item.selected {
-  background-color: #9466FF;
+  background-color: #489765;
 }
 
+
 .catalog-pagination-item:hover.selected a {
-  background-color: #9466FF;
+  background-color: #489765;
+  color: #fff;
 }
+
+.catalog-pagination-item.selected a {
+  color: #fff;
+}
+
 
 .catalogMenu{
   background-color: #9466FF;
-} */
+}

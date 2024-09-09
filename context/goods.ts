@@ -1,4 +1,5 @@
 'use client'
+import { ILoadProductsByFilterFx, IProducts } from './../types/goods'
 import { getBestsellerProductsFx, getNewProductsFx } from '@/api/main-page'
 import { IProduct } from '@/types/common'
 import { ILoadOneProductFx } from '@/types/goods'
@@ -36,6 +37,51 @@ export const loadOneProductFx = createEffect(
   }
 )
 
+// export const loadProductsByFillterFx = createEffect(
+//   async ({
+//     limit,
+//     offset,
+//     category,
+//     additionalParam,
+//     isCatalog,
+//   }: ILoadProductsByFilterFx) => {
+//     try {
+//       // делаем запрос
+//       // всегда передаём limit, offset(из параметров), категорию, доп.параметр
+//       const { data } = await api.get(
+//         `api/goods/filter?limit=${limit}&offset=${offset}&category=${category}&${additionalParam}${
+//           isCatalog ? '&catalog=true' : ''
+//         }`
+//       )
+
+//       return data
+//     } catch (error) {
+//       toast.error((error as Error).message)
+//     }
+//   }
+// )
+export const loadProductsByFillterFx = createEffect(
+  async ({
+    limit,
+    offset,
+    category,
+    isCatalog,
+    additionalParam,
+  }: ILoadProductsByFilterFx) => {
+    try {
+      const { data } = await api.get(
+        `/api/goods/filter?limit=${limit}&offset=${offset}&category=${category}&${additionalParam}${
+          isCatalog ? '&catalog=true' : ''
+        }`
+      )
+
+      return data
+    } catch (error) {
+      toast.error((error as Error).message)
+    }
+  }
+)
+
 const goods = createDomain()
 
 // createGate - иммитирует поведение useEffect на первый рендер
@@ -44,6 +90,7 @@ export const MainPageGate = createGate()
 
 export const setCurrentProduct = goods.createEvent<IProduct>() // сетим товар
 export const loadOneProduct = goods.createEvent<ILoadOneProductFx>()
+export const loadProductsByFilter = goods.createEvent<ILoadProductsByFilterFx>()
 
 const goodsStoreInstace = (effect: Effect<void, [], Error>) =>
   goods
@@ -74,9 +121,20 @@ export const $currentProduct = goods // получаем продукт из eve
   .on(setCurrentProduct, (_, product) => product) //получаем товары с клиента, уже имеющиеся
   .on(loadOneProductFx.done, (_, { result }) => result.productItem) // получаем товары с сервера
 
+export const $products = goods
+  .createStore<IProducts>({} as IProducts)
+  .on(loadProductsByFillterFx.done, (_, { result }) => result)
+
 sample({
   clock: loadOneProduct,
   source: $currentProduct,
   fn: (_, data) => data,
   target: loadOneProductFx,
+})
+
+sample({
+  clock: loadProductsByFilter,
+  source: $products,
+  fn: (_, data) => data,
+  target: loadProductsByFillterFx,
 })

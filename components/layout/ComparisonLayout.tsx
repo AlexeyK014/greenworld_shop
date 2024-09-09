@@ -1,10 +1,7 @@
 'use client'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
-import { useCrumbText } from '@/hooks/useCrumbText'
 import { useLang } from '@/hooks/useLang'
-import { usePageTitle } from '@/hooks/usePageTitle'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import Breadcrumbs from '../modules/Breadcrumbs/Breadcrumbs'
 import HeadeingWithCount from '../elements/HeadingWithCount/HeadeingWithCount'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
@@ -27,13 +24,13 @@ import { isUserAuth } from '@/lib/utils/common'
 
 const ComparisonLayout = ({ children }: { children: React.ReactNode }) => {
   // для динамического изменения title на странице
-  const [dynamicTitle, setDynamicTitle] = useState('')
-
-  const breadcrumbs = document.querySelector('.breadcrumbs') as HTMLUListElement
+  // const [dynamicTitle, setDynamicTitle] = useState('')
+  // const { crumbText } = useCrumbText('comparison')
+  // const breadcrumbs = document.querySelector('.breadcrumbs') as HTMLUListElement
   const { lang, translations } = useLang()
+  const pathname = usePathname()
   const { getDefaultTextGenerator, getTextGenerator } =
     useBreadcrumbs('comparison')
-  const { crumbText } = useCrumbText('comparison')
   const currentComparisonByAuth = useGoodsByAuth($comparison, $comparisonFromLS)
   const { availableProductLinks, linksSpinner } = useComparisonLinks()
   const shouldShowEmptyComparison = useUnit($shouldShowEmptyComparison)
@@ -41,34 +38,6 @@ const ComparisonLayout = ({ children }: { children: React.ReactNode }) => {
   const mainSpinner = isUserAuth()
     ? linksSpinner || loginCheckSpinner
     : linksSpinner
-
-  const pathname = usePathname()
-  usePageTitle('comparison', dynamicTitle)
-
-  // для динамического изменения хлебной крошки
-  useEffect(() => {
-    const lastCrumbs = document.querySelector('.last-crumb') as HTMLElement
-
-    // получаем вторую часть url
-    if (lastCrumbs) {
-      const productTypePathname = pathname.split('/comparison/')[1]
-
-      // когда ешё не выбрали категорию
-      if (!productTypePathname) {
-        setDynamicTitle('')
-        lastCrumbs.textContent = crumbText
-        return
-      }
-
-      // иначе обновляем хлебную крошку под определённый тип
-      // получаем перевод, который совпадает с URL
-      const text = (
-        translations[lang].comparison as { [index: string]: string }
-      )[productTypePathname]
-      setDynamicTitle(text) // сэтим тип в title
-      lastCrumbs.textContent = text // последняя хлебная крошка
-    }
-  }, [breadcrumbs, crumbText, lang, pathname, translations])
 
   return (
     <main>

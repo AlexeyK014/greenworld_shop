@@ -111,7 +111,7 @@ module.exports = {
           },
           {
             type: 'sunflower',
-            // color: getRandomArrayValue(colors),
+            color: getRandomArrayValue(colors),
             // composition: getRandomArrayValue(compositions),
             // numberOfSpokes: getRandomArrayValue(numbersOfSpokes),
             // spokeMaterial: getRandomArrayValue(spokeMaterials),

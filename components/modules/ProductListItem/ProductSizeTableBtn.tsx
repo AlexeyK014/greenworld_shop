@@ -1,3 +1,4 @@
+import { setIsAddToFavorites } from '@/context/favorites'
 import { $showQuickModal, showSizeTable } from '@/context/modals'
 import { setSizeTableSizes } from '@/context/sizeTable'
 import { useLang } from '@/hooks/useLang'
@@ -10,6 +11,7 @@ const ProductSizeTableBtn = ({ sizes, type, className }: ISelectedSizes) => {
   const showQuickViewModal = useUnit($showQuickModal)
 
   const handleShowSizeTable = () => {
+    setIsAddToFavorites(false)
     // если модалка закрыта, добавляем overflow
     if (!showQuickViewModal) {
       addOverflowHiddenToBody()

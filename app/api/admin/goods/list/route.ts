@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     const sort = JSON.parse(sortParam)
 
     // фун-я для фильтрации
-    const getFilterCollection = async (collection: string) => {
+    const getFilteredCollection = async (collection: string) => {
       const goods = await db
         .collection(collection)
         .find()
@@ -36,8 +36,8 @@ export async function GET(req: Request) {
     }
 
     const [microgreen, sprouts] = await Promise.allSettled([
-      getFilterCollection('microgreen'),
-      getFilterCollection('sprouts'),
+      getFilteredCollection('microgreen'),
+      getFilteredCollection('sprouts'),
     ])
 
     if (microgreen.status !== 'fulfilled' || sprouts.status !== 'fulfilled') {

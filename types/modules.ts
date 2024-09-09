@@ -24,7 +24,7 @@ export interface ICatalogMenuButtonProps {
 
 export interface IProductListItemProps {
   item: IProduct
-  title: string
+  title?: string
 }
 
 export interface IProductLabelProps {

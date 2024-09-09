@@ -200,3 +200,49 @@ export const showCountMessage = (count: string, lang: string) => {
 
   return lang === 'ru' ? 'товаров' : 'items'
 }
+
+// проверка offset, что он присутствует
+export const checkOffsetParam = (offset: string | string[] | undefined) =>
+  offset && !isNaN(+offset) && +offset >= 0
+
+// фун-я для получения на первый рендер searchParams
+export const getSearchParamUrl = () => {
+  const paramsString = window.location.search // возвращается строчка с параметрами
+
+  // URLSearchParams это класс который вызывает методы и манипулирует searchParams
+  const urlParams = new URLSearchParams(paramsString)
+
+  return urlParams
+}
+
+export const updateSearchParam = (
+  key: string,
+  value: string | number,
+  pathname: string
+) => {
+  const urlParams = getSearchParamUrl()
+  urlParams.set(key, `${value}`)
+
+  // после обновления searchParams, формируем обновлённый pathname
+  const newPath = `${pathname}?${urlParams.toString()}`
+
+  // чтобы без перезагрузки обновить адресную сторку и передаём newPath
+  window.history.pushState({ path: newPath }, '', newPath)
+}
+
+// провека цены, что это number
+export const checkPriceParam = (price: number) =>
+  price && !isNaN(price) && price >= 0 && price <= 10000
+
+// изначально это строка(param: string), но когда отправляем на бэк форматируем decodeURIComponent
+export const getCheckedArrayParam = (param: string) => {
+  try {
+    const sizesArr = JSON.parse(decodeURIComponent(param))
+
+    if (Array.isArray(sizesArr) && sizesArr.length) {
+      return sizesArr
+    }
+  } catch (error) {
+    return false
+  }
+}

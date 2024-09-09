@@ -31,7 +31,7 @@ const ProductItemActionBtn = ({
   }, [open, withTooltip])
 
   return (
-    <div className={styles.action}>
+    <div className={styles.actions}>
       <button
         className={`btn-reset ${styles.actions__btn} ${styles[iconClass]}`}
         onClick={callback}

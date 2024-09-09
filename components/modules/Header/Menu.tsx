@@ -59,27 +59,27 @@ const Menu = () => {
     {
       id: 1,
       text: translations[lang].comparison.peas,
-      href: '/catalog/cloth?offset=0&type=peas',
+      href: '/catalog/microgreen?offset=0&type=peas',
     },
     {
       id: 2,
       text: translations[lang].comparison.radish,
-      href: '/catalog/cloth?offset=0&type=radish',
+      href: '/catalog/microgreen?offset=0&type=radish',
     },
     {
       id: 3,
       text: translations[lang].comparison.cabbage,
-      href: '/catalog/cloth?offset=0&type=cabbage',
+      href: '/catalog/microgreen?offset=0&type=cabbage',
     },
     {
       id: 4,
       text: translations[lang].comparison.sunflower,
-      href: '/catalog/cloth?offset=0&type=sunflower',
+      href: '/catalog/microgreen?offset=0&type=sunflower',
     },
     {
       id: 5,
       text: translations[lang].comparison.arugulas,
-      href: '/catalog/cloth?offset=0&type=arugulas',
+      href: '/catalog/microgreen?offset=0&type=arugulas',
     },
   ]
 
@@ -87,27 +87,27 @@ const Menu = () => {
     {
       id: 1,
       text: translations[lang].comparison.peas,
-      href: '/catalog/accessories?offset=0&type=peas',
+      href: '/catalog/sprouts?offset=0&type=peas',
     },
     {
       id: 2,
       text: translations[lang].comparison.radish,
-      href: '/catalog/accessories?offset=0&type=radish',
+      href: '/catalog/sprouts?offset=0&type=radish',
     },
     {
       id: 3,
       text: translations[lang].comparison.chickpeas,
-      href: '/catalog/accessories?offset=0&type=chickpeas',
+      href: '/catalog/sprouts?offset=0&type=chickpeas',
     },
     {
       id: 4,
       text: translations[lang].comparison.sunflower,
-      href: '/catalog/accessories?offset=0&type=sunflower',
+      href: '/catalog/sprouts?offset=0&type=sunflower',
     },
     {
       id: 5,
       text: translations[lang].comparison.arugulas,
-      href: '/catalog/accessories?offset=0&type=arugulas',
+      href: '/catalog/sprouts?offset=0&type=arugulas',
     },
   ]
 
@@ -115,27 +115,27 @@ const Menu = () => {
     {
       id: 1,
       text: translations[lang].comparison.peas,
-      href: '/catalog/souvenirs?offset=0&type=peas',
+      href: '/catalog/seeds?offset=0&type=peas',
     },
     {
       id: 2,
       text: translations[lang].comparison.radish,
-      href: '/catalog/souvenirs?offset=0&type=promotional-souvenirs',
+      href: '/catalog/seeds?offset=0&type=promotional-souvenirs',
     },
     {
       id: 3,
       text: translations[lang].comparison.chickpeas,
-      href: '/catalog/souvenirs?offset=0&type=chickpeas',
+      href: '/catalog/seeds?offset=0&type=chickpeas',
     },
     {
       id: 4,
       text: translations[lang].comparison.sunflower,
-      href: '/catalog/souvenirs?offset=0&type=sunflower',
+      href: '/catalog/seeds?offset=0&type=sunflower',
     },
     {
       id: 5,
       text: translations[lang].comparison.arugulas,
-      href: '/catalog/souvenirs?offset=0&type=arugulas',
+      href: '/catalog/seeds?offset=0&type=arugulas',
     },
   ]
 
@@ -143,22 +143,22 @@ const Menu = () => {
     {
       id: 1,
       text: translations[lang].comparison.box,
-      href: '/catalog/office?offset=0&type=box',
+      href: '/catalog/equipment?offset=0&type=box',
     },
     {
       id: 2,
       text: translations[lang].comparison.lamps,
-      href: '/catalog/office?offset=0&type=lamps',
+      href: '/catalog/equipment?offset=0&type=lamps',
     },
     {
       id: 3,
       text: translations[lang].comparison.shelf,
-      href: '/catalog/office?offset=0&type=shelf',
+      href: '/catalog/equipment?offset=0&type=shelf',
     },
     {
       id: 2,
       text: translations[lang].comparison.agrovata,
-      href: '/catalog/office?offset=0&type=agrovata',
+      href: '/catalog/equipment?offset=0&type=agrovata',
     },
   ]
 

@@ -19,6 +19,7 @@ import ProductColor from '../ProductListItem/ProductColor'
 import { ICartItem } from '@/types/cart'
 import { useComparisonAction } from '@/hooks/useComparisonAction'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+import { setIsAddToFavorites } from '@/context/favorites'
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()
@@ -58,7 +59,10 @@ const QuickViewModal = () => {
     closeQuickModal()
   }
 
-  const addToCart = () => handleAddToCart(count)
+  const addToCart = () => {
+    handleAddToCart(count)
+    setIsAddToFavorites(false)
+  }
 
   return (
     <div className={styles.modal}>
