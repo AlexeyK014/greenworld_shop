@@ -156,7 +156,7 @@ const Menu = () => {
       href: '/catalog/equipment?offset=0&type=shelf',
     },
     {
-      id: 2,
+      id: 4,
       text: translations[lang].comparison.agrovata,
       href: '/catalog/equipment?offset=0&type=agrovata',
     },

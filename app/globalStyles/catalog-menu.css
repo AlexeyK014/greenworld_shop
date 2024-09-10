@@ -15,7 +15,7 @@
   background-color: #E1F0DA;
   width: 100%;
   min-height: 713px;
-  background-image: url(/img/menu-bg-small.png);
+  /* background-image: url(/img/menu-bg-small.png); */
   background-repeat: no-repeat;
   background-position: top 90px right;
 }
@@ -83,7 +83,7 @@
   top: 11px;
   width: 74px;
   height: 2px;
-  background-image: url(/img/menu-line-tiny.svg);
+  /* background-image: url(/img/menu-line-tiny.svg); */
   background-repeat: no-repeat;
   background-position: center center;
 }

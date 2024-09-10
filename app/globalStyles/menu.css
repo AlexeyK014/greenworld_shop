@@ -213,7 +213,7 @@
 .nav-menu__accordion__item:first-child .nav-menu__accordion__item__title::before {
   content: '';
   position: absolute;
-  background-image: url(/img/menu-line.svg);
+  /* background-image: url(/img/menu-line.svg); */
   background-repeat: no-repeat;
   background-position: center center;
   width: 224px;
@@ -271,7 +271,7 @@
 
 @media (max-width: 800px) {
   .nav-menu__accordion__item:first-child .nav-menu__accordion__item__title::before {
-    background-image: url(/img/menu-line-small.svg);
+    /* background-image: url(/img/menu-line-small.svg); */
     left: -200px;
   }
 
