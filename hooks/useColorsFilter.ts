@@ -1,14 +1,13 @@
-import {
-  $colors,
-  $colorsOptions,
-  setColors,
-  setColorsOptions,
-  updateColorsOptionByCode,
-} from '@/context/catalog'
 import { useLang } from './useLang'
 import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
 import { getCheckedArrayParam, getSearchParamUrl } from '@/lib/utils/common'
+import {
+  setColorsOptions,
+  setColors,
+  updateColorsOptionByCode,
+} from '@/context/catalog/index'
+import { $colorsOptions, $colors } from '@/context/catalog/state'
 
 export const useColorsFilter = (
   handleApplyFiltersWithColors: (arg0: string[]) => void

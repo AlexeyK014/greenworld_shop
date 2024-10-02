@@ -5,15 +5,15 @@ import {
   openCatalogMenu,
   openMenu,
   // openProfile,
-} from '@/context/modals'
+} from '@/context/modals/index'
 import { useLang } from '@/hooks/useLang'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
 import Link from 'next/link'
 import React from 'react'
 import CatalogMenu from '../Header/CatalogMenu'
-import { $cart, $cartFromLs } from '@/context/cart'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $favorites, $favoritesFromLS } from '@/context/favorites'
+import { $cart, $cartFromLs } from '@/context/cart/state'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
 // import Profile from '../Profile/Profile'
 
 const MobileNavbar = () => {

@@ -1,4 +1,4 @@
-import { $showQuickModal, $showSizeTable } from '@/context/modals'
+import { $showQuickModal, $showSizeTable } from '@/context/modals/state'
 import { closeAuthPopupWhenSomeModalOpened } from '@/lib/utils/common'
 import { useUnit } from 'effector-react'
 

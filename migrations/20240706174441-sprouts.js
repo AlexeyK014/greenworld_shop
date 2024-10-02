@@ -8,7 +8,6 @@ const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
 const collections = ['street', 'black', 'casual', 'orange', 'line']
 const colors = ['purpure', 'yellow', 'orange', 'black', 'white']
 const compositions = ['cotton', 'synthetics', 'polyester']
-// const sproutsTypes = ['buckwheat']
 const sproutsTypes = ['peas', 'buckwheat', 'chickpeas', 'wheat']
 
 const images = [

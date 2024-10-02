@@ -7,7 +7,7 @@ import {
   deleteProductFromCart,
   setCartFromLS,
   setShouldShowEmpty,
-} from '@/context/cart'
+} from '@/context/cart/index'
 
 export const useCartItemAction = (cartItem: ICartItem) => {
   const [deleteSpinner, setDeleteSpinner] = useState(false)

@@ -28,6 +28,7 @@ export async function GET(req: Request) {
     const priceToParam = url.searchParams.get('priceTo')
     const sizesParam = url.searchParams.get('sizes')
     const colorsParam = url.searchParams.get('colors')
+    const colectionParam = url.searchParams.get('collection')
     const sortParam = url.searchParams.get('sort') || 'default'
 
     // делаем проверку на валидность этих параметров
@@ -65,6 +66,10 @@ export async function GET(req: Request) {
           ['characteristics.color']: color.toLowerCase(),
         })),
       }),
+      ...(colectionParam && {
+        // обращаемся к 'characteristics.collection' и к той коллекции которая приодит в параме
+        ['characteristics.collection']: colectionParam,
+      }),
     }
 
     const sort = {
@@ -88,7 +93,7 @@ export async function GET(req: Request) {
       const getFilteredCollection = async (collection: string) => {
         const goods = await db
           .collection(collection)
-          .find(filter)
+          .find()
           .sort(sort as Sort)
           .toArray()
 
@@ -120,7 +125,26 @@ export async function GET(req: Request) {
         ...sprouts.value,
         ...seeds.value,
         ...equipment.value,
-      ]
+      ].sort((a, b) => {
+        if (sortParam.includes('cheap_first')) {
+          return +a.price - +b.price
+        }
+
+        if (sortParam.includes('expensive_first')) {
+          return +b.price - +a.price
+        }
+
+        if (sortParam.includes('new')) {
+          // приводим к Number поле isNew
+          // булевое значение при проиведение к числе превращются к 0 или 1
+          return Number(b.isNew) - Number(a.isNew)
+        }
+
+        if (sortParam.includes('popular')) {
+          return +b.popularity - +a.popularity
+        }
+        return 0
+      })
 
       return NextResponse.json({
         count: allGoods.length,

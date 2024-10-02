@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { updateCartItemCount } from '@/context/cart'
+import { updateCartItemCount } from '@/context/cart/index'
 import { updateCartItemCountInLS } from '@/lib/utils/cart'
 import { isUserAuth } from '@/lib/utils/common'
 import { IProductCounterProps } from '@/types/goods'

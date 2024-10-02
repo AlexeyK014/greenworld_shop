@@ -1,9 +1,14 @@
+'use client'
+
 import { handleJWTError } from '@/lib/utils/errors'
-import { IUser } from '@/types/user'
-import { createDomain, createEffect, sample } from 'effector'
-import api from '../api/apiInstance'
+import { createDomain, createEffect } from 'effector'
 import toast from 'react-hot-toast'
-import { setIsAuth } from './auth'
+import { setIsAuth } from '../auth'
+import api from '@/api/apiInstance'
+
+export const user = createDomain()
+
+export const loginCheck = user.createEvent<{ jwt: string }>()
 
 // делаем запрос на route
 // передаём токен
@@ -27,21 +32,4 @@ export const loginCheckFx = createEffect(async ({ jwt }: { jwt: string }) => {
   } catch (error) {
     toast.error((error as Error).message)
   }
-})
-
-const user = createDomain()
-
-export const loginCheck = user.createEvent<{ jwt: string }>()
-
-export const $user = user
-  .createStore<IUser>({} as IUser)
-  .on(loginCheckFx.done, (_, { result }) => result) // при успехе, получаем данные юзера и прокидываем в стор
-
-sample({
-  clock: loginCheck,
-  source: $user,
-  fn: (_, { jwt }) => ({
-    jwt,
-  }),
-  target: loginCheckFx,
 })

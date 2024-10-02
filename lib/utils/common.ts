@@ -1,12 +1,13 @@
-import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth'
-import { setCurrentProduct } from '@/context/goods'
+import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth/index'
+import { setCurrentProduct } from '@/context/goods/index'
 import {
   closeSearchModal,
+  closeShareModal,
   closeSizeTable,
   showSizeTable,
-} from '@/context/modals'
-import { setSizeTableSizes } from '@/context/sizeTable'
-import { loginCheck } from '@/context/user'
+} from '@/context/modals/index'
+import { setSizeTableSizes } from '@/context/sizeTable/index'
+import { loginCheck } from '@/context/user/index'
 import { ICartItem } from '@/types/cart'
 import { IProduct } from '@/types/common'
 import { EventCallable } from 'effector'
@@ -245,4 +246,27 @@ export const getCheckedArrayParam = (param: string) => {
   } catch (error) {
     return false
   }
+}
+
+export const capitalizeFirstLetter = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1)
+
+//получаем продукты из LS
+export const getWatchedProductFromLS = () => {
+  // сохранаем id, category и по ним получаем нужный товар с сервера
+  let watchedProducts: IProduct[] = JSON.parse(
+    localStorage.getItem('watched') as string
+  )
+
+  //делаем провеку если это не watchedProducts или не массив
+  if (!watchedProducts || !Array.isArray(watchedProducts)) {
+    watchedProducts = []
+  }
+
+  return watchedProducts
+}
+
+export const handleCloseShareModule = () => {
+  removeOverflowHiddenFromBody()
+  closeShareModal()
 }

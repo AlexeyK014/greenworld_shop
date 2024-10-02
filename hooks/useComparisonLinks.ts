@@ -1,13 +1,10 @@
-import {
-  $comparison,
-  $comparisonFromLS,
-  getComparisonItemsFx,
-} from '@/context/comparison'
 import { useGoodsByAuth } from './useGoodsByAuth'
 import { useUnit } from 'effector-react'
 import { useLang } from './useLang'
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
+import { getComparisonItemsFx } from '@/context/comparison/index'
+import { $comparison, $comparisonFromLS } from '@/context/comparison/state'
 
 export const useComparisonLinks = () => {
   const currentComparisonByAuth = useGoodsByAuth($comparison, $comparisonFromLS) // получаем товары сравнения

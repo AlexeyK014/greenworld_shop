@@ -18,3 +18,11 @@ export const productTypes = [
 export const productCategory = ['microgreen', 'sprouts', 'seeds', 'equipment']
 export const allowedColors = ['purpure', 'yellow', 'orange', 'black', 'white']
 export const allowedSizes = ['s', 'm', 'l', 'xl', 'xll']
+export const alowedCollectionsCategories = ['microgreen', 'sprouts']
+export const allowedCollections = [
+  'street',
+  'black',
+  'casual',
+  'orange',
+  'line',
+]

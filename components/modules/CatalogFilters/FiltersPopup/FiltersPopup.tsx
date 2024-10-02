@@ -1,5 +1,3 @@
-import { $filtersPopup, setFiltersPopup } from '@/context/catalog'
-import { $products, loadProductsByFillterFx } from '@/context/goods'
 import { useCategoryFilter } from '@/hooks/useCategoryFilter'
 import { useLang } from '@/hooks/useLang'
 import { useMenuAnimation } from '@/hooks/useMenuAnimation'
@@ -17,6 +15,10 @@ import SizesFilter from './SizesFilter'
 import ColorsFilter from './ColorsFilter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { $products } from '@/context/goods/state'
+import { setFiltersPopup } from '@/context/catalog/index'
+import { $filtersPopup } from '@/context/catalog/state'
+import { loadProductsByFillterFx } from '@/context/goods/index'
 
 const FiltersPopup = ({
   handleApplyFiltersWithPrice,

@@ -1,6 +1,4 @@
 import { AllowedLangs } from '@/constants/lang'
-import { setLang } from '@/context/lang'
-import { $menuIsOpen, closeMenu } from '@/context/modals'
 import { useLang } from '@/hooks/useLang'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
 import { useUnit } from 'effector-react'
@@ -13,6 +11,9 @@ import MenuLinkItem from './MenuLinkItem'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import BuyersListItems from './BuyersListItems'
 import ContactsListItems from './ContactsListItems'
+import { setLang } from '@/context/lang/index'
+import { closeMenu } from '@/context/modals/index'
+import { $menuIsOpen } from '@/context/modals/state'
 
 const Menu = () => {
   // id 0 - ничего непоказывает

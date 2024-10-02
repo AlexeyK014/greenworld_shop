@@ -1,4 +1,3 @@
-import { getCartItemsFx } from '@/api/cart'
 import { withClickOutside } from '@/components/hocs/withClickOutside'
 import { useLang } from '@/hooks/useLang'
 import { IWrappedComponentProps } from '@/types/hocs'
@@ -12,7 +11,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useTotalPrice } from '@/hooks/useTotalPrice'
 import { formatPrice } from '@/lib/utils/common'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLs } from '@/context/cart'
+import { $cart, $cartFromLs } from '@/context/cart/state'
+import { getCartItemsFx } from '@/context/cart/index'
 
 const CartPopup = forwardRef<HTMLDivElement, IWrappedComponentProps>(
   ({ open, setOpen }, ref) => {

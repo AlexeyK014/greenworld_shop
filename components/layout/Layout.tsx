@@ -6,7 +6,6 @@ import MobileNavbar from '../modules/MobileNavbar/MobileNavbar'
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchModal from '../modules/Header/SearchModal'
 import { useUnit } from 'effector-react'
-import { $searchModal, $showQuickModal, $showSizeTable } from '@/context/modals'
 import {
   handleCloseAuthPopup,
   handleCloseSearchModal,
@@ -14,8 +13,16 @@ import {
 import Footer from '../modules/Footer/Footer'
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
 import SizeTable from '../modules/SizeTable/SizeTable'
-import { $openAuthPopup } from '@/context/auth'
 import AuthPopup from '../modules/AuthPopup/AuthPopup'
+import { $openAuthPopup } from '@/context/auth/state'
+import {
+  $searchModal,
+  $shareModal,
+  $showQuickModal,
+  $showSizeTable,
+} from '@/context/modals/state'
+import { basePropsForMotion } from '@/constants/motion'
+import ShareModal from '../modules/ShareModal/ShareModal'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const isMedia800 = useMediaQuery(800)
@@ -23,6 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const showQuickViewModal = useUnit($showQuickModal)
   const showSizeTable = useUnit($showSizeTable)
   const openAuthPopup = useUnit($openAuthPopup)
+  const shareModal = useUnit($shareModal)
 
   // чтобы при клики на overlay закрывалась модалка
   const authWrapperRef = useRef() as MutableRefObject<HTMLDivElement>
@@ -65,12 +73,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <SearchModal />
           </motion.div>
         )}
+        {shareModal && (
+          <motion.div {...basePropsForMotion}>
+            <ShareModal />
+          </motion.div>
+        )}
         {showSizeTable && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+          <motion.div {...basePropsForMotion}>
             <SizeTable />
           </motion.div>
         )}
@@ -79,9 +88,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <AnimatePresence>
           {showQuickViewModal && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              {...basePropsForMotion}
+              initial={{ opacity: 0, zIndex: 6 }}
             >
               <QuickViewModal />
             </motion.div>

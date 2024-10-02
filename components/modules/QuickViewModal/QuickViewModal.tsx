@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { closeQuickModal } from '@/context/modals'
+import { closeQuickModal } from '@/context/modals/index'
 import { formatPrice, removeOverflowHiddenFromBody } from '@/lib/utils/common'
 import styles from '@/styles/quick-view-modal/index.module.scss'
 import QuickViewModalSlider from './QuickViewModalSlider'
@@ -19,7 +19,7 @@ import ProductColor from '../ProductListItem/ProductColor'
 import { ICartItem } from '@/types/cart'
 import { useComparisonAction } from '@/hooks/useComparisonAction'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import { setIsAddToFavorites } from '@/context/favorites'
+import { setIsAddToFavorites } from '@/context/favorites/index'
 
 const QuickViewModal = () => {
   const { lang, translations } = useLang()

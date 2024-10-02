@@ -6,21 +6,21 @@ import SizesSelect from './SizesSelect'
 import ColorsSelect from './ColorsSelect'
 import SortSelect from './SortSelect'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import {
-  $colorsOptions,
-  $sizeOptions,
-  setColors,
-  setColorsOptions,
-  setFiltersPopup,
-  setSizes,
-  setSizesOptions,
-} from '@/context/catalog'
+
 import { useUnit } from 'effector-react'
 import { motion } from 'framer-motion'
 import { basePropsForMotion } from '@/constants/motion'
 import SelectInfoItem from './SelectInfoItem'
 import FiltersPopup from './FiltersPopup/FiltersPopup'
 import { addOverflowHiddenToBody } from '@/lib/utils/common'
+import {
+  setSizesOptions,
+  setSizes,
+  setColorsOptions,
+  setColors,
+  setFiltersPopup,
+} from '@/context/catalog/index'
+import { $sizeOptions, $colorsOptions } from '@/context/catalog/state'
 
 const CatalogFilters = ({
   handleApplyFiltersWithPrice,

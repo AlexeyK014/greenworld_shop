@@ -1,6 +1,5 @@
 'use client'
 
-import { $catalogMenuIsOpen, closeCatalogMenu } from '@/context/modals'
 import { useLang } from '@/hooks/useLang'
 import { useMenuAnimation } from '@/hooks/useMenuAnimation'
 import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
@@ -13,6 +12,8 @@ import CatalogMenuButton from './CatalogMenuButton'
 import CatalogMenuList from './CatalogMenuList'
 import Accordion from '../Accordion/Accordion'
 import Link from 'next/link'
+import { closeCatalogMenu } from '@/context/modals/index'
+import { $catalogMenuIsOpen } from '@/context/modals/state'
 
 const CatalogMenu = () => {
   const catalogMenuIsOpen = useUnit($catalogMenuIsOpen)

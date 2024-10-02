@@ -1,4 +1,4 @@
-import { setIsAuth } from '@/context/auth'
+import { setIsAuth } from '@/context/auth/index'
 import { useEarthoOne } from '@eartho/one-client-react'
 import { useRouter } from 'next/navigation'
 

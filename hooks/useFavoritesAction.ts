@@ -78,11 +78,14 @@ import toast from 'react-hot-toast'
 import { useState } from 'react'
 import { IProduct } from '@/types/common'
 import { useGoodsByAuth } from './useGoodsByAuth'
-import { addProductToFavorites, setIsAddToFavorites } from '@/context/favorites'
 import { productsWithoutSizes } from '@/constants/product'
 import { handleShowSizeTable, isUserAuth } from '@/lib/utils/common'
-import { $favorites, $favoritesFromLS } from '@/context/favorites'
 import { addFavoriteItemToLs } from '@/lib/utils/favorites'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import {
+  addProductToFavorites,
+  setIsAddToFavorites,
+} from '@/context/favorites/index'
 
 export const useFavoritesAction = (product: IProduct) => {
   const [addToFavoritesSpinner, setAddToFavoritesSpinner] = useState(false)

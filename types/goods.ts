@@ -4,7 +4,7 @@ import { IProduct } from './common'
 export interface ILoadOneProductFx {
   productId: string
   category: string
-  setSpinner: (arg0: boolean) => void
+  setSpinner?: (arg0: boolean) => void
   withShowingSizeTable?: boolean
 }
 
@@ -21,8 +21,8 @@ export interface IProductCounterProps {
   initialCount?: number
   totalCount?: number
   setCount: (arg0: number) => void
-  increasePrice: VoidFunction
-  decreasePrice: VoidFunction
+  increasePrice?: VoidFunction
+  decreasePrice?: VoidFunction
   cartItem: ICartItem
   updateCountAsync: boolean
 }
@@ -52,4 +52,8 @@ export interface ILoadProductsByFilterFx {
 export interface IProducts {
   count: number
   items: IProduct[]
+}
+
+export interface ILoadWatchedProductsFx {
+  payload: { _id: string; category: string }[]
 }

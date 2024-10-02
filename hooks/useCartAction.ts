@@ -3,12 +3,13 @@ import {
   addItemToCart,
   addProductToCartBySizeTable,
 } from './../lib/utils/cart'
-import { $currentProduct } from '@/context/goods'
 import { useUnit } from 'effector-react'
 import { useMemo, useState } from 'react'
 import { isUserAuth } from '@/lib/utils/common'
-import { $cart, $cartFromLs, updateCartItemCount } from '@/context/cart'
 import { useGoodsByAuth } from './useGoodsByAuth'
+import { $currentProduct } from '@/context/goods/state'
+import { updateCartItemCount } from '@/context/cart/index'
+import { $cart, $cartFromLs } from '@/context/cart/state'
 
 export const useCartAction = (isSizeTable = false) => {
   const product = useUnit($currentProduct)

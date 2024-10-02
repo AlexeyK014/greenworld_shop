@@ -11,15 +11,16 @@ import {
   deleteProductFromComparison,
   setComparisonFromLS,
   setShouldShowEmptyComparison,
-} from '@/context/comparison'
+} from '@/context/comparison/index'
 import { deleteProductFromLS, isUserAuth } from '@/lib/utils/common'
 import { productsWithoutSizes } from '@/constants/product'
 import { addCartItemToLS } from '@/lib/utils/cart'
 import { IProduct } from '@/types/common'
 import { useMemo, useState } from 'react'
-import { $cart, $cartFromLs, addProductToCart } from '@/context/cart'
-import { loadOneProduct } from '@/context/goods'
+import { loadOneProduct } from '@/context/goods/index'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+import { addProductToCart } from '@/context/cart/index'
+import { $cart, $cartFromLs } from '@/context/cart/state'
 
 const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)

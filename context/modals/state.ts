@@ -1,17 +1,20 @@
-import { createDomain } from 'effector'
+'use client'
 
-const modals = createDomain()
-
-export const openMenu = modals.createEvent()
-export const closeMenu = modals.createEvent()
-export const openCatalogMenu = modals.createEvent()
-export const closeCatalogMenu = modals.createEvent()
-export const openSearchModal = modals.createEvent()
-export const closeSearchModal = modals.createEvent()
-export const closeQuickModal = modals.createEvent()
-export const showQuickModal = modals.createEvent()
-export const closeSizeTable = modals.createEvent()
-export const showSizeTable = modals.createEvent()
+import {
+  modals,
+  openMenu,
+  closeMenu,
+  openCatalogMenu,
+  closeCatalogMenu,
+  openSearchModal,
+  closeSearchModal,
+  showQuickModal,
+  closeQuickModal,
+  closeSizeTable,
+  showSizeTable,
+  openShareModal,
+  closeShareModal,
+} from '.'
 
 export const $menuIsOpen = modals
   .createStore(false)
@@ -37,3 +40,8 @@ export const $showSizeTable = modals
   .createStore(false)
   .on(closeSizeTable, () => false)
   .on(showSizeTable, () => true)
+
+export const $shareModal = modals
+  .createStore(false)
+  .on(openShareModal, () => true)
+  .on(closeShareModal, () => false)

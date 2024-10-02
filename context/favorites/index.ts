@@ -1,15 +1,17 @@
-import { IDeleteFavoriteItemsFx } from './../types/favorites'
+'use client'
+
 import { handleJWTError } from '@/lib/utils/errors'
 import { IAddProductToCartFx } from '@/types/cart'
 import {
-  IAddProductsFromLSToFavoriteFx,
   IFavoriteItem,
+  IAddProductsFromLSToFavoriteFx,
+  IDeleteFavoriteItemsFx,
 } from '@/types/favorites'
-import { createDomain, createEffect, sample } from 'effector'
-import api from '../api/apiInstance'
+import { createDomain, createEffect } from 'effector'
 import toast from 'react-hot-toast'
+import api from '@/api/apiInstance'
 
-const favorites = createDomain()
+export const favorites = createDomain()
 
 export const getFavoriteItemsFx = createEffect(
   async ({ jwt }: { jwt: string }) => {
@@ -149,76 +151,3 @@ export const addProductsFromLSToFavorites =
 
 export const deleteProductFromFavorites =
   favorites.createEvent<IDeleteFavoriteItemsFx>()
-
-// export const $favorites = favorites
-//   .createStore<IFavoriteItem[]>([])
-//   .on(getFavoriteItemsFx.done, (_, { result }) => result)
-//   .on(addProductToFavoriteFx.done, (cart, { result }) => [
-//     // для добавления эл-ов в избранное на сервере
-//     // чтобы не дублировались объекты у которых одно и тоже поле
-//     ...new Map(
-//       [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
-//     ).values(),
-//   ])
-//   .on(addProductsFromLSToFavoritesFx.done, (_, { result }) => result.items)
-//   .on(deleteFavoriteItemFx.done, (state, { result }) =>
-//     state.filter((item) => item._id !== result.id)
-//   )
-
-export const $favorites = favorites
-  .createStore<IFavoriteItem[]>([])
-  .on(getFavoriteItemsFx.done, (_, { result }) => result)
-  .on(addProductToFavoriteFx.done, (cart, { result }) => [
-    ...new Map(
-      [...cart, result.newFavoriteItem].map((item) => [item.clientId, item])
-    ).values(),
-  ])
-  .on(addProductsFromLSToFavoritesFx.done, (_, { result }) => result.items)
-  .on(deleteFavoriteItemFx.done, (state, { result }) =>
-    state.filter((item) => item._id !== result.id)
-  )
-
-// избранные товары для LS, добавляютяс когда юзер не залогинен
-// export const $favoritesFromLS = favorites
-//   .createStore<IFavoriteItem[]>([])
-//   .on(setFavoritesFromLS, (_, favorites) => favorites)
-export const $favoritesFromLS = favorites
-  .createStore<IFavoriteItem[]>([])
-  .on(setFavoritesFromLS, (_, favorites) => favorites)
-
-export const $isAddToFavorites = favorites
-  .createStore(false)
-  .on(setIsAddToFavorites, (_, value) => value)
-
-// для показа пустой страницы избранных
-export const $shouldShowEmptyFavorites = favorites
-  .createStore(false)
-  .on(setShouldShowEmptyFavorites, (_, value) => value)
-
-sample({
-  clock: addProductToFavorites,
-  source: $favorites,
-  fn: (_, data) => data,
-  target: addProductToFavoriteFx,
-})
-
-sample({
-  clock: loadFavoriteItems,
-  source: $favorites,
-  fn: (_, data) => data,
-  target: getFavoriteItemsFx,
-})
-
-sample({
-  clock: addProductsFromLSToFavorites,
-  source: $favorites,
-  fn: (_, data) => data,
-  target: addProductsFromLSToFavoritesFx,
-})
-
-sample({
-  clock: deleteProductFromFavorites,
-  source: $favorites,
-  fn: (_, data) => data,
-  target: deleteFavoriteItemFx,
-})

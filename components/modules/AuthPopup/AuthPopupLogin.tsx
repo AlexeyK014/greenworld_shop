@@ -1,4 +1,3 @@
-import { handleSignIn, signInFx } from '@/context/auth'
 import { useAuthForm } from '@/hooks/useAuthForm'
 import { IAuthSideProps, IInputs } from '@/types/authPopup'
 import React from 'react'
@@ -9,6 +8,7 @@ import AuthPopupClose from './AuthPopupClose'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import AuthPopupSocials from './AuthPopupSocials'
+import { signInFx, handleSignIn } from '@/context/auth/index'
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
   const { lang, translations } = useLang()

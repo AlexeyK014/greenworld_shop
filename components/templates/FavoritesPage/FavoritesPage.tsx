@@ -4,12 +4,6 @@
 /* eslint-disable max-len */
 'use client'
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
-import {
-  $favorites,
-  $favoritesFromLS,
-  $shouldShowEmptyFavorites,
-  getFavoriteItemsFx,
-} from '@/context/favorites'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { useLang } from '@/hooks/useLang'
@@ -23,6 +17,8 @@ import { motion } from 'framer-motion'
 import FavoritesList from '@/components/modules/FavoritesPage/FavoritesList'
 import { isUserAuth } from '@/lib/utils/common'
 import { loginCheckFx } from '@/context/user'
+import { getFavoriteItemsFx } from '@/context/favorites'
+import { $favorites, $favoritesFromLS, $shouldShowEmptyFavorites } from '@/context/favorites/state'
 
 const FavoritesPage = () => {
   const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS) // для получения товаров

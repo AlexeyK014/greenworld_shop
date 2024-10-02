@@ -131,12 +131,12 @@ import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { countWholeCartItemsAmount } from '@/lib/utils/cart'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
 import { isUserAuth } from '@/lib/utils/common'
-import { $cart, $cartFromLs, $shouldShowEmpty } from '@/context/cart'
 import cartSkeletonStyles from '@/styles/cart-skeleton/index.module.scss'
 import styles from '@/styles/cart-page/index.module.scss'
 import HeadeingWithCount from '@/components/elements/HeadingWithCount/HeadeingWithCount'
-import { getCartItemsFx } from '@/api/cart'
-import { loginCheckFx } from '@/context/user'
+import { loginCheckFx } from '@/context/user/index'
+import { getCartItemsFx } from '@/context/cart/index'
+import { $cart, $cartFromLs, $shouldShowEmpty } from '@/context/cart/state'
 
 const CartPage = () => {
   const cartSpinner = useUnit(getCartItemsFx.pending)

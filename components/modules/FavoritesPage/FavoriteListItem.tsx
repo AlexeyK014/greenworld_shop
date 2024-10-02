@@ -2,7 +2,6 @@ import { IFavoriteItem } from '@/types/favorites'
 import styles from '@/styles/favorites/index.module.scss'
 import { useState } from 'react'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLs, addProductToCart } from '@/context/cart'
 import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartItemBtn'
 import AddToCArtIcon from '@/components/elements/AddToCartIcon/AddToCArtIcon'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
@@ -19,8 +18,10 @@ import {
   deleteProductFromFavorites,
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
-} from '@/context/favorites'
+} from '@/context/favorites/index'
 import { useProductDelete } from '@/hooks/useProductDelete'
+import { addProductToCart } from '@/context/cart/index'
+import { $cart, $cartFromLs } from '@/context/cart/state'
 
 const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
   // для добавления товара в корзину

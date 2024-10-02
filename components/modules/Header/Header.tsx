@@ -5,7 +5,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect } from 'react'
 import Menu from './Menu'
-import { openMenu, openSearchModal } from '@/context/modals'
+import { openMenu, openSearchModal } from '@/context/modals/index'
 import {
   addOverflowHiddenToBody,
   handleOpenAuthPopup,
@@ -15,28 +15,27 @@ import Logo from '../../elements/Logo/logo'
 import { useLang } from '@/hooks/useLang'
 import CartPopup from './CartPopup/CartPopup'
 import HeaderProfile from './HeaderProfile'
-import {
-  addProductsFromLSToCart,
-  setCartFromLS,
-  setShouldShowEmpty,
-} from '@/context/cart'
-import { setLang } from '@/context/lang'
+import { setLang } from '@/context/lang/index'
 import {
   addProductsFromLSToFavorites,
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
-} from '@/context/favorites'
+} from '@/context/favorites/index'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $favorites, $favoritesFromLS } from '@/context/favorites'
-import { $isAuth } from '@/context/auth'
 import {
-  $comparison,
-  $comparisonFromLS,
   addProductsFromLSToComparison,
   setComparisonFromLS,
   setShouldShowEmptyComparison,
-} from '@/context/comparison'
-import { loginCheckFx } from '@/context/user'
+} from '@/context/comparison/index'
+import { $isAuth } from '@/context/auth/state'
+import { $comparison, $comparisonFromLS } from '@/context/comparison/state'
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import { loginCheckFx } from '@/context/user/index'
+import {
+  setShouldShowEmpty,
+  setCartFromLS,
+  addProductsFromLSToCart,
+} from '@/context/cart/index'
 
 const Header = () => {
   const isAuth = useUnit($isAuth)

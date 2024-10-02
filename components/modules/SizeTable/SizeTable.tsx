@@ -1,18 +1,19 @@
 /* eslint-disable prettier/prettier */
-import { $sizeTableSizes } from '@/context/sizeTable'
+import { $sizeTableSizes } from '@/context/sizeTable/state'
 import { useCartAction } from '@/hooks/useCartAction'
 import { useUnit } from 'effector-react'
 import styles from '@/styles/size-table/index.module.scss'
-import { $showQuickModal } from '@/context/modals'
+import { $showQuickModal } from '@/context/modals/state'
 import { closeSizeTableByCheck, isUserAuth } from '@/lib/utils/common'
 import { useLang } from '@/hooks/useLang'
 import AddToCartBtn from '../ProductListItem/AddToCartBtn'
 import ProductCountBySize from '../ProductListItem/ProductCountBySize'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $favorites, $favoritesFromLS, $isAddToFavorites, addProductToFavorites } from '@/context/favorites'
 import { addFavoriteItemToLs } from '@/lib/utils/favorites'
 import toast from 'react-hot-toast'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
+import { addProductToFavorites } from '@/context/favorites/index'
+import { $isAddToFavorites, $favorites, $favoritesFromLS } from '@/context/favorites/state'
 
 const SizeTable = () => {
   const { lang, translations } = useLang()

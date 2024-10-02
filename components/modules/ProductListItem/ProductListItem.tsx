@@ -12,16 +12,16 @@ import {
   isItemInList,
 } from '@/lib/utils/common'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { setCurrentProduct } from '@/context/goods'
+import { setCurrentProduct } from '@/context/goods/index'
 import { productsWithoutSizes } from '@/constants/product'
 import { useCartAction } from '@/hooks/useCartAction'
 import { addProductToCartBySizeTable } from '@/lib/utils/cart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { setIsAddToFavorites } from '@/context/favorites'
+import { setIsAddToFavorites } from '@/context/favorites/index'
 import { useFavoritesAction } from '@/hooks/useFavoritesAction'
 import { useComparisonAction } from '@/hooks/useComparisonAction'
-import { showQuickModal } from '@/context/modals'
+import { showQuickModal } from '@/context/modals/index'
 
 const ProductListItem = ({ item, title }: IProductListItemProps) => {
   const { lang, translations } = useLang()

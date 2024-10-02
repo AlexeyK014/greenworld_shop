@@ -1,10 +1,10 @@
-import { $catalogCategoryOptions } from '@/context/catalog'
 // для логикик фильтров
 
 import { useLang } from './useLang'
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
 import { getSearchParamUrl } from '@/lib/utils/common'
+import { $catalogCategoryOptions } from '@/context/catalog/state'
 
 export const useCategoryFilter = () => {
   const { lang, translations } = useLang()
@@ -29,7 +29,7 @@ export const useCategoryFilter = () => {
     const urlParams = getSearchParamUrl()
     const typeParam = urlParams.get('type') // поределяем type
 
-    // делаем проверку, если при перезагрузки есть этот параметр, чтоюы применился, делаем setOptions
+    // делаем проверку, если при перезагрузки есть этот параметр, чтобы применился, делаем setOptions
     // в setOptions, получаем значение из переводов. Делаем проверку по тексту
     // если выделеный options будет равен тому title который наход в options, тогда isActive
     if (typeParam) {

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable indent */
 'use client'
 import { useProductFilters } from '@/hooks/useProductFilters'
@@ -12,8 +11,10 @@ import ProductListItem from '@/components/modules/ProductListItem/ProductListIte
 import { useLang } from '@/hooks/useLang'
 import HeadeingWithCount from '@/components/elements/HeadingWithCount/HeadeingWithCount'
 import { useEffect } from 'react'
-import { setCatalogCategoryOptions } from '@/context/catalog'
+import { setCatalogCategoryOptions } from '@/context/catalog/index'
 import CatalogFilters from '@/components/modules/CatalogFilters/CatalogFilters'
+import { useWatchedProducts } from '@/hooks/useWatchedProducts'
+import WatchedProducts from '@/components/modules/WatchedProducts/WatchedProducts'
 
 const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
   const { lang, translations } = useLang()
@@ -32,6 +33,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
     handleApplyFiltersWithColors,
     handleApplyFiltersBySort,
   } = useProductFilters(searchParams, pageName, pageName === 'catalog')
+
+  const { watchedProducts } = useWatchedProducts()
 
   useEffect(() => {
     // pageName на какой странице мы сейчас находимся
@@ -238,6 +241,9 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
           }
           onPageChange={handlePageChange}
         />
+        {!!watchedProducts.items?.length && (
+          <WatchedProducts watchedProducts={watchedProducts} />
+        )}
       </div>
     </>
   )

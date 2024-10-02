@@ -3,18 +3,17 @@
 // принимаем массив со строчками(размерами) и эти размеры сэтим в param и отправляем на бэк
 // чтобы по ним возвращаеть те товары у которых есть эти размеры
 
-import {
-  $sizeOptions,
-  $sizes,
-  setSizes,
-  setSizesOptions,
-  updateSizesOptionBySize,
-} from '@/context/catalog'
 import { useUnit } from 'effector-react'
 import { useLang } from './useLang'
 import { useEffect } from 'react'
 import { getCheckedArrayParam, getSearchParamUrl } from '@/lib/utils/common'
 import { allowedSizes } from '@/constants/product'
+import {
+  setSizes,
+  setSizesOptions,
+  updateSizesOptionBySize,
+} from '@/context/catalog/index'
+import { $sizeOptions, $sizes } from '@/context/catalog/state'
 
 export const useSizeFiter = (
   handleApplyFiltersWithSizes: (arg0: string[]) => void

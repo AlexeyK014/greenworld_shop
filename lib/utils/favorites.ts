@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import {
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
-} from '@/context/favorites'
+} from '@/context/favorites/index'
 
 // добавление товаров в избранное на клиенте
 export const addFavoriteItemToLs = (

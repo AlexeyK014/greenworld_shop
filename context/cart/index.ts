@@ -1,13 +1,71 @@
-import {
-  IAddProductToCartFx,
-  IDeleteCartItemsFx,
-  IUpdateCartItemCountFx,
-} from './../types/cart'
+'use client'
+
 import { handleJWTError } from '@/lib/utils/errors'
-import { ICartItem } from '@/types/cart'
-import { createEffect } from 'effector'
+import {
+  ICartItem,
+  IAddProductToCartFx,
+  IAddProductsFromLSToCartFx,
+  IUpdateCartItemCountFx,
+  IDeleteCartItemsFx,
+} from '@/types/cart'
+import { createDomain, createEffect } from 'effector'
 import toast from 'react-hot-toast'
-import api from './apiInstance'
+import api from '@/api/apiInstance'
+
+export const cart = createDomain()
+
+// загрузка товаров в корзину от какого-то конкретного пользователя
+export const loadCartItems = cart.createEvent<{ jwt: string }>()
+
+// добавление товара для неавторизованного
+export const setCartFromLS = cart.createEvent<ICartItem[]>()
+
+// получение тех полей которые необходимо для добавление товара на СЕРВЕР
+export const addProductToCart = cart.createEvent<IAddProductToCartFx>()
+
+export const addProductsFromLSToCart =
+  cart.createEvent<IAddProductsFromLSToCartFx>()
+
+export const updateCartItemCount = cart.createEvent<IUpdateCartItemCountFx>()
+
+// эвент для установки TotlaPrice
+export const setTotalPrice = cart.createEvent<number>()
+
+export const deleteProductFromCart = cart.createEvent<IDeleteCartItemsFx>()
+
+export const setShouldShowEmpty = cart.createEvent<boolean>()
+
+export const addProductsFromLSToCartFx = createEffect(
+  async ({ jwt, cartItems }: IAddProductsFromLSToCartFx) => {
+    try {
+      const { data } = await api.post(
+        '/api/cart/add-many',
+        { items: cartItems },
+        {
+          headers: { Authorization: `Bearer ${jwt}` },
+        }
+      )
+
+      // если ошибка повторяем запрос после refresh
+      if (data?.error) {
+        const newData: { cartItems: ICartItem[] } = await handleJWTError(
+          data.error.name,
+          {
+            repeatRequestMethodName: 'addProductsFromLSToCartFx',
+            payload: { items: cartItems },
+          }
+        )
+        return newData
+      }
+
+      // для обновления стора с БД
+      loadCartItems({ jwt })
+      return data
+    } catch (error) {
+      toast.error((error as Error).message)
+    }
+  }
+)
 
 export const getCartItemsFx = createEffect(async ({ jwt }: { jwt: string }) => {
   try {

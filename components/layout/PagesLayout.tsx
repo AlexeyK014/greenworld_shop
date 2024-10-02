@@ -1,9 +1,5 @@
 'use client'
-import {
-  $showQuickModal,
-  $showSizeTable,
-  closeQuickModal,
-} from '@/context/modals'
+
 import { useUnit } from 'effector-react'
 import React, { useEffect, useState } from 'react'
 import { rock } from '@/public/fonts/fonts'
@@ -11,14 +7,22 @@ import Layout from './Layout'
 import {
   closeSizeTableByCheck,
   handleCloseAuthPopup,
+  handleCloseShareModule,
   removeOverflowHiddenFromBody,
 } from '@/lib/utils/common'
-import { $openAuthPopup } from '@/context/auth'
 import { Toaster } from 'react-hot-toast'
 import { EarthoOneProvider } from '@eartho/one-client-react'
 import CookieAlert from '../modules/CookieAlert/CookieAlert'
 import { motion } from 'framer-motion'
 import { Next13ProgressBar } from 'next13-progressbar'
+import '@/context/goods/init'
+import {
+  $shareModal,
+  $showQuickModal,
+  $showSizeTable,
+} from '@/context/modals/state'
+import { $openAuthPopup } from '@/context/auth/state'
+import { closeQuickModal } from '@/context/modals/index'
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const [isClient, setIsClient] = useState(false)
@@ -29,6 +33,7 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const showQuickViewModal = useUnit($showQuickModal)
   const showSizeTable = useUnit($showSizeTable)
   const openAuthPopup = useUnit($openAuthPopup)
+  const shareModal = useUnit($shareModal)
 
   useEffect(() => setIsClient(true), [])
 
@@ -75,6 +80,10 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
               <div
                 className={`auth-overlay ${openAuthPopup ? 'overlay-active' : ''}`}
                 onClick={handleCloseAuthPopup}
+              />
+              <div
+                className={`share-overlay ${shareModal ? 'overlay-active' : ''}`}
+                onClick={handleCloseShareModule}
               />
               {cookieAlertOpne && (
                 <motion.div

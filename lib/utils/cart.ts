@@ -7,7 +7,7 @@ import {
   addProductToCart,
   setCartFromLS,
   setShouldShowEmpty,
-} from '@/context/cart'
+} from '@/context/cart/index'
 import { productsWithoutSizes } from '@/constants/product'
 
 // добавление товара в корзину с запросом на сервер

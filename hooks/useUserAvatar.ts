@@ -1,4 +1,4 @@
-import { $user } from '@/context/user'
+import { $user } from '@/context/user/state'
 import { useUnit } from 'effector-react'
 import { useEffect, useState } from 'react'
 

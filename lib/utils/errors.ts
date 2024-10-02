@@ -2,27 +2,27 @@
 // обрабатываем ошибку протухание токена
 // если в login-check появиться сообщение что токен протух, нам необходимо повторить запрос
 
+import { JWTError } from '@/constants/jwt'
+import { refreshTokenFx } from '@/context/auth/index'
 import {
+  addProductsFromLSToCartFx,
   addProductToCartFx,
   deleteCartItemFx,
   getCartItemsFx,
-} from '@/api/cart'
-import { JWTError } from '@/constants/jwt'
-import { refreshTokenFx } from '@/context/auth'
-import { addProductsFromLSToCartFx } from '@/context/cart'
+} from '@/context/cart/index'
 import {
   addProductFromLSToComparisonFx,
   addProductToComparisonFx,
   deleteComparisonItemFx,
   getComparisonItemsFx,
-} from '@/context/comparison'
+} from '@/context/comparison/index'
 import {
   addProductsFromLSToFavoritesFx,
   addProductToFavoriteFx,
   deleteFavoriteItemFx,
   getFavoriteItemsFx,
-} from '@/context/favorites'
-import { loginCheckFx } from '@/context/user'
+} from '@/context/favorites/index'
+import { loginCheckFx } from '@/context/user/index'
 import {
   IAddProductsFromLSToCartFx,
   IAddProductToCartFx,

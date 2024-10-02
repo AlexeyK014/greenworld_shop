@@ -1,5 +1,4 @@
-import { register } from 'module';
-import { FieldErrors, FieldErrorsImpl, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
 export interface IInputs {
   name: string
   email: string

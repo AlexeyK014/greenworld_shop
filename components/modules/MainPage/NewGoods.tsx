@@ -1,8 +1,9 @@
-import { getNewProductsFx } from '@/api/main-page'
-import { $newProducts } from '@/context/goods'
+// import { getNewProductsFx } from '@/api/main-page'
 import { useLang } from '@/hooks/useLang'
 import { useUnit } from 'effector-react'
 import MainPageSection from './MainPageSection'
+import { $newProducts } from '@/context/goods/state'
+import { getNewProductsFx } from '@/context/goods/index'
 
 const NewGoods = () => {
   const goods = useUnit($newProducts)

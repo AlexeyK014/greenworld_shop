@@ -5,11 +5,6 @@ import { usePathname } from 'next/navigation'
 import Breadcrumbs from '../modules/Breadcrumbs/Breadcrumbs'
 import HeadeingWithCount from '../elements/HeadingWithCount/HeadeingWithCount'
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import {
-  $comparison,
-  $comparisonFromLS,
-  $shouldShowEmptyComparison,
-} from '@/context/comparison'
 import { useComparisonLinks } from '@/hooks/useComparisonLinks'
 import skeletonLinksStyles from '@/styles/comparison-links-skeleton/index.module.scss'
 import skeletonListStyles from '@/styles/comparison-list-skeleton/index.module.scss'
@@ -19,8 +14,13 @@ import Skeleton from '../elements/Skeleton/Skeleton'
 import ComparisonLinksList from '../modules/Comparison/ComparisonLinksList'
 import EmptyPageContent from '../modules/EmptyPageContent/EmptyPageContent'
 import { useUnit } from 'effector-react'
-import { loginCheckFx } from '@/context/user'
+import { loginCheckFx } from '@/context/user/index'
 import { isUserAuth } from '@/lib/utils/common'
+import {
+  $comparison,
+  $comparisonFromLS,
+  $shouldShowEmptyComparison,
+} from '@/context/comparison/state'
 
 const ComparisonLayout = ({ children }: { children: React.ReactNode }) => {
   // для динамического изменения title на странице
