@@ -91,11 +91,7 @@ export async function GET(req: Request) {
     // созд фун-ю, где принимаем кол-ю и возвращаем товары
     if (isCatalogParam) {
       const getFilteredCollection = async (collection: string) => {
-        const goods = await db
-          .collection(collection)
-          .find()
-          .sort(sort as Sort)
-          .toArray()
+        const goods = await db.collection(collection).find(filter).toArray()
 
         return goods
       }
