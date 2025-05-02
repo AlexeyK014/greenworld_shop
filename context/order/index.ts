@@ -31,7 +31,6 @@ export const setCourierAdressData = order.createEvent<IGreenworldAddressData>();
 export const setOnlinePaymentTb = order.createEvent<boolean>();
 export const setCashPaymentTb = order.createEvent<boolean>();
 export const makePayment = order.createEvent<IMakePaymentFx>();
-export const setScrollToRequiredBlock = order.createEvent<boolean>();
 export const setOrderDetailsValues = order.createEvent<IOrderDetailsValues>();
 
 export const getGreenworldShopByCityFx = order.createEffect(
@@ -102,15 +101,3 @@ export const paymentNotifyFx = order.createEffect(async ({ message, email }: IPa
     toast.error((error as Error).message);
   }
 });
-
-// export const paymentNotifyFx = order.createEffect(
-//   async ({ message, email }: IPaymentNotifyFx) => {
-//     try {
-//       const { data } = await api.post('/api/payment/notify', { message, email })
-
-//       return data
-//     } catch (error) {
-//       toast.error((error as Error).message)
-//     }
-//   }
-// )

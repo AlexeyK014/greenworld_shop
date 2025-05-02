@@ -11,12 +11,6 @@ import OrderTitle from '@/components/modules/OrderPage/OrderTitle';
 import { basePropsForMotion } from '@/constants/motion';
 import { $cart, $cartFromLs } from '@/context/cart/state';
 import { $mapModal } from '@/context/modals/state';
-import {
-  $chosenCourierAdressData,
-  $chosenPickupAdressData,
-  $orderDetailsValues,
-  $scrollToRequiredBlock,
-} from '@/context/order/state';
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { useLang } from '@/hooks/useLang';
@@ -26,8 +20,7 @@ import styles from '@/styles/order/index.module.scss';
 import { useUnit } from 'effector-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 const OrderPage = () => {
   const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs('order');
@@ -35,52 +28,13 @@ const OrderPage = () => {
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
   const isMedia1220 = useMediaQuery(1220);
   const mapModal = useUnit($mapModal);
-  const scrollToRequiredBlock = useUnit($scrollToRequiredBlock);
-  const shouldScrollToDelivery = useRef(true);
-  const [isFirstRender, setIsFirstRender] = useState(true); //для определение первый рендер или нет
-  const deliveryBlockRef = useRef() as MutableRefObject<HTMLLIElement>; //чтобы прокучиваться к блоку
-  const detailsBlockRef = useRef() as MutableRefObject<HTMLLIElement>; //чтобы прокучиваться к блоку
-  const chosenCourierAdressData = useUnit($chosenCourierAdressData);
-  const chosenPickupAdressData = useUnit($chosenPickupAdressData);
-  const orderDetailsValues = useUnit($orderDetailsValues);
   const router = useRouter();
 
-  const scrollToBlock = (selector: HTMLLIElement) => {
-    //скролим в нужное место
-    window.scrollTo({
-      top: selector.getBoundingClientRect().top + window.scrollY + -50, // центрируем блок
-      behavior: 'smooth', // плавность
-    });
-  };
 
   //чтобы не проигрывала прокрутка на первый рендер
   useEffect(() => {
-    // проверяем был ли первый рендер
-    if (shouldScrollToDelivery.current) {
-      shouldScrollToDelivery.current = false;
-      setIsFirstRender(false);
-    }
-
     clearCartByPayment();
   }, []);
-
-  useEffect(() => {
-    if (isFirstRender) {
-      //чтобы лишний раз не отыгрывал скролл на страницы
-      return;
-    }
-
-    if (!orderDetailsValues.isValid) {
-      scrollToBlock(detailsBlockRef.current);
-      return;
-    }
-
-    //проверка выделен ли хотя бы ожин адрес
-    if (!chosenCourierAdressData.address_line1 && !chosenPickupAdressData.address_line1) {
-      scrollToBlock(detailsBlockRef.current);
-      toast.error('Нужно указать адрес!');
-    }
-  }, [scrollToRequiredBlock]);
 
   const clearCartByPayment = async () => {
     // делаем проверку, если у нас есть paymentId в LS
@@ -140,14 +94,14 @@ const OrderPage = () => {
                     </table>
                   )}
                 </li>
-                <li className={styles.order__list__item} ref={deliveryBlockRef}>
+                <li className={`${styles.order__list__item} order-block`}>
                   <OrderDelivery />
                 </li>
                 <li className={styles.order__list__item}>
                   <OrderTitle orderNumber="3" text={translations[lang].order.payment} />
                   <OrderPayment />
                 </li>
-                <li className={styles.order__list__item} ref={detailsBlockRef}>
+                <li className={`${styles.order__list__item} details-block`}>
                   <OrderTitle orderNumber="4" text={translations[lang].order.recipient_details} />
                   <div className={styles.order__list__item__details}>
                     <p className={styles.order__list__item__details__title}>

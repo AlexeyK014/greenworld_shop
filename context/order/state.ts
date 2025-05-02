@@ -13,7 +13,6 @@ import {
   setOnlinePaymentTb,
   setOrderDetailsValues,
   setPickupTab,
-  setScrollToRequiredBlock,
   setShouldLoadGreenworldData,
   setShouldShowCourierAdressData,
 } from '.';
@@ -58,11 +57,6 @@ export const $onlinePaymentTab = order
 export const $cashPaymentTab = order
   .createStore<boolean>(false)
   .on(setCashPaymentTb, (_, value) => value);
-
-//этот стор нужен для того чтобы мы делали тригер для useEffect, изменяя false/true
-export const $scrollToRequiredBlock = order
-  .createStore<boolean>(false)
-  .on(setScrollToRequiredBlock, (_, value) => value);
 
 export const $orderDetailsValues = order
   .createStore<IOrderDetailsValues>({} as IOrderDetailsValues)

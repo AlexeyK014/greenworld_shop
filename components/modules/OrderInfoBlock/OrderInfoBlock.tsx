@@ -33,7 +33,6 @@ const OrderInfoBlock = ({
   const pickupTab = useUnit($pickupTab);
   const chosenCourierAdressData = useUnit($chosenCourierAdressData);
   const chosenPickupAdressData = useUnit($chosenPickupAdressData);
-  const scrollToRequiredBlock = useUnit($scrollToRequiredBlock);
   const paymentSpinner = useUnit(makePaymentFx.pending);
   const checkboxRef = useRef() as MutableRefObject<HTMLInputElement>;
   const orderDetailsValues = useUnit($orderDetailsValues);
@@ -44,6 +43,14 @@ const OrderInfoBlock = ({
 
   // для переключения состояния
   const handleAgreementChange = () => setIsUserAgree(!isUserAgree);
+
+  const scrollToBlock = (selector: HTMLLIElement) => {
+    //скролим в нужное место
+    window.scrollTo({
+      top: selector.getBoundingClientRect().top + window.scrollY + -50, // центрируем блок
+      behavior: 'smooth', // плавность
+    });
+  };
 
   //  проверка, если юзер нажал на Tab - выделяем checkbox
   const handleTabCheckbox = (e: React.KeyboardEvent<HTMLLabelElement>) => {
@@ -58,13 +65,13 @@ const OrderInfoBlock = ({
   const handleMakePayment = async () => {
     //проверка выделен ли хотя бы ожин адрес
     if (!chosenCourierAdressData.address_line1 && !chosenPickupAdressData.address_line1) {
-      console.log('click');
-
-      setScrollToRequiredBlock(!scrollToRequiredBlock);
+      const orderBlock = document.querySelector('.order-block') as HTMLLIElement
+      scrollToBlock(orderBlock)
       return;
     }
     if (!orderDetailsValues.isValid) {
-      setScrollToRequiredBlock(!scrollToRequiredBlock);
+      const detailsBlock = document.querySelector('.details-block') as HTMLLIElement
+      scrollToBlock(detailsBlock)
       return;
     }
 
@@ -162,9 +169,8 @@ const OrderInfoBlock = ({
         ) : (
           <Link
             href="/order"
-            className={`${styles.order_block__btn} ${
-              !isUserAgree || !currentCartByAuth.length ? styles.disabled : ''
-            }`}
+            className={`${styles.order_block__btn} ${!isUserAgree || !currentCartByAuth.length ? styles.disabled : ''
+              }`}
           >
             {translations[lang].order.make_order}
           </Link>
