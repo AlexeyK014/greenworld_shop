@@ -46,7 +46,9 @@
       background-color: #4897650c;
       position: sticky;
       top: 20px;
-      box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.20), 0px 0px 20px 0px rgba(0, 0, 0, 0.10);
+      box-shadow:
+        0px 12px 20px 0px rgba(0, 0, 0, 0.2),
+        0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 
       @media (max-width: 930px) {
         min-width: 352px;
@@ -81,7 +83,7 @@
         width: 24px;
 
         & span::before {
-          background-color: #A5A8AD;
+          background-color: #a5a8ad;
           content: '';
           height: 100%;
           width: 100%;
@@ -95,7 +97,7 @@
 
         &:hover span::before {
           transition: background-color 0.2s ease-in-out;
-          background-color: #FF0C0C;
+          background-color: #ff0c0c;
         }
 
         @media (max-width: 530px) {
@@ -114,7 +116,9 @@
       }
 
       &__img {
-        background: radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0.00) 100%), #f8f8fa00;
+        background:
+          radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0) 100%),
+          #f8f8fa00;
 
         @media (max-width: 530px) {
           margin-right: 14px !important;

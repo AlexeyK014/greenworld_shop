@@ -1,208 +1,192 @@
-'use client'
-import Link from 'next/link'
-import { useUnit } from 'effector-react'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect } from 'react'
-import Menu from './Menu'
-import { openMenu, openSearchModal } from '@/context/modals/index'
+'use client';
+import Link from 'next/link';
+import { useUnit } from 'effector-react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
+import Menu from './Menu';
+import { openMenu, openSearchModal } from '@/context/modals/index';
 import {
   addOverflowHiddenToBody,
   handleOpenAuthPopup,
   triggerLoginCheck,
-} from '@/lib/utils/common'
-import Logo from '../../elements/Logo/logo'
-import { useLang } from '@/hooks/useLang'
-import CartPopup from './CartPopup/CartPopup'
-import HeaderProfile from './HeaderProfile'
-import { setLang } from '@/context/lang/index'
+} from '@/lib/utils/common';
+import Logo from '../../elements/Logo/logo';
+import { useLang } from '@/hooks/useLang';
+import CartPopup from './CartPopup/CartPopup';
+import HeaderProfile from './HeaderProfile';
+import { setLang } from '@/context/lang/index';
 import {
   addProductsFromLSToFavorites,
   setFavoritesFromLS,
   setShouldShowEmptyFavorites,
-} from '@/context/favorites/index'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
+} from '@/context/favorites/index';
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import {
   addProductsFromLSToComparison,
   setComparisonFromLS,
   setShouldShowEmptyComparison,
-} from '@/context/comparison/index'
-import { $isAuth } from '@/context/auth/state'
-import { $comparison, $comparisonFromLS } from '@/context/comparison/state'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
-import { loginCheckFx } from '@/context/user/index'
-import {
-  setShouldShowEmpty,
-  setCartFromLS,
-  addProductsFromLSToCart,
-} from '@/context/cart/index'
+} from '@/context/comparison/index';
+import { $isAuth } from '@/context/auth/state';
+import { $comparison, $comparisonFromLS } from '@/context/comparison/state';
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state';
+import { loginCheckFx } from '@/context/user/index';
+import { setShouldShowEmpty, setCartFromLS, addProductsFromLSToCart } from '@/context/cart/index';
 
 const Header = () => {
-  const isAuth = useUnit($isAuth)
-  const loginCheckSpinner = useUnit(loginCheckFx.pending)
-  const { lang, translations } = useLang()
+  const isAuth = useUnit($isAuth);
+  const loginCheckSpinner = useUnit(loginCheckFx.pending);
+  const { lang, translations } = useLang();
   // const user = useUnit($user)
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS)
-  const currentComparisonByAuth = useGoodsByAuth($comparison, $comparisonFromLS)
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS);
+  const currentComparisonByAuth = useGoodsByAuth($comparison, $comparisonFromLS);
 
   const handleOpenMenu = () => {
-    addOverflowHiddenToBody()
-    openMenu()
-  }
+    addOverflowHiddenToBody();
+    openMenu();
+  };
 
   const handleOpenSearchModal = () => {
-    openSearchModal()
-    addOverflowHiddenToBody()
-  }
+    openSearchModal();
+    addOverflowHiddenToBody();
+  };
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem('auth') as string)
-    const lang = JSON.parse(localStorage.getItem('lang') as string)
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
+    const lang = JSON.parse(localStorage.getItem('lang') as string);
 
     // при первом рендере получаем данные из LS в состояние
-    const cart = JSON.parse(localStorage.getItem('cart') as string)
-    const favoritesFromLS = JSON.parse(
-      localStorage.getItem('favorites') as string
-    )
+    const cart = JSON.parse(localStorage.getItem('cart') as string);
+    const favoritesFromLS = JSON.parse(localStorage.getItem('favorites') as string);
 
-    const comparisonFromLS = JSON.parse(
-      localStorage.getItem('comparison') as string
-    )
+    const comparisonFromLS = JSON.parse(localStorage.getItem('comparison') as string);
 
     // устанавливаем язык
     if (lang) {
       if (lang === 'ru' || lang === 'en') {
-        setLang(lang)
+        setLang(lang);
       }
     }
 
-    triggerLoginCheck() // если токен не валидный
+    triggerLoginCheck(); // если токен не валидный
 
     // проверяем, если нет - тогда true
     if (!favoritesFromLS || !favoritesFromLS?.length) {
-      setShouldShowEmptyFavorites(true)
+      setShouldShowEmptyFavorites(true);
     }
 
     if (!cart || !cart?.length) {
-      setShouldShowEmpty(true)
+      setShouldShowEmpty(true);
     }
 
     if (auth?.accessToken) {
-      return
+      return;
     }
 
     if (cart && Array.isArray(cart)) {
       if (!cart.length) {
-        setShouldShowEmpty(true)
+        setShouldShowEmpty(true);
       } else {
-        setCartFromLS(cart)
+        setCartFromLS(cart);
       }
     }
 
     if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
       if (!favoritesFromLS.length) {
-        setShouldShowEmptyFavorites(true)
+        setShouldShowEmptyFavorites(true);
       } else {
         // на первый рендер вызываем фун-ю и смотрим есть ли токен в LS
         // если есть токены то получаем данные юзера
-        setFavoritesFromLS(favoritesFromLS)
+        setFavoritesFromLS(favoritesFromLS);
       }
     }
 
     if (comparisonFromLS && Array.isArray(comparisonFromLS)) {
       if (!comparisonFromLS.length) {
-        setShouldShowEmptyComparison(true)
+        setShouldShowEmptyComparison(true);
       } else {
-        setComparisonFromLS(comparisonFromLS)
+        setComparisonFromLS(comparisonFromLS);
       }
     }
-  }, [])
+  }, []);
 
   // если юзер авторизируется, чтобы мы синронизировались с сервером
   // например для отправки товара который мы добавили будучи не авторизованны
   useEffect(() => {
     if (isAuth) {
-      const auth = JSON.parse(localStorage.getItem('auth') as string)
-      const cartFromLS = JSON.parse(localStorage.getItem('cart') as string)
-      const favoritesFromLS = JSON.parse(
-        localStorage.getItem('favorites') as string
-      )
-      const comparisonFromLS = JSON.parse(
-        localStorage.getItem('comparison') as string
-      )
+      const auth = JSON.parse(localStorage.getItem('auth') as string);
+      const cartFromLS = JSON.parse(localStorage.getItem('cart') as string);
+      const favoritesFromLS = JSON.parse(localStorage.getItem('favorites') as string);
+      const comparisonFromLS = JSON.parse(localStorage.getItem('comparison') as string);
 
       // если есть данные корзины и если данные в массиве
       if (cartFromLS && Array.isArray(cartFromLS)) {
         addProductsFromLSToCart({
           jwt: auth.accessToken,
           cartItems: cartFromLS,
-        })
+        });
       }
 
       if (favoritesFromLS && Array.isArray(favoritesFromLS)) {
         addProductsFromLSToFavorites({
           jwt: auth.accessToken,
           favoriteItems: favoritesFromLS,
-        })
+        });
       }
 
       if (comparisonFromLS && Array.isArray(comparisonFromLS)) {
         addProductsFromLSToComparison({
           jwt: auth.accessToken,
           comparisonItems: comparisonFromLS,
-        })
+        });
       }
     }
-  }, [isAuth])
+  }, [isAuth]);
 
   return (
-    <header className='header'>
-      <div className='container header__container'>
-        <button className='btn-reset header__burger' onClick={handleOpenMenu}>
+    <header className="header">
+      <div className="container header__container">
+        <button className="btn-reset header__burger" onClick={handleOpenMenu}>
           {translations[lang].header.menu_btn}
         </button>
         <Menu />
-        <div className='header__logo'>
+        <div className="header__logo">
           <Logo />
         </div>
-        <ul className='header__links list-reset'>
-          <li className='header__links__item'>
+        <ul className="header__links list-reset">
+          <li className="header__links__item">
             <button
-              className='btn-reset header__links__item__btn header__links__item__btn--search'
+              className="btn-reset header__links__item__btn header__links__item__btn--search"
               onClick={handleOpenSearchModal}
             />
           </li>
-          <li className='header__links__item'>
+          <li className="header__links__item">
             <Link
-              href='/favorites'
-              className='header__links__item__btn header__links__item__btn--favorites'
+              href="/favorites"
+              className="header__links__item__btn header__links__item__btn--favorites"
             >
-              {!!currentFavoritesByAuth.length && (
-                <span className='not-empty' />
-              )}
+              {!!currentFavoritesByAuth.length && <span className="not-empty" />}
             </Link>
           </li>
-          <li className='header__links__item'>
+          <li className="header__links__item">
             <Link
-              className='header__links__item__btn header__links__item__btn--compare'
-              href='/comparison'
+              className="header__links__item__btn header__links__item__btn--compare"
+              href="/comparison"
             >
-              {!!currentComparisonByAuth.length && (
-                <span className='not-empty' />
-              )}
+              {!!currentComparisonByAuth.length && <span className="not-empty" />}
             </Link>
           </li>
-          <li className='header__links__item'>
+          <li className="header__links__item">
             <CartPopup />
           </li>
-          <li className='header__links__item header__links__item--profile'>
+          <li className="header__links__item header__links__item--profile">
             {isAuth ? (
               <HeaderProfile />
             ) : loginCheckSpinner ? (
               <FontAwesomeIcon icon={faSpinner} spin />
             ) : (
               <button
-                className='btn-reset header__links__item__btn header__links__item__btn--profile'
+                className="btn-reset header__links__item__btn header__links__item__btn--profile"
                 onClick={handleOpenAuthPopup}
               />
             )}
@@ -210,7 +194,7 @@ const Header = () => {
         </ul>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

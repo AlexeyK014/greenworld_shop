@@ -24,7 +24,7 @@
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .breadcrumbs__item__link::before {
@@ -45,7 +45,7 @@
 
 .breadcrumbs__item__link:hover {
   color: #f79153;
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .last-crumb {

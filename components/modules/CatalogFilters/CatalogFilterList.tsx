@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-import { ICategoryFilterListProps } from '@/types/catalog'
-import { motion } from 'framer-motion'
-import styles from '@/styles/catalog/index.module.scss'
-import Link from 'next/link'
-import SelectItem from './SelectItem'
-import { getSearchParamUrl } from '@/lib/utils/common'
+import { ICategoryFilterListProps } from '@/types/catalog';
+import { motion } from 'framer-motion';
+import styles from '@/styles/catalog/index.module.scss';
+import Link from 'next/link';
+import SelectItem from './SelectItem';
+import { getSearchParamUrl } from '@/lib/utils/common';
 
 const CatalogFilterList = ({
   mobileClassName,
@@ -15,9 +15,7 @@ const CatalogFilterList = ({
   setOption,
   allCategoriesTitle,
 }: ICategoryFilterListProps) => (
-  <motion.ul
-    className={`list-reset ${styles.catalog__filters__list} ${mobileClassName}`}
-  >
+  <motion.ul className={`list-reset ${styles.catalog__filters__list} ${mobileClassName}`}>
     {/* Object.keys - проверяем на наличе ключа у стора catalogCategoryOptions */}
     {/* и если ключ НЕ равен ключу для корневого layout */}
     {/* либо мы показываем динамические options либо показываем options для корневого layout */}
@@ -46,10 +44,7 @@ const CatalogFilterList = ({
           </button>
         </li>
         {catalogCategoryOptions.rootCategoryOptions.map((item) => (
-          <li
-            className={`${styles.catalog__filters__list__item} ${mobileClassName}`}
-            key={item.id}
-          >
+          <li className={`${styles.catalog__filters__list__item} ${mobileClassName}`} key={item.id}>
             <Link
               className={styles.catalog__filters__list__item__btn}
               href={`${item.href}?${getSearchParamUrl().toString()}`} // чтобы query параметры добавились к url
@@ -61,6 +56,6 @@ const CatalogFilterList = ({
       </>
     )}
   </motion.ul>
-)
+);
 
-export default CatalogFilterList
+export default CatalogFilterList;

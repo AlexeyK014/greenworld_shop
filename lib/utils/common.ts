@@ -1,5 +1,5 @@
 import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth/index'
-import { setCurrentProduct } from '@/context/goods/index'
+import { setCurrentProduct } from '@/context/goods/index';
 import {
   closeSearchModal,
   closeShareModal,
@@ -48,10 +48,10 @@ export const shuffle = <T>(array: T[]) => {
   while (currentIndex != 0) {
     randomIndex = Math.floor(Math.random() * currentIndex)
     currentIndex--
-    ;[array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ]
+      ;[array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ]
   }
   return array
 }
@@ -231,7 +231,7 @@ export const updateSearchParam = (
   window.history.pushState({ path: newPath }, '', newPath)
 }
 
-// провека цены, что это number
+// провека цены, что это number. Возвряащет true/false
 export const checkPriceParam = (price: number) =>
   price && !isNaN(price) && price >= 0 && price <= 10000
 
@@ -269,4 +269,12 @@ export const getWatchedProductFromLS = () => {
 export const handleCloseShareModule = () => {
   removeOverflowHiddenFromBody()
   closeShareModal()
+}
+
+// добавление скрипта в head на первый рендер
+export const addScriptToHead = (src: string) => {
+  const script = document.createElement('script') // созд тэг 'script'
+  document.head.appendChild(script) // в head аппендим этот скрипт
+
+  script.src = src
 }

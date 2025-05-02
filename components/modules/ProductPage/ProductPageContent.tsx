@@ -1,31 +1,31 @@
-import ProductImages from './ProductImages'
-import styles from '@/styles/product/index.module.scss'
-import { useUnit } from 'effector-react'
-import { useLang } from '@/hooks/useLang'
+import ProductImages from './ProductImages';
+import styles from '@/styles/product/index.module.scss';
+import { useUnit } from 'effector-react';
+import { useLang } from '@/hooks/useLang';
 import {
   addOverflowHiddenToBody,
   capitalizeFirstLetter,
   formatPrice,
   getWatchedProductFromLS,
-} from '@/lib/utils/common'
-import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn'
-import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable'
-import ProductColor from '../ProductListItem/ProductColor'
-import { useCartAction } from '@/hooks/useCartAction'
-import ProductSizesItem from '../ProductListItem/ProductSizesItem'
-import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn'
-import ProductCounter from '../ProductListItem/ProductCounter'
-import { ICartItem } from '@/types/cart'
-import AddToCartBtn from '../ProductListItem/AddToCartBtn'
-import { setIsAddToFavorites } from '@/context/favorites/index'
-import ProductInfoAccordion from './ProductInfoAccordion'
-import ProductsByCollection from './ProductsByCollection'
-import { $currentProduct } from '@/context/goods/state'
-import { useEffect } from 'react'
-import WatchedProducts from '../WatchedProducts/WatchedProducts'
-import { useWatchedProducts } from '@/hooks/useWatchedProducts'
-import { openShareModal } from '@/context/modals'
+} from '@/lib/utils/common';
+import { useFavoritesAction } from '@/hooks/useFavoritesAction';
+import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn';
+import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
+import ProductColor from '../ProductListItem/ProductColor';
+import { useCartAction } from '@/hooks/useCartAction';
+import ProductSizesItem from '../ProductListItem/ProductSizesItem';
+import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn';
+import ProductCounter from '../ProductListItem/ProductCounter';
+import { ICartItem } from '@/types/cart';
+import AddToCartBtn from '../ProductListItem/AddToCartBtn';
+import { setIsAddToFavorites } from '@/context/favorites/index';
+import ProductInfoAccordion from './ProductInfoAccordion';
+import ProductsByCollection from './ProductsByCollection';
+import { $currentProduct } from '@/context/goods/state';
+import { useEffect } from 'react';
+import WatchedProducts from '../WatchedProducts/WatchedProducts';
+import { useWatchedProducts } from '@/hooks/useWatchedProducts';
+import { openShareModal } from '@/context/modals/index';
 
 const ProductPageContent = () => {
   const {
@@ -39,19 +39,19 @@ const ProductPageContent = () => {
     existingItem,
     count,
     setCount,
-  } = useCartAction()
-  const product = useUnit($currentProduct)
+  } = useCartAction();
+  const product = useUnit($currentProduct);
 
   // добавляем товар в просмотренные
   useEffect(() => {
-    const watchedProducts = getWatchedProductFromLS()
+    const watchedProducts = getWatchedProductFromLS(); // фун-я получаем продукты с LS
 
     // необходимо убдиться нет ли товара в LS( не просматривали его ранее)
     // проходимся по переменной с помощью метода find
-    const isWatched = watchedProducts.find((item) => item._id === product._id)
+    const isWatched = watchedProducts.find((item) => item._id === product._id);
     // если такой товар найден
     if (isWatched) {
-      return
+      return;
     }
 
     //а иначе
@@ -60,28 +60,25 @@ const ProductPageContent = () => {
       JSON.stringify([
         ...watchedProducts, // разваорачиваем прежние продукты
         { category: product.category, _id: product._id }, // добавляем новый продукт
-      ])
-    )
-  }, [product._id, product.category])
+      ]),
+    );
+  }, [product._id, product.category]);
 
-  const { lang, translations } = useLang()
-  const {
-    handleAddProductToFavorites,
-    addToFavoritesSpinner,
-    isProductInFavorites,
-  } = useFavoritesAction(product)
+  const { lang, translations } = useLang();
+  const { handleAddProductToFavorites, addToFavoritesSpinner, isProductInFavorites } =
+    useFavoritesAction(product);
 
   const handleProductShare = () => {
-    addOverflowHiddenToBody()
-    openShareModal()
-  }
+    addOverflowHiddenToBody();
+    openShareModal();
+  };
 
   const addToCart = () => {
-    handleAddToCart(count)
-    setIsAddToFavorites(false)
-  }
+    handleAddToCart(count);
+    setIsAddToFavorites(false);
+  };
 
-  const { watchedProducts } = useWatchedProducts(product._id)
+  const { watchedProducts } = useWatchedProducts(product._id);
 
   return (
     <>
@@ -104,9 +101,7 @@ const ProductPageContent = () => {
           )}
           <h1 className={styles.product__top__title}>{product.name}</h1>
           <div className={styles.product__top__price}>
-            <h3 className={styles.product__top__price__title}>
-              {formatPrice(product.price)} P
-            </h3>
+            <h3 className={styles.product__top__price__title}>{formatPrice(product.price)} P</h3>
             <div className={styles.product__top__price__inner}>
               <div className={styles.product__top__price__favorite}>
                 <ProductItemActionBtn
@@ -130,26 +125,20 @@ const ProductPageContent = () => {
             </div>
           </div>
           <div className={styles.product__top__available}>
-            <ProductAvailable
-              vendorCode={product.vendorCode}
-              inStock={+product.inStock}
-            />
+            <ProductAvailable vendorCode={product.vendorCode} inStock={+product.inStock} />
           </div>
-          <ProductColor
-            color={product.characteristics.color}
-            className={styles.product__top__color}
-          />
           {!!product.characteristics.collection && (
             <span className={styles.product__top__collection}>
               <span>{translations[lang].catalog.collection}:</span>{' '}
               {capitalizeFirstLetter(product.characteristics.collection)}
             </span>
           )}
+
+          {/* делаем проверку, если есть размеры, тогда показываем таблицу с размерами */}
           {!!Object.keys(product.sizes).length && (
             <>
               <span className={styles.product__top__size}>
-                <span>{translations[lang].catalog.size}:</span>{' '}
-                {selectedSize.toUpperCase()}
+                <span>{translations[lang].catalog.size}:</span> {selectedSize.toUpperCase()}
               </span>
               <ul className={`list-reset ${styles.product__top__sizes}`}>
                 {Object.entries(product.sizes).map(([key, value], i) => (
@@ -170,9 +159,7 @@ const ProductPageContent = () => {
             </>
           )}
           <div className={styles.product__top__bottom}>
-            <span className={styles.product__top__count}>
-              {translations[lang].product.count}
-            </span>
+            <span className={styles.product__top__count}>{translations[lang].product.count}</span>
             <div className={styles.product__top__inner}>
               {!!selectedSize ? (
                 <ProductCounter
@@ -190,8 +177,7 @@ const ProductPageContent = () => {
                   style={{ justifyContent: 'center' }}
                 >
                   <span>
-                    {translations[lang].product.total_in_cart}{' '}
-                    {allCurrentCartItemCount}
+                    {translations[lang].product.total_in_cart} {allCurrentCartItemCount}
                   </span>
                 </div>
               )}
@@ -209,24 +195,13 @@ const ProductPageContent = () => {
             </div>
           </div>
           <div className={styles.product__top__description}>
-            <ProductInfoAccordion
-              title={translations[lang].product.description}
-            >
-              <p className={styles.product__top__description__text}>
-                {product.description}
-              </p>
+            <ProductInfoAccordion title={translations[lang].product.description}>
+              <p className={styles.product__top__description__text}>{product.description}</p>
             </ProductInfoAccordion>
-            <ProductInfoAccordion
-              title={translations[lang].product.characteristics}
-            >
-              <ul
-                className={`list-reset ${styles.product__top__description__characteristics}`}
-              >
+            <ProductInfoAccordion title={translations[lang].product.characteristics}>
+              <ul className={`list-reset ${styles.product__top__description__characteristics}`}>
                 {Object.entries(product.characteristics).map(([key, value]) => (
-                  <li
-                    key={key}
-                    className={styles.product__top__description__text}
-                  >
+                  <li key={key} className={styles.product__top__description__text}>
                     {capitalizeFirstLetter(key)}: {value}
                   </li>
                 ))}
@@ -235,14 +210,9 @@ const ProductPageContent = () => {
           </div>
         </div>
       </div>
-      {!!product.characteristics.collection && (
-        <ProductsByCollection collection={product.characteristics.collection} />
-      )}
-      {!!watchedProducts.items?.length && (
-        <WatchedProducts watchedProducts={watchedProducts} />
-      )}
+      {!!watchedProducts.items?.length && <WatchedProducts watchedProducts={watchedProducts} />}
     </>
-  )
-}
+  );
+};
 
-export default ProductPageContent
+export default ProductPageContent;

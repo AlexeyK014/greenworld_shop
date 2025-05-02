@@ -1,11 +1,11 @@
-import styles from '@/styles/product-item-action-btn/index.module.scss'
-import { AnimatePresence, motion } from 'framer-motion'
-import Tooltip from '../Tooltip/Tooltip'
-import tooltipStyles from '@/styles/tooltip/index.module.scss'
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
-import { IProductItemActionBtnProps } from '@/types/elements'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import styles from '@/styles/product-item-action-btn/index.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
+import Tooltip from '../Tooltip/Tooltip';
+import tooltipStyles from '@/styles/tooltip/index.module.scss';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { IProductItemActionBtnProps } from '@/types/elements';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const ProductItemActionBtn = ({
   text,
@@ -15,20 +15,20 @@ const ProductItemActionBtn = ({
   spinner,
   withTooltip = true,
 }: IProductItemActionBtnProps) => {
-  const [open, setOpen] = useState(false)
-  const [tooltipLeft, setTooltipLeft] = useState(0) // для позиционирование слева
-  const showTooltip = () => setOpen(true)
-  const hideTooltip = () => setOpen(false)
+  const [open, setOpen] = useState(false);
+  const [tooltipLeft, setTooltipLeft] = useState(0); // для позиционирование слева
+  const showTooltip = () => setOpen(true);
+  const hideTooltip = () => setOpen(false);
 
   // для получения актуальной ширины
-  const tooltipRef = useRef() as MutableRefObject<HTMLDivElement>
+  const tooltipRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   // прроисходит проверка, что если tooltip открыт, позиционируем слева
   useEffect(() => {
     if (open && withTooltip) {
-      setTooltipLeft(tooltipRef.current.clientWidth)
+      setTooltipLeft(tooltipRef.current.clientWidth);
     }
-  }, [open, withTooltip])
+  }, [open, withTooltip]);
 
   return (
     <div className={styles.actions}>
@@ -39,7 +39,7 @@ const ProductItemActionBtn = ({
         onMouseLeave={hideTooltip}
         style={{ marginBottom: marginBottom || 16 }}
       >
-        {spinner && <FontAwesomeIcon icon={faSpinner} spin color='#fff' />}
+        {spinner && <FontAwesomeIcon icon={faSpinner} spin color="#fff" />}
       </button>
       {withTooltip && (
         <AnimatePresence>
@@ -58,7 +58,7 @@ const ProductItemActionBtn = ({
         </AnimatePresence>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ProductItemActionBtn
+export default ProductItemActionBtn;

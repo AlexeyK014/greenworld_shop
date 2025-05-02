@@ -1,12 +1,12 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import styles from '@/styles/favorites/index.module.scss'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { basePropsForMotion } from '@/constants/motion'
-import FavoriteListItem from './FavoriteListItem'
-import { $favorites, $favoritesFromLS } from '@/context/favorites/state'
+import { AnimatePresence, motion } from 'framer-motion';
+import styles from '@/styles/favorites/index.module.scss';
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
+import { basePropsForMotion } from '@/constants/motion';
+import FavoriteListItem from './FavoriteListItem';
+import { $favorites, $favoritesFromLS } from '@/context/favorites/state';
 
 const FavoritesList = () => {
-  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS) // для получения товаров
+  const currentFavoritesByAuth = useGoodsByAuth($favorites, $favoritesFromLS); // для получения товаров
 
   return (
     <AnimatePresence>
@@ -20,7 +20,7 @@ const FavoritesList = () => {
         </motion.li>
       ))}
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default FavoritesList
+export default FavoritesList;

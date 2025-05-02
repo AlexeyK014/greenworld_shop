@@ -6,4 +6,4 @@ export const baseSliderSettings = {
   speed: 500,
   autoplay: true,
   arrows: false,
-}
+};

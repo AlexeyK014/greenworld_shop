@@ -5,9 +5,9 @@
   width: 20px;
   text-align: center;
   height: 20px;
-  background-color: #FF4747;
+  background-color: #ff4747;
   border-radius: 50%;
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     background-image: url('/img/cart.svg');
     background-repeat: no-repeat;
     background-position: left center;

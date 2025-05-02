@@ -1,28 +1,27 @@
-import AllLink from '@/components/elements/AllLink/AllLink'
-import useImagePreloader from '@/hooks/useImagePreloader'
-import { useLang } from '@/hooks/useLang'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import styles from '@/styles/main-page/index.module.scss'
-import img1 from '@/public/img/brands-life.png'
-import img2 from '@/public/img/categories-img-1.png'
-import Link from 'next/link'
-import Image from 'next/image'
-import { MainSlider } from './MainSlide'
+import AllLink from '@/components/elements/AllLink/AllLink';
+import useImagePreloader from '@/hooks/useImagePreloader';
+import { useLang } from '@/hooks/useLang';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import styles from '@/styles/main-page/index.module.scss';
+import img1 from '@/public/img/brands-life.png';
+import img2 from '@/public/img/categories-img-1.png';
+import Link from 'next/link';
+import Image from 'next/image';
+import { MainSlider } from './MainSlide';
 
 const BrandLife = () => {
-  const isMedia490 = useMediaQuery(490)
-  const { handleLoadingImageComplete, imgSpinner } = useImagePreloader()
-  const { lang, translations } = useLang()
-  const imgSpinnerClass = imgSpinner ? styles.img_loading : ''
+  const isMedia490 = useMediaQuery(490);
+  const { handleLoadingImageComplete, imgSpinner } = useImagePreloader();
+  const { lang, translations } = useLang();
+  const imgSpinnerClass = imgSpinner ? styles.img_loading : '';
 
-  const textWithNonBreakingSpace = (text: string) =>
-    text.replace(/\s/g, '\u00A0')
+  const textWithNonBreakingSpace = (text: string) => text.replace(/\s/g, '\u00A0');
 
   const images = [
     { src: img1, id: 1, title: translations[lang].main_page.brand_nature },
     { src: img2, id: 2, title: translations[lang].main_page.brand_look },
     { src: img2, id: 3, title: translations[lang].main_page.brand_idea },
-  ]
+  ];
 
   return (
     <section className={styles.brands}>
@@ -37,56 +36,44 @@ const BrandLife = () => {
           <ul className={`list-reset ${styles.brands__list}`}>
             <li className={styles.brands__list__item}>
               <Link
-                href='/'
+                href="/"
                 className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
               >
                 <Image
                   src={img1}
                   alt={translations[lang].main_page.brand_nature}
-                  className='translation-opacity opacity-0 duration'
+                  className="translation-opacity opacity-0 duration"
                   onLoad={handleLoadingImageComplete}
                 />
-                <span>
-                  {textWithNonBreakingSpace(
-                    translations[lang].main_page.brand_nature
-                  )}
-                </span>
+                <span>{textWithNonBreakingSpace(translations[lang].main_page.brand_nature)}</span>
               </Link>
             </li>
             <li className={styles.brands__list__item}>
               <Link
-                href='/'
+                href="/"
                 className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
               >
                 <Image
                   src={img2}
                   alt={translations[lang].main_page.brand_look}
-                  className='translation-opacity opacity-0 duration'
+                  className="translation-opacity opacity-0 duration"
                   onLoad={handleLoadingImageComplete}
                 />
-                <span>
-                  {textWithNonBreakingSpace(
-                    translations[lang].main_page.brand_look
-                  )}
-                </span>
+                <span>{textWithNonBreakingSpace(translations[lang].main_page.brand_look)}</span>
               </Link>
             </li>
             <li className={styles.brands__list__item}>
               <Link
-                href='/'
+                href="/"
                 className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
               >
                 <Image
                   src={img2}
                   alt={translations[lang].main_page.brand_idea}
-                  className='translation-opacity opacity-0 duration'
+                  className="translation-opacity opacity-0 duration"
                   onLoad={handleLoadingImageComplete}
                 />
-                <span>
-                  {textWithNonBreakingSpace(
-                    translations[lang].main_page.brand_idea
-                  )}
-                </span>
+                <span>{textWithNonBreakingSpace(translations[lang].main_page.brand_idea)}</span>
               </Link>
             </li>
           </ul>
@@ -94,7 +81,7 @@ const BrandLife = () => {
         {isMedia490 && <MainSlider images={images} />}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default BrandLife
+export default BrandLife;

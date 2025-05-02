@@ -1,19 +1,19 @@
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { useLang } from '@/hooks/useLang'
-import { usePriceFilter } from '@/hooks/usePriceFilter'
-import styles from '@/styles/catalog/index.module.scss'
-import SelectBtn from './SelectBtn'
-import { AnimatePresence, motion } from 'framer-motion'
-import { basePropsForMotion } from '@/constants/motion'
-import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog'
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { useLang } from '@/hooks/useLang';
+import { usePriceFilter } from '@/hooks/usePriceFilter';
+import styles from '@/styles/catalog/index.module.scss';
+import SelectBtn from './SelectBtn';
+import { AnimatePresence, motion } from 'framer-motion';
+import { basePropsForMotion } from '@/constants/motion';
+import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog';
 
 const PriceSelect = ({
   handleApplyFiltersWithPrice,
 }: {
-  handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void
+  handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void;
 }) => {
-  const { lang, translations } = useLang()
-  const { open, ref, toggle, setOpen } = useClickOutside()
+  const { lang, translations } = useLang();
+  const { open, ref, toggle, setOpen } = useClickOutside();
   const {
     priceFrom,
     priceTo,
@@ -25,21 +25,22 @@ const PriceSelect = ({
     setPriceInfo,
     priceFromInfo,
     priceToInfo,
-  } = usePriceFilter()
+  } = usePriceFilter();
 
   const handleSelectPrice = () => {
     // уст границы рэнджа, если юзер за них вышел
-    const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string
-    const validPriceTo = getCheckedPriceTo(+priceTo) as string
+    const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string;
+    const validPriceTo = getCheckedPriceTo(+priceTo) as string;
 
-    setPriceFrom(validPriceFrom)
-    setPriceTo(validPriceTo)
-    setPriceInfo(
-      `${priceFromInfo(validPriceFrom)} ${priceToInfo(validPriceTo)}`
-    )
-    setOpen(false)
-    handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
-  }
+    setPriceFrom(validPriceFrom);
+    setPriceTo(validPriceTo);
+    setPriceInfo(`${priceFromInfo(validPriceFrom)} ${priceToInfo(validPriceTo)}`);
+    // когда фильтры применятся, закрываем селект
+    setOpen(false);
+
+    // тригерим чтобы данные применились на сервере
+    handleApplyFiltersWithPrice(validPriceFrom, validPriceTo);
+  };
 
   return (
     <div className={styles.catalog__filters__select} ref={ref}>
@@ -62,8 +63,8 @@ const PriceSelect = ({
                 <label>
                   <span>{translations[lang].catalog.from}</span>
                   <input
-                    type='text'
-                    placeholder='130 P'
+                    type="text"
+                    placeholder="130 P"
                     value={priceFrom}
                     onChange={handleChangePriceFrom}
                   />
@@ -71,8 +72,8 @@ const PriceSelect = ({
                 <label>
                   <span>{translations[lang].catalog.to}</span>
                   <input
-                    type='text'
-                    placeholder='10000 P'
+                    type="text"
+                    placeholder="10000 P"
                     value={priceTo}
                     onChange={handleChangePriceTo}
                   />
@@ -90,7 +91,7 @@ const PriceSelect = ({
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default PriceSelect
+export default PriceSelect;

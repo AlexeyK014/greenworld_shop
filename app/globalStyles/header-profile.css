@@ -16,7 +16,7 @@
 }
 
 .header-profile__inner {
-  background-color: #3D4555;
+  background-color: #3d4555;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.12);
   padding: 0;
   margin: 0;
@@ -59,13 +59,13 @@
   margin-right: 10px;
 }
 
-.header-profile__item__btn{
-  color: #E8E9EA;
-  transition: color .2s ease-in-out;
+.header-profile__item__btn {
+  color: #e8e9ea;
+  transition: color 0.2s ease-in-out;
   font-size: 16px;
 }
 
 .header-profile__item__btn:hover {
-  color: #9466FF;
-  transition: color .2s ease-in-out;
+  color: #9466ff;
+  transition: color 0.2s ease-in-out;
 }

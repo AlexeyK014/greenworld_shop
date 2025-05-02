@@ -252,6 +252,14 @@
       "delivery_will_be": "Delivery will be to this address",
       "enter_address_on_map_or_search": "Enter the address on the map or find it using search",
       "comments_order": "Comments on the order"
+    },
+    "payment_success": {
+      "thanks": "Thanks",
+      "thanks_text": "Thank you for the order!",
+      "order_info": "Your order 1-info for the amount of 2-info has been paid and accepted for assembly",
+      "order_description": "You can find out more about the status of your order by email or in your <a href=\"/profile\">personal account</a> in the store",
+      "continue_shopping": "Continue shopping",
+      "go_main": "Go to Main page"
     }
   },
   "ru": {
@@ -450,7 +458,7 @@
     "validation": {
       "invalid_value": "Недопустимое значение!",
       "requiredName": "Введите имя!",
-      "invalid_phone": "Нправильный телефон!",
+      "invalid_phone": "Неправильный телефон!",
       "required_email": "Введите email!",
       "invalid_email": "Неправильный Email!",
       "min_2": "Минимум 2 символа!",
@@ -508,6 +516,14 @@
       "delivery_will_be": "Доставка будет по этому адресу",
       "enter_address_on_map_or_search": "Укажите адрес на карте или найдите с помощью поиска",
       "comments_order": "Комментарий к заказу"
+    },
+    "payment_success": {
+      "thanks": "Спасибо",
+      "thanks_text": "Спасибо за заказ!",
+      "order_info": "Ваш заказ 1-info на сумму 2-info оплачен и принят на сборку",
+      "order_description": "Подробнее о статусе заказа вы можете узнать на своей почте или в <a href=\"/profile\">личном кабинете</a> магазина",
+      "continue_shopping": "Продолжить покупки",
+      "go_main": "Перейти на главную"
     }
   }
 }

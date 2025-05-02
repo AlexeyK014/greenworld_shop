@@ -1,4 +1,13 @@
-export const productsWithoutSizes = ['sunflower', 'chickpeas']
+export const productsWithoutSizes = [
+  'sunflower',
+  'arugulas',
+  'cabbage',
+  'radish',
+  'peas',
+  'chickpeas',
+  'buckwheat',
+  'wheat',
+];
 
 export const productTypes = [
   'peas',
@@ -13,16 +22,9 @@ export const productTypes = [
   'lamps',
   'shelf',
   'agrovata',
-]
+];
 
-export const productCategory = ['microgreen', 'sprouts', 'seeds', 'equipment']
-export const allowedColors = ['purpure', 'yellow', 'orange', 'black', 'white']
-export const allowedSizes = ['s', 'm', 'l', 'xl', 'xll']
-export const alowedCollectionsCategories = ['microgreen', 'sprouts']
-export const allowedCollections = [
-  'street',
-  'black',
-  'casual',
-  'orange',
-  'line',
-]
+export const productCategory = ['microgreen', 'sprouts', 'seeds', 'equipment'];
+export const allowedSizes = ['маленький', 'средний', 'большой'];
+export const alowedCollectionsCategories = ['microgreen', 'sprouts'];
+export const allowedCollections = ['street', 'black', 'casual', 'orange', 'line'];

@@ -1,13 +1,13 @@
-import { useLang } from '@/hooks/useLang'
-import { showCountMessage } from '@/lib/utils/common'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import styles from '@/styles/heading-with-count/index.module.scss'
-import { IHeadingWithCount } from '@/types/elements'
+import { useLang } from '@/hooks/useLang';
+import { showCountMessage } from '@/lib/utils/common';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import styles from '@/styles/heading-with-count/index.module.scss';
+import { IHeadingWithCount } from '@/types/elements';
 
 const HeadeingWithCount = ({ count, title, spinner }: IHeadingWithCount) => {
-  const { lang } = useLang()
+  const { lang } = useLang();
   return (
     <h1 className={`site-title ${styles.title}`}>
       <span>{title}</span>
@@ -16,7 +16,7 @@ const HeadeingWithCount = ({ count, title, spinner }: IHeadingWithCount) => {
         {showCountMessage(`${count}`, lang)}
       </span>
     </h1>
-  )
-}
+  );
+};
 
-export default HeadeingWithCount
+export default HeadeingWithCount;

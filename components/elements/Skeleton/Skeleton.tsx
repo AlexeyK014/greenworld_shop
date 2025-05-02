@@ -1,13 +1,10 @@
-import { basePropsForMotion } from '@/constants/motion'
-import { ISkeletonProps } from '@/types/elements'
-import { motion } from 'framer-motion'
-import React from 'react'
+import { basePropsForMotion } from '@/constants/motion';
+import { ISkeletonProps } from '@/types/elements';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 const Skeleton = ({ styles, count = 4 }: ISkeletonProps) => (
-  <motion.ul
-    className={`list-reset ${styles.skeleton}`}
-    {...basePropsForMotion}
-  >
+  <motion.ul className={`list-reset ${styles.skeleton}`} {...basePropsForMotion}>
     {/* в зависимости от count создаём массив и рисуем li */}
     {Array.from(new Array(count)).map((_, i) => (
       <li key={i} className={styles.skeleton__item}>
@@ -15,6 +12,6 @@ const Skeleton = ({ styles, count = 4 }: ISkeletonProps) => (
       </li>
     ))}
   </motion.ul>
-)
+);
 
-export default Skeleton
+export default Skeleton;

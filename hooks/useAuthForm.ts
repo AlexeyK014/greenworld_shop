@@ -1,17 +1,17 @@
-import { IInputs, ISignUpFx } from '@/types/authPopup'
-import { useEarthoOne } from '@eartho/one-client-react'
-import { EventCallable, Store } from 'effector'
-import { useUnit } from 'effector-react'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { IInputs, ISignUpFx } from '@/types/authPopup';
+import { useEarthoOne } from '@eartho/one-client-react';
+import { EventCallable, Store } from 'effector';
+import { useUnit } from 'effector-react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 export const useAuthForm = (
   initialSpinner: Store<boolean>,
   isSideActive: boolean,
-  event: EventCallable<ISignUpFx>
+  event: EventCallable<ISignUpFx>,
 ) => {
-  const spinner = useUnit(initialSpinner)
-  const { isConnected, user, connectWithPopup } = useEarthoOne()
+  const spinner = useUnit(initialSpinner);
+  const { isConnected, user, connectWithPopup } = useEarthoOne();
   // connectWithPopup - фун-я которую вызывает сам popup
   // user - данные пользователя после авторизации
   // isConnected - состояние, успешно ли юзер подключён
@@ -20,7 +20,7 @@ export const useAuthForm = (
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IInputs>()
+  } = useForm<IInputs>();
 
   useEffect(() => {
     if (isSideActive) {
@@ -30,13 +30,13 @@ export const useAuthForm = (
           email: user?.email as string,
           password: user?.uid as string,
           isOAuth: true,
-        })
+        });
       }
     }
-  }, [isConnected])
+  }, [isConnected]);
 
   const handleSignupWithOAuth = () =>
-    connectWithPopup({ accessId: `${process.env.NEXT_PUBLIC_OAUTH_ACCESS_ID}` })
+    connectWithPopup({ accessId: `${process.env.NEXT_PUBLIC_OAUTH_ACCESS_ID}` });
 
   return {
     spinner,
@@ -44,5 +44,5 @@ export const useAuthForm = (
     errors,
     handleSubmit,
     handleSignupWithOAuth,
-  }
-}
+  };
+};

@@ -1,22 +1,20 @@
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { useLang } from '@/hooks/useLang'
-import styles from '@/styles/catalog/index.module.scss'
-import SelectBtn from './SelectBtn'
-import { basePropsForMotion } from '@/constants/motion'
-import { AnimatePresence, motion } from 'framer-motion'
-import CheckBoxSelectItem from './CheckBoxSelectItem'
-import { useSizeFiter } from '@/hooks/useSizeFilter'
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { useLang } from '@/hooks/useLang';
+import styles from '@/styles/catalog/index.module.scss';
+import SelectBtn from './SelectBtn';
+import { basePropsForMotion } from '@/constants/motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import CheckBoxSelectItem from './CheckBoxSelectItem';
+import { useSizeFilter } from '@/hooks/useSizeFilter';
 
 const SizesSelect = ({
   handleApplyFiltersWithSizes,
 }: {
-  handleApplyFiltersWithSizes: (sizes: string[]) => void
+  handleApplyFiltersWithSizes: (sizes: string[]) => void;
 }) => {
-  const { lang, translations } = useLang()
-  const { open, ref, toggle } = useClickOutside()
-  const { handleSelectSize, sizes, sizeOptions } = useSizeFiter(
-    handleApplyFiltersWithSizes
-  )
+  const { lang, translations } = useLang();
+  const { open, ref, toggle } = useClickOutside();
+  const { handleSelectSize, sizes, sizeOptions } = useSizeFilter(handleApplyFiltersWithSizes);
 
   return (
     <div
@@ -36,17 +34,13 @@ const SizesSelect = ({
             {...basePropsForMotion}
           >
             {sizeOptions.map((item) => (
-              <CheckBoxSelectItem
-                key={item.id}
-                item={item}
-                callback={handleSelectSize}
-              />
+              <CheckBoxSelectItem key={item.id} item={item} callback={handleSelectSize} />
             ))}
           </motion.ul>
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default SizesSelect
+export default SizesSelect;

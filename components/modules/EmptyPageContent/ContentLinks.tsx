@@ -1,15 +1,15 @@
-import { useLang } from '@/hooks/useLang'
-import Link from 'next/link'
-import styles from '@/styles/empty-content/index.module.scss'
+import { useLang } from '@/hooks/useLang';
+import Link from 'next/link';
+import styles from '@/styles/empty-content/index.module.scss';
 
 const ContentLinks = ({ btnText }: { btnText: string }) => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
   return (
     <div className={styles.empty_content__links}>
-      <Link href='/catalog'>{btnText}</Link>
-      <Link href='/'>{translations[lang].common.back_to_main}</Link>
+      <Link href="/catalog">{btnText}</Link>
+      <Link href="/">{translations[lang].common.back_to_main}</Link>
     </div>
-  )
-}
+  );
+};
 
-export default ContentLinks
+export default ContentLinks;

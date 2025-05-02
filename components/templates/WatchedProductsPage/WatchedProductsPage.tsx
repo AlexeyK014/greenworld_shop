@@ -1,17 +1,16 @@
-'use client'
+'use client';
 
-import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs'
-import ProductListItem from '@/components/modules/ProductListItem/ProductListItem'
-import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
-import { useLang } from '@/hooks/useLang'
-import { useWatchedProducts } from '@/hooks/useWatchedProducts'
-import styles from '@/styles/watched-products-page/index.module.scss'
+import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs';
+import ProductListItem from '@/components/modules/ProductListItem/ProductListItem';
+import { useBreadcrumbs } from '@/hooks/useBreadcrumbs';
+import { useLang } from '@/hooks/useLang';
+import { useWatchedProducts } from '@/hooks/useWatchedProducts';
+import styles from '@/styles/watched-products-page/index.module.scss';
 
 const WatchedProductsPage = () => {
-  const { watchedProducts } = useWatchedProducts()
-  const { lang, translations } = useLang()
-  const { getDefaultTextGenerator, getTextGenerator } =
-    useBreadcrumbs('watched_products')
+  const { watchedProducts } = useWatchedProducts(); // получаем все товары
+  const { lang, translations } = useLang();
+  const { getDefaultTextGenerator, getTextGenerator } = useBreadcrumbs('watched_products');
 
   return (
     <main>
@@ -20,7 +19,7 @@ const WatchedProductsPage = () => {
         getTextGenerator={getTextGenerator}
       />
       <section className={styles.watched_products}>
-        <div className='container'>
+        <div className="container">
           <h1 className={`side-title ${styles.watched_products__title}`}>
             {translations[lang].product.watched}
           </h1>
@@ -32,7 +31,7 @@ const WatchedProductsPage = () => {
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default WatchedProductsPage
+export default WatchedProductsPage;

@@ -1,22 +1,17 @@
-import jwt, { VerifyErrors } from 'jsonwebtoken'
-import clientPromise from '@/lib/mongodb'
-import {
-  getDbAndReqBody,
-  findUserByEmail,
-  parseJwt,
-  generateTokens,
-} from '@/lib/utils/api-routes'
-import { NextResponse } from 'next/server'
+import jwt, { VerifyErrors } from 'jsonwebtoken';
+import clientPromise from '@/lib/mongodb';
+import { getDbAndReqBody, findUserByEmail, parseJwt, generateTokens } from '@/lib/utils/api-routes';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { db, reqBody } = await getDbAndReqBody(clientPromise, req)
+    const { db, reqBody } = await getDbAndReqBody(clientPromise, req);
 
     if (reqBody?.jwt) {
-      const refreshToken = reqBody.jwt
-      let accessToken = {}
-      let tokens = {}
-      let error = null
+      const refreshToken = reqBody.jwt;
+      let accessToken = {};
+      let tokens = {};
+      let error = null;
 
       // проверка токена
       await jwt.verify(
@@ -24,21 +19,21 @@ export async function POST(req: Request) {
         process.env.NEXT_PUBLIC_REFRESH_TOKEN_KEY as string,
         async (err: VerifyErrors | null) => {
           // получаем email
-          const user = await findUserByEmail(db, parseJwt(reqBody.jwt).email)
+          const user = await findUserByEmail(db, parseJwt(reqBody.jwt).email);
 
           // если юзера нет - токен неправильный
           if (!user) {
-            error = { message: 'Invalid jwt token' }
-            return
+            error = { message: 'Invalid jwt token' };
+            return;
           }
 
           if (err) {
             if (err.name === 'TokenExpiredError') {
-              tokens = generateTokens(user.name, user.email)
+              tokens = generateTokens(user.name, user.email);
             }
 
-            error = err
-            return
+            error = err;
+            return;
           }
 
           // если всё нормально, тогда генерируем новый токен
@@ -50,14 +45,14 @@ export async function POST(req: Request) {
             process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY as string,
             {
               expiresIn: '10m',
-            }
-          )
-        }
-      )
+            },
+          );
+        },
+      );
 
       // если ошибка с refreshToken, тогда возвращаем оба новых токена(refreshToken, accessToken)
       if ((error as unknown as VerifyErrors)?.name === 'TokenExpiredError') {
-        return NextResponse.json(tokens)
+        return NextResponse.json(tokens);
       }
 
       // если другая ошибка
@@ -66,19 +61,19 @@ export async function POST(req: Request) {
           message: 'Unauthorized',
           status: 401,
           error,
-        })
+        });
       }
 
       // иначе если refreshToken нормальный, тогда возвращаем refreshToken
       // и возвр новый accessToken, который протух и мы его рефрешнули
-      return NextResponse.json({ accessToken, refreshToken })
+      return NextResponse.json({ accessToken, refreshToken });
     } else {
       return NextResponse.json({
         message: 'jwt is required',
         status: 404,
-      })
+      });
     }
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error((error as Error).message);
   }
 }

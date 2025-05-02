@@ -1,16 +1,11 @@
-import { IAccordionProps } from '@/types/modules'
-import { AnimatePresence, motion } from 'framer-motion'
-import React, { useState } from 'react'
+import { IAccordionProps } from '@/types/modules';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useState } from 'react';
 
-const Accordion = ({
-  children,
-  title,
-  titleClass,
-  rotateIconClass,
-}: IAccordionProps) => {
-  const [expanded, setExpanded] = useState(false)
+const Accordion = ({ children, title, titleClass, rotateIconClass }: IAccordionProps) => {
+  const [expanded, setExpanded] = useState(false);
 
-  const toggleAccordion = () => setExpanded(!expanded)
+  const toggleAccordion = () => setExpanded(!expanded);
   return (
     <>
       <motion.button
@@ -25,10 +20,10 @@ const Accordion = ({
       <AnimatePresence initial={false}>
         {expanded && (
           <motion.div
-            key='content'
-            initial='collapsed'
-            animate='open'
-            exit='collapsed'
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
             variants={{
               open: { opacity: 1, height: 'auto' },
               collapsed: { opacity: 0, height: 0 },
@@ -41,7 +36,7 @@ const Accordion = ({
         )}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default Accordion
+export default Accordion;

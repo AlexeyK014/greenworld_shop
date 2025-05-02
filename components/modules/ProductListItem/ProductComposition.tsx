@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useLang } from '@/hooks/useLang'
-import styles from '@/styles/product-list-item/index.module.scss'
+import { useLang } from '@/hooks/useLang';
+import styles from '@/styles/product-list-item/index.module.scss';
 
 const ProductComposition = ({ composition }: { composition: string }) => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
   return (
     <span className={styles.product__composition}>
       {translations[lang].product.composition}:{' '}
@@ -11,7 +11,7 @@ const ProductComposition = ({ composition }: { composition: string }) => {
        * @ts-ignore */}
       {translations[lang].catalog[composition]}
     </span>
-  )
-}
+  );
+};
 
-export default ProductComposition
+export default ProductComposition;

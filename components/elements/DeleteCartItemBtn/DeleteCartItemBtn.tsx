@@ -1,7 +1,7 @@
-import { IDeleteCartItembtnProps } from '@/types/cart'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { IDeleteCartItembtnProps } from '@/types/cart';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 const DeleteItemBtn = ({
   btnDisabled, // дизайбл кнопки между запросом и удалением
@@ -13,12 +13,8 @@ const DeleteItemBtn = ({
     onClick={callback}
     disabled={btnDisabled}
   >
-    {btnDisabled ? (
-      <FontAwesomeIcon icon={faSpinner} spin color='fff' />
-    ) : (
-      <span />
-    )}
+    {btnDisabled ? <FontAwesomeIcon icon={faSpinner} spin color="fff" /> : <span />}
   </button>
-)
+);
 
-export default DeleteItemBtn
+export default DeleteItemBtn;

@@ -1,19 +1,19 @@
 // получаем сам товар с базы данных
-import clientPromise from '@/lib/mongodb'
-import { getDbAndReqBody } from '@/lib/utils/api-routes'
-import { ObjectId } from 'mongodb'
-import { NextResponse } from 'next/server'
+import clientPromise from '@/lib/mongodb';
+import { getDbAndReqBody } from '@/lib/utils/api-routes';
+import { ObjectId } from 'mongodb';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { db, reqBody } = await getDbAndReqBody(clientPromise, req)
-    const productsPayload: { _id: string; category: string }[] = reqBody.payload // из LS
+    const { db, reqBody } = await getDbAndReqBody(clientPromise, req);
+    const productsPayload: { _id: string; category: string }[] = reqBody.payload; // из LS
 
     if (!productsPayload) {
       return NextResponse.json({
         message: 'payload field is required',
         status: 404,
-      })
+      });
     }
 
     const getWatchedProducts = async (category: string) => {
@@ -24,18 +24,19 @@ export async function POST(req: Request) {
           // через диструктуризацию достаём id
           _id: { $in: productsPayload.map(({ _id }) => new ObjectId(_id)) },
         })
-        .toArray()
+        .toArray();
 
-      return goods
-    }
+      return goods;
+    };
 
     const [microgreen, sprouts, seeds, equipment] = await Promise.allSettled([
       getWatchedProducts('microgreen'),
       getWatchedProducts('sprouts'),
       getWatchedProducts('seeds'),
       getWatchedProducts('equipment'),
-    ])
+    ]);
 
+    // в случае краша возвращаем items.count
     if (
       microgreen.status !== 'fulfilled' ||
       sprouts.status !== 'fulfilled' ||
@@ -45,22 +46,17 @@ export async function POST(req: Request) {
       return NextResponse.json({
         count: 0,
         items: [],
-      })
+      });
     }
 
     // когда всё подгрузилось создаём переменну. Разворачиваем все товары
-    const allGoods = [
-      ...microgreen.value,
-      ...sprouts.value,
-      ...seeds.value,
-      ...equipment.value,
-    ]
+    const allGoods = [...microgreen.value, ...sprouts.value, ...seeds.value, ...equipment.value];
 
     return NextResponse.json({
       count: allGoods.length,
       items: allGoods,
-    })
+    });
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error((error as Error).message);
   }
 }

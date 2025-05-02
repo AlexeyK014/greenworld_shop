@@ -7,16 +7,18 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   background: #bcebc0;
-  box-shadow: 0px 32px 32px 0px rgba(0, 0, 0, 0.20), 0px 0px 32px 0px rgba(0, 0, 0, 0.10);
+  box-shadow:
+    0px 32px 32px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 32px 0px rgba(0, 0, 0, 0.1);
   display: flex;
 
   @media (max-width: 1070px) {
-   width: 815px;
+    width: 815px;
   }
 
   @media (max-width: 890px) {
     width: 733px;
-   }
+  }
 
   &__close {
     height: 15px;
@@ -41,7 +43,7 @@
 
     &:hover::before {
       transition: background-color 0.2s ease-in-out;
-      background-color: #D76F30;
+      background-color: #d76f30;
     }
   }
 
@@ -72,7 +74,7 @@
 
     @media (max-width: 890px) {
       max-width: 270px;
-     }
+    }
 
     &__slider {
       position: relative;
@@ -93,20 +95,20 @@
           width: 32px;
           height: 32px;
           border-radius: 24px;
-          background-color: #3F4652 !important;
+          background-color: #3f4652 !important;
           position: absolute;
           bottom: -49px;
           z-index: 2;
           overflow: hidden;
-          transition: background-color .2s ease-in-out;
+          transition: background-color 0.2s ease-in-out;
           bottom: -47px;
           background-image: url(/img/slider-arrow.svg);
           background-repeat: no-repeat;
           background-position: center center;
 
           &:hover {
-            background-color: #D76F30 !important;
-            transition: background-color .2s ease-in-out;
+            background-color: #d76f30 !important;
+            transition: background-color 0.2s ease-in-out;
           }
         }
 
@@ -131,13 +133,13 @@
             position: absolute;
             top: 0;
             left: 0;
-            fill: #797E8B;
-            transition: fill .2s ease-in-out;
+            fill: #797e8b;
+            transition: fill 0.2s ease-in-out;
           }
 
           & li button:hover svg {
-            fill: #E8E9EA;
-            transition: fill .2s ease-in-out;
+            fill: #e8e9ea;
+            transition: fill 0.2s ease-in-out;
           }
         }
       }
@@ -179,14 +181,12 @@
         display: flex;
         align-items: center;
 
-
         &__item {
           position: relative;
-          min-width: 59px;
+          min-width: 109px;
           height: 32px;
           border-radius: 24px;
-          transition: background-color .2s ease-in-out;
-
+          transition: background-color 0.2s ease-in-out;
 
           &:not(:last-child) {
             margin-right: 12px;
@@ -197,8 +197,8 @@
           }
 
           &:hover {
-            background-color: #D76F30 !important;
-            transition: background-color .2s ease-in-out;
+            background-color: #69b886d9 !important;
+            transition: background-color 0.2s ease-in-out;
           }
 
           & button {
@@ -207,7 +207,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            color: rgba(255, 255, 255, 0.90);
+            color: rgba(255, 255, 255, 0.9);
             width: 100%;
             height: 100%;
             font-size: 14px;
@@ -228,7 +228,7 @@
             right: -3px;
             width: 20px;
             height: 20px;
-            background-color: #FF4747;
+            background-color: #ff4747;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -260,11 +260,11 @@
         color: #fff;
         font-size: 16px;
         font-weight: 500;
-        transition: background-color .2s ease-in-out;
+        transition: background-color 0.2s ease-in-out;
 
         &:hover {
-          background-color: #D76F30 !important;
-          transition: background-color .2s ease-in-out;
+          background-color: #d76f30 !important;
+          transition: background-color 0.2s ease-in-out;
         }
 
         &:disabled {
@@ -294,11 +294,11 @@
         text-align: center;
         font-size: 16px;
         font-weight: 500;
-        transition: color .2s ease-in-out;
+        transition: color 0.2s ease-in-out;
 
         &:hover {
-          color: #D76F30;
-          transition: color .2s ease-in-out;
+          color: #d76f30;
+          transition: color 0.2s ease-in-out;
         }
       }
     }
@@ -324,7 +324,6 @@
     left: 63px;
   }
 }
-
 
 .next {
   right: 159px;

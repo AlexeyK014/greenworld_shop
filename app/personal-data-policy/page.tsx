@@ -1,5 +1,5 @@
-import PersonalDataPolicyPage from '@/components/templates/PersonalDataPolicyPage/PersonalDataPolicyPage'
+import PersonalDataPolicyPage from '@/components/templates/PersonalDataPolicyPage/PersonalDataPolicyPage';
 
 export default function PersonalDataPolicy() {
-  return <PersonalDataPolicyPage />
+  return <PersonalDataPolicyPage />;
 }

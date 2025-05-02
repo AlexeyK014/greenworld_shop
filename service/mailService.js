@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
 
 // происходит отправка eamil
 // subject - от кого отправляем email
@@ -11,22 +11,22 @@ export async function sendMail(subject, toEmail, otpText) {
       user: process.env.NEXT_PUBLIC_NODEMAILER_EMAIL,
       pass: process.env.NEXT_PUBLIC_NODEMAILER_PW,
     },
-  })
+  });
 
   const mailOptions = {
     from: process.env.NEXT_PUBLIC_NODEMAILER_EMAIL,
     to: toEmail,
     subject: subject,
     text: otpText,
-  }
+  };
 
   await new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, (err, response) => {
       if (err) {
-        reject(err)
+        reject(err);
       } else {
-        resolve(response)
+        resolve(response);
       }
-    })
-  })
+    });
+  });
 }

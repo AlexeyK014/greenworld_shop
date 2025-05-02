@@ -1,13 +1,13 @@
-import { useDebounceCallback } from '@/hooks/useDebounceCallback'
-import { useLang } from '@/hooks/useLang'
-import { usePriceFilter } from '@/hooks/usePriceFilter'
-import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog'
-import styles from '@/styles/catalog/index.module.scss'
+import { useDebounceCallback } from '@/hooks/useDebounceCallback';
+import { useLang } from '@/hooks/useLang';
+import { usePriceFilter } from '@/hooks/usePriceFilter';
+import { getCheckedPriceFrom, getCheckedPriceTo } from '@/lib/utils/catalog';
+import styles from '@/styles/catalog/index.module.scss';
 
 const PriceFilter = ({
   handleApplyFiltersWithPrice,
 }: {
-  handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void
+  handleApplyFiltersWithPrice: (arg0: string, arg1: string) => void;
 }) => {
   const {
     priceFrom,
@@ -16,52 +16,50 @@ const PriceFilter = ({
     setPriceTo,
     handleChangePriceFrom,
     handleChangePriceTo,
-  } = usePriceFilter()
-  const { lang, translations } = useLang()
-  const delayCallback = useDebounceCallback(2000)
+  } = usePriceFilter();
+  const { lang, translations } = useLang();
+  const delayCallback = useDebounceCallback(2000);
 
   const onPriceFromChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangePriceFrom(e)
+    handleChangePriceFrom(e);
 
     // делаем проверку, чтобы оба фильтра были заполнены(фильтр применился)
     // ничего не происходит до те пока  инпуты заполнены
     if (!priceTo) {
-      return
+      return;
     }
 
     // если инпут будет заполнен, то при заполнение второго инпута нам нужно применить фильтры
     // передаём новый прайс, который поступает из инпута
     const validPriceFrom = getCheckedPriceFrom(
-      +e.target.value.replace(/[^0-9]+/g, '') // только цифры
-    ) as string
-    const validPriceTo = getCheckedPriceTo(+priceTo) as string
+      +e.target.value.replace(/[^0-9]+/g, ''), // только цифры
+    ) as string;
+    const validPriceTo = getCheckedPriceTo(+priceTo) as string;
 
-    setPriceFrom(validPriceFrom)
+    setPriceFrom(validPriceFrom);
 
     // как юзер заканчиват вводит данные в инпут - вызываем фун-ю для фильтраии
-    delayCallback(() =>
-      handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
-    )
-  }
+    delayCallback(() => handleApplyFiltersWithPrice(validPriceFrom, validPriceTo));
+  };
 
   const onPriceToChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangePriceTo(e)
+    handleChangePriceTo(e); // обновляет состояние
+
+    // делаем провреку, чтобы оба инпута были заполнены
     if (!priceFrom) {
-      return
+      return;
     }
 
-    const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string
+    const validPriceFrom = getCheckedPriceFrom(+priceFrom) as string;
     const validPriceTo = getCheckedPriceTo(
-      +e.target.value.replace(/[^0-9]+/g, '') // только цифры
-    ) as string
+      +e.target.value.replace(/[^0-9]+/g, ''), // только цифры
+    ) as string;
 
-    setPriceTo(validPriceTo)
+    setPriceTo(validPriceTo);
 
     // как юзер заканчиват вводит данные в инпут - вызываем фун-ю для фильтраии
-    delayCallback(() =>
-      handleApplyFiltersWithPrice(validPriceFrom, validPriceTo)
-    )
-  }
+    delayCallback(() => handleApplyFiltersWithPrice(validPriceFrom, validPriceTo));
+  };
   return (
     <>
       <h3 className={styles.catalog__filters__popup__inner_title}>
@@ -72,25 +70,15 @@ const PriceFilter = ({
       >
         <label>
           <span>{translations[lang].catalog.from}</span>
-          <input
-            type='text'
-            placeholder='130 ₽'
-            value={priceFrom}
-            onChange={onPriceFromChange}
-          />
+          <input type="text" placeholder="130 ₽" value={priceFrom} onChange={onPriceFromChange} />
         </label>
         <label>
           <span>{translations[lang].catalog.to}</span>
-          <input
-            type='text'
-            placeholder='6 500 ₽'
-            value={priceTo}
-            onChange={onPriceToChange}
-          />
+          <input type="text" placeholder="6 500 ₽" value={priceTo} onChange={onPriceToChange} />
         </label>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PriceFilter
+export default PriceFilter;

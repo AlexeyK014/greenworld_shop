@@ -1,10 +1,10 @@
-import AllLink from '@/components/elements/AllLink/AllLink'
-import styles from '@/styles/main-page/index.module.scss'
-import { IMainPageSectionProps } from '@/types/main-page'
-import skeletonStyles from '@/styles/skeleton/index.module.scss'
-import { motion } from 'framer-motion'
-import { basePropsForMotion } from '@/constants/motion'
-import ProductListItem from '../ProductListItem/ProductListItem'
+import AllLink from '@/components/elements/AllLink/AllLink';
+import styles from '@/styles/main-page/index.module.scss';
+import { IMainPageSectionProps } from '@/types/main-page';
+import skeletonStyles from '@/styles/skeleton/index.module.scss';
+import { motion } from 'framer-motion';
+import { basePropsForMotion } from '@/constants/motion';
+import ProductListItem from '../ProductListItem/ProductListItem';
 
 const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
   <section className={styles.main_section}>
@@ -14,10 +14,7 @@ const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
       <div className={styles.main_section__inner}>
         <AllLink />
         {spinner && (
-          <motion.ul
-            className={skeletonStyles.skeleton}
-            {...basePropsForMotion}
-          >
+          <motion.ul className={skeletonStyles.skeleton} {...basePropsForMotion}>
             {Array.from(new Array(4)).map((_, i) => (
               <li key={i} className={skeletonStyles.skeleton__item}>
                 <div className={skeletonStyles.skeleton__item__light} />
@@ -26,10 +23,7 @@ const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
           </motion.ul>
         )}
         {!spinner && (
-          <motion.ul
-            className={`list-reset ${styles.main_section__list}`}
-            {...basePropsForMotion}
-          >
+          <motion.ul className={`list-reset ${styles.main_section__list}`} {...basePropsForMotion}>
             {goods.map((item) => (
               <ProductListItem key={item._id} item={item} title={title} />
             ))}
@@ -38,6 +32,6 @@ const MainPageSection = ({ title, goods, spinner }: IMainPageSectionProps) => (
       </div>
     </div>
   </section>
-)
+);
 
-export default MainPageSection
+export default MainPageSection;

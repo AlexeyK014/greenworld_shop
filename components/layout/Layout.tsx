@@ -1,49 +1,39 @@
-'use client'
-import React, { MutableRefObject, useRef } from 'react'
-import Header from '../modules/Header/Header'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import MobileNavbar from '../modules/MobileNavbar/MobileNavbar'
-import { AnimatePresence, motion } from 'framer-motion'
-import SearchModal from '../modules/Header/SearchModal'
-import { useUnit } from 'effector-react'
-import {
-  handleCloseAuthPopup,
-  handleCloseSearchModal,
-} from '@/lib/utils/common'
-import Footer from '../modules/Footer/Footer'
-import QuickViewModal from '../modules/QuickViewModal/QuickViewModal'
-import SizeTable from '../modules/SizeTable/SizeTable'
-import AuthPopup from '../modules/AuthPopup/AuthPopup'
-import { $openAuthPopup } from '@/context/auth/state'
-import {
-  $searchModal,
-  $shareModal,
-  $showQuickModal,
-  $showSizeTable,
-} from '@/context/modals/state'
-import { basePropsForMotion } from '@/constants/motion'
-import ShareModal from '../modules/ShareModal/ShareModal'
+'use client';
+import React, { MutableRefObject, useRef } from 'react';
+import Header from '../modules/Header/Header';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import MobileNavbar from '../modules/MobileNavbar/MobileNavbar';
+import { AnimatePresence, motion } from 'framer-motion';
+import SearchModal from '../modules/Header/SearchModal';
+import { useUnit } from 'effector-react';
+import { handleCloseAuthPopup, handleCloseSearchModal } from '@/lib/utils/common';
+import Footer from '../modules/Footer/Footer';
+import QuickViewModal from '../modules/QuickViewModal/QuickViewModal';
+import SizeTable from '../modules/SizeTable/SizeTable';
+import AuthPopup from '../modules/AuthPopup/AuthPopup';
+import { $openAuthPopup } from '@/context/auth/state';
+import { $searchModal, $shareModal, $showQuickModal, $showSizeTable } from '@/context/modals/state';
+import { basePropsForMotion } from '@/constants/motion';
+import ShareModal from '../modules/ShareModal/ShareModal';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const isMedia800 = useMediaQuery(800)
-  const searchModal = useUnit($searchModal)
-  const showQuickViewModal = useUnit($showQuickModal)
-  const showSizeTable = useUnit($showSizeTable)
-  const openAuthPopup = useUnit($openAuthPopup)
-  const shareModal = useUnit($shareModal)
+  const isMedia800 = useMediaQuery(800);
+  const searchModal = useUnit($searchModal);
+  const showQuickViewModal = useUnit($showQuickModal);
+  const showSizeTable = useUnit($showSizeTable);
+  const openAuthPopup = useUnit($openAuthPopup);
+  const shareModal = useUnit($shareModal);
 
   // чтобы при клики на overlay закрывалась модалка
-  const authWrapperRef = useRef() as MutableRefObject<HTMLDivElement>
+  const authWrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
 
-  const handleCloseAuthPopupByTarget = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    const target = e.target as Element
+  const handleCloseAuthPopupByTarget = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e.target as Element;
 
     if (target === authWrapperRef.current) {
-      handleCloseAuthPopup()
+      handleCloseAuthPopup();
     }
-  }
+  };
 
   return (
     <>
@@ -57,7 +47,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
             exit={{ opacity: 0, scale: 0.5 }}
-            className='auth-popup-wrapper'
+            className="auth-popup-wrapper"
             onClick={handleCloseAuthPopupByTarget}
             ref={authWrapperRef}
           >
@@ -87,10 +77,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {!isMedia800 && (
         <AnimatePresence>
           {showQuickViewModal && (
-            <motion.div
-              {...basePropsForMotion}
-              initial={{ opacity: 0, zIndex: 6 }}
-            >
+            <motion.div {...basePropsForMotion} initial={{ opacity: 0, zIndex: 6 }}>
               <QuickViewModal />
             </motion.div>
           )}
@@ -98,14 +85,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       )}
       {/* слой затемнения при открытие модалки */}
       <div
-        className={`header__search-overlay ${
-          searchModal ? 'overlay-active' : ''
-        }`}
+        className={`header__search-overlay ${searchModal ? 'overlay-active' : ''}`}
         onClick={handleCloseSearchModal}
       />
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

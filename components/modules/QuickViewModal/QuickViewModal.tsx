@@ -1,28 +1,28 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { closeQuickModal } from '@/context/modals/index'
-import { formatPrice, removeOverflowHiddenFromBody } from '@/lib/utils/common'
-import styles from '@/styles/quick-view-modal/index.module.scss'
-import QuickViewModalSlider from './QuickViewModalSlider'
-import { useCartAction } from '@/hooks/useCartAction'
-import { useProductImages } from '@/hooks/useProfuctImages'
-import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable'
-import ProductComposition from '../ProductListItem/ProductComposition'
-import { useLang } from '@/hooks/useLang'
-import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn'
-import ProductSizesItem from '../ProductListItem/ProductSizesItem'
-import ProductCounter from '../ProductListItem/ProductCounter'
-import AddToCartBtn from '../ProductListItem/AddToCartBtn'
-import Link from 'next/link'
-import stylesForProduct from '@/styles/product-list-item/index.module.scss'
-import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn'
-import ProductColor from '../ProductListItem/ProductColor'
-import { ICartItem } from '@/types/cart'
-import { useComparisonAction } from '@/hooks/useComparisonAction'
-import { useFavoritesAction } from '@/hooks/useFavoritesAction'
-import { setIsAddToFavorites } from '@/context/favorites/index'
+import { closeQuickModal } from '@/context/modals/index';
+import { formatPrice, removeOverflowHiddenFromBody } from '@/lib/utils/common';
+import styles from '@/styles/quick-view-modal/index.module.scss';
+import QuickViewModalSlider from './QuickViewModalSlider';
+import { useCartAction } from '@/hooks/useCartAction';
+import { useProductImages } from '@/hooks/useProfuctImages';
+import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
+import ProductComposition from '../ProductListItem/ProductComposition';
+import { useLang } from '@/hooks/useLang';
+import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn';
+import ProductSizesItem from '../ProductListItem/ProductSizesItem';
+import ProductCounter from '../ProductListItem/ProductCounter';
+import AddToCartBtn from '../ProductListItem/AddToCartBtn';
+import Link from 'next/link';
+import stylesForProduct from '@/styles/product-list-item/index.module.scss';
+import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn';
+import ProductColor from '../ProductListItem/ProductColor';
+import { ICartItem } from '@/types/cart';
+import { useComparisonAction } from '@/hooks/useComparisonAction';
+import { useFavoritesAction } from '@/hooks/useFavoritesAction';
+import { setIsAddToFavorites } from '@/context/favorites/index';
 
 const QuickViewModal = () => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
   const {
     product,
     selectedSize,
@@ -36,40 +36,31 @@ const QuickViewModal = () => {
     existingItem,
     count,
     setCount,
-  } = useCartAction()
+  } = useCartAction();
 
   // для иконки сравнения
-  const {
-    handleAddToComparison,
-    isProductInComparison,
-    addToComparisonSpinner,
-  } = useComparisonAction(product)
+  const { handleAddToComparison, isProductInComparison, addToComparisonSpinner } =
+    useComparisonAction(product);
 
   // для иконки избранное
-  const {
-    handleAddProductToFavorites,
-    addToFavoritesSpinner,
-    isProductInFavorites,
-  } = useFavoritesAction(product)
+  const { handleAddProductToFavorites, addToFavoritesSpinner, isProductInFavorites } =
+    useFavoritesAction(product);
 
-  const images = useProductImages(product)
+  const images = useProductImages(product);
 
   const handleCloseModal = () => {
-    removeOverflowHiddenFromBody()
-    closeQuickModal()
-  }
+    removeOverflowHiddenFromBody();
+    closeQuickModal();
+  };
 
   const addToCart = () => {
-    handleAddToCart(count)
-    setIsAddToFavorites(false)
-  }
+    handleAddToCart(count);
+    setIsAddToFavorites(false);
+  };
 
   return (
     <div className={styles.modal}>
-      <button
-        className={`btn-reset ${styles.modal__close}`}
-        onClick={handleCloseModal}
-      />
+      <button className={`btn-reset ${styles.modal__close}`} onClick={handleCloseModal} />
       <div className={styles.modal__actions}>
         <ProductItemActionBtn
           spinner={addToFavoritesSpinner}
@@ -103,19 +94,12 @@ const QuickViewModal = () => {
       </div>
       <div className={styles.modal__right}>
         <h3 className={styles.modal__right__title}>{product.name}</h3>
-        <div className={styles.modal__right__price}>
-          {formatPrice(+product.price)} P
-        </div>
+        <div className={styles.modal__right__price}>{formatPrice(+product.price)} P</div>
         <div className={styles.modal__right__info}>
-          <ProductAvailable
-            vendorCode={product.vendorCode}
-            inStock={+product.inStock}
-          />
+          <ProductAvailable vendorCode={product.vendorCode} inStock={+product.inStock} />
           <ProductColor color={product.characteristics.color} />
           {product.characteristics?.composition && (
-            <ProductComposition
-              composition={product.characteristics.composition}
-            />
+            <ProductComposition composition={product.characteristics.composition} />
           )}
 
           {/* Блок с размерами */}
@@ -169,8 +153,7 @@ const QuickViewModal = () => {
                   style={{ justifyContent: 'center' }}
                 >
                   <span>
-                    {translations[lang].product.total_in_cart}{' '}
-                    {allCurrentCartItemCount}
+                    {translations[lang].product.total_in_cart} {allCurrentCartItemCount}
                   </span>
                 </div>
               )}
@@ -199,7 +182,7 @@ const QuickViewModal = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuickViewModal
+export default QuickViewModal;

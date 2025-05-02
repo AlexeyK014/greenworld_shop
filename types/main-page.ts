@@ -1,7 +1,7 @@
-import { IProduct } from './common'
+import { IProduct } from './common';
 
 export interface IMainPageSectionProps {
-  title: string
-  goods: IProduct[]
-  spinner: boolean
+  title: string;
+  goods: IProduct[];
+  spinner: boolean;
 }

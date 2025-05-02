@@ -1,6 +1,6 @@
-import { sample } from 'effector'
-import { handleSignUp, signUpFx, handleSignIn, signInFx } from '.'
-import { $auth } from './state'
+import { sample } from 'effector';
+import { handleSignUp, signUpFx, handleSignIn, signInFx } from '.';
+import { $auth } from './state';
 
 sample({
   clock: handleSignUp,
@@ -12,7 +12,7 @@ sample({
     isOAuth,
   }),
   target: signUpFx,
-})
+});
 
 sample({
   clock: handleSignIn,
@@ -24,4 +24,4 @@ sample({
     isOAuth,
   }),
   target: signInFx,
-})
+});

@@ -1,45 +1,39 @@
-import {
-  checkOffsetParam,
-  getSearchParamUrl,
-  updateSearchParam,
-} from '@/lib/utils/common'
-import { SearchParams } from '@/types/catalog'
-import { useUnit } from 'effector-react'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import styles from '@/styles/catalog/index.module.scss'
-import { $products } from '@/context/goods/state'
-import {
-  loadProductsByFillterFx,
-  loadProductsByFilter,
-} from '@/context/goods/index'
+import { checkOffsetParam, getSearchParamUrl, updateSearchParam } from '@/lib/utils/common';
+import { SearchParams } from '@/types/catalog';
+import { useUnit } from 'effector-react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styles from '@/styles/catalog/index.module.scss';
+import { $products } from '@/context/goods/state';
+import { loadProductsByFillterFx, loadProductsByFilter } from '@/context/goods/index';
 
 export const useProductFilters = (
   searchParams: SearchParams, // получаем со странице
   category: string,
-  isCatalog = false
+  isCatalog = false,
 ) => {
-  const products = useUnit($products)
-  const isValidOffset = checkOffsetParam(searchParams.offset)
-  const pathname = usePathname()
-  const productsSpinner = useUnit(loadProductsByFillterFx.pending)
+  const products = useUnit($products);
+  const isValidOffset = checkOffsetParam(searchParams.offset);
+  const pathname = usePathname();
+  const productsSpinner = useUnit(loadProductsByFillterFx.pending);
 
   // для кол-ва страниц
-  const pagesCount = Math.ceil((products.count || 12) / 12)
+  // products.count кол-во всех товаров, которое приходит с сервера
+  const pagesCount = Math.ceil((products.count || 12) / 12);
 
   // чтобы получать offset для текущей страницы
   const [currentPage, setCurrentPage] = useState(
     // чтобы после перезагрузки сохранялся currentPage
-    isValidOffset ? +(searchParams.offset || 0) : 0
-  )
+    isValidOffset ? +(searchParams.offset || 0) : 0,
+  );
 
   // на перрвый рендер запрашиваем данные о страницы
   useEffect(() => {
-    const urlParams = getSearchParamUrl()
+    const urlParams = getSearchParamUrl();
 
     // обновляем offset, чтобы он не дублировался
     // сначала удаляем
-    urlParams.delete('offset')
+    urlParams.delete('offset');
 
     // затем делаем проверку
     if (!isValidOffset) {
@@ -49,11 +43,11 @@ export const useProductFilters = (
         additionalParam: urlParams.toString(),
         isCatalog,
         category,
-      })
+      });
 
-      updateSearchParam('offset', 0, pathname)
-      setCurrentPage(0)
-      return
+      updateSearchParam('offset', 0, pathname);
+      setCurrentPage(0);
+      return;
     }
 
     // если offset неправильный
@@ -63,18 +57,18 @@ export const useProductFilters = (
       additionalParam: urlParams.toString(),
       isCatalog,
       category,
-    })
+    });
 
-    setCurrentPage(+(searchParams.offset || 0))
-  }, [])
+    setCurrentPage(+(searchParams.offset || 0));
+  }, []);
 
   // изменение страницы на пагинации
   const handlePageChange = ({ selected }: { selected: number }) => {
     // сначала необходимо ресетнут offset
-    const urlParams = getSearchParamUrl()
+    const urlParams = getSearchParamUrl();
     // обновляем offset, чтобы он не дублировался
     // сначала удаляем
-    urlParams.delete('offset')
+    urlParams.delete('offset');
 
     // при переключение страницы обновляем запрос
     loadProductsByFilter({
@@ -83,56 +77,49 @@ export const useProductFilters = (
       additionalParam: urlParams.toString(),
       isCatalog,
       category,
-    })
+    });
 
-    updateSearchParam('offset', selected, pathname)
-    setCurrentPage(selected)
-  }
+    updateSearchParam('offset', selected, pathname);
+    setCurrentPage(selected);
+  };
 
   const handleApplyFiltersWithCategory = (categoryType: string) => {
-    updateSearchParam('type', categoryType, pathname)
-    handlePageChange({ selected: 0 }) // чтобы ресетнулась пагинация
-  }
+    updateSearchParam('type', categoryType, pathname);
+    handlePageChange({ selected: 0 }); // чтобы ресетнулась пагинация
+  };
 
   const handleApplyFiltersWithPrice = (priceFrom: string, priceTo: string) => {
-    updateSearchParam('priceFrom', priceFrom, pathname)
-    updateSearchParam('priceTo', priceTo, pathname)
-    handlePageChange({ selected: 0 }) // чтобы ресетнулась пагинация
-  }
+    updateSearchParam('priceFrom', priceFrom, pathname);
+    updateSearchParam('priceTo', priceTo, pathname);
+    handlePageChange({ selected: 0 }); // чтобы ресетнулась пагинация
+  };
 
   const handleApplyFiltersWithSizes = (sizes: string[]) => {
-    updateSearchParam(
-      'sizes',
-      encodeURIComponent(JSON.stringify(sizes)),
-      pathname
-    )
-    handlePageChange({ selected: 0 })
-  }
+    updateSearchParam('sizes', encodeURIComponent(JSON.stringify(sizes)), pathname);
+    handlePageChange({ selected: 0 });
+  };
 
   const handleApplyFiltersWithColors = (sizes: string[]) => {
-    updateSearchParam(
-      'colors',
-      encodeURIComponent(JSON.stringify(sizes)),
-      pathname
-    )
-    handlePageChange({ selected: 0 })
-  }
+    updateSearchParam('colors', encodeURIComponent(JSON.stringify(sizes)), pathname);
+    handlePageChange({ selected: 0 });
+  };
 
   const handleApplyFiltersBySort = (sort: string) => {
-    const urlParams = getSearchParamUrl()
-    const offset = urlParams.get('offset')
+    // чтобы понимать на какой мы сейчас странице
+    const urlParams = getSearchParamUrl();
+    const offset = urlParams.get('offset');
 
-    updateSearchParam('sort', sort, pathname)
+    updateSearchParam('sort', sort, pathname);
 
     handlePageChange({
       selected: checkOffsetParam(offset as string) ? +(offset || 0) : 0,
-    })
-  }
+    });
+  };
 
   // пропсы для ReactPaginate
   const paginationProps = {
-    containerClassName: `list-reset ${styles.catalog__bottom__list}`,
-    pageClassName: `catalog-pagination-item ${styles.catalog__bottom__list__item}`,
+    containerClassName: `list-reset ${styles.catalog__bottom__list}`, // для контейнера
+    pageClassName: `catalog-pagination-item ${styles.catalog__bottom__list__item}`, // для item
     pageLinkClassName: styles.catalog__bottom__list__item__link,
     previousClassName: `catalog-pagination-prev ${styles.catalog__bottom__list__prev}`,
     nextClassName: `catalog-pagination-next ${styles.catalog__bottom__list__next}`,
@@ -141,7 +128,7 @@ export const useProductFilters = (
     breakLabe: '...',
     pageCount: pagesCount,
     forcePage: currentPage,
-  }
+  };
 
   return {
     paginationProps,
@@ -154,5 +141,5 @@ export const useProductFilters = (
     handleApplyFiltersWithSizes,
     handleApplyFiltersWithColors,
     handleApplyFiltersBySort,
-  }
-}
+  };
+};

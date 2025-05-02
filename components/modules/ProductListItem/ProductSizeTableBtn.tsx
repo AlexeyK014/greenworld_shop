@@ -1,32 +1,32 @@
-import { setIsAddToFavorites } from '@/context/favorites/index'
-import { showSizeTable } from '@/context/modals/index'
-import { $showQuickModal } from '@/context/modals/state'
-import { setSizeTableSizes } from '@/context/sizeTable/index'
-import { useLang } from '@/hooks/useLang'
-import { addOverflowHiddenToBody } from '@/lib/utils/common'
-import { ISelectedSizes } from '@/types/common'
-import { useUnit } from 'effector-react'
+import { setIsAddToFavorites } from '@/context/favorites/index';
+import { showSizeTable } from '@/context/modals/index';
+import { $showQuickModal } from '@/context/modals/state';
+import { setSizeTableSizes } from '@/context/sizeTable/index';
+import { useLang } from '@/hooks/useLang';
+import { addOverflowHiddenToBody } from '@/lib/utils/common';
+import { ISelectedSizes } from '@/types/common';
+import { useUnit } from 'effector-react';
 
 const ProductSizeTableBtn = ({ sizes, type, className }: ISelectedSizes) => {
-  const { lang, translations } = useLang()
-  const showQuickViewModal = useUnit($showQuickModal)
+  const { lang, translations } = useLang();
+  const showQuickViewModal = useUnit($showQuickModal);
 
   const handleShowSizeTable = () => {
-    setIsAddToFavorites(false)
+    setIsAddToFavorites(false);
     // если модалка закрыта, добавляем overflow
     if (!showQuickViewModal) {
-      addOverflowHiddenToBody()
+      addOverflowHiddenToBody();
     }
 
-    setSizeTableSizes({ sizes, type })
-    showSizeTable()
-  }
+    setSizeTableSizes({ sizes, type });
+    showSizeTable();
+  };
 
   return (
     <button className={`btn-reset ${className}`} onClick={handleShowSizeTable}>
       {translations[lang].product.size_table}
     </button>
-  )
-}
+  );
+};
 
-export default ProductSizeTableBtn
+export default ProductSizeTableBtn;

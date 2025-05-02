@@ -1,23 +1,23 @@
 /* eslint-disable indent */
-'use client'
-import { useProductFilters } from '@/hooks/useProductFilters'
-import { IProductsPage } from '@/types/catalog'
-import styles from '@/styles/catalog/index.module.scss'
-import skeletonStyles from '@/styles/skeleton/index.module.scss'
-import ReactPaginate from 'react-paginate'
-import { motion } from 'framer-motion'
-import { basePropsForMotion } from '@/constants/motion'
-import ProductListItem from '@/components/modules/ProductListItem/ProductListItem'
-import { useLang } from '@/hooks/useLang'
-import HeadeingWithCount from '@/components/elements/HeadingWithCount/HeadeingWithCount'
-import { useEffect } from 'react'
-import { setCatalogCategoryOptions } from '@/context/catalog/index'
-import CatalogFilters from '@/components/modules/CatalogFilters/CatalogFilters'
-import { useWatchedProducts } from '@/hooks/useWatchedProducts'
-import WatchedProducts from '@/components/modules/WatchedProducts/WatchedProducts'
+'use client';
+import { useProductFilters } from '@/hooks/useProductFilters';
+import { IProductsPage } from '@/types/catalog';
+import styles from '@/styles/catalog/index.module.scss';
+import skeletonStyles from '@/styles/skeleton/index.module.scss';
+import ReactPaginate from 'react-paginate';
+import { motion } from 'framer-motion';
+import { basePropsForMotion } from '@/constants/motion';
+import ProductListItem from '@/components/modules/ProductListItem/ProductListItem';
+import { useLang } from '@/hooks/useLang';
+import HeadeingWithCount from '@/components/elements/HeadingWithCount/HeadeingWithCount';
+import { useEffect } from 'react';
+import { setCatalogCategoryOptions } from '@/context/catalog/index';
+import CatalogFilters from '@/components/modules/CatalogFilters/CatalogFilters';
+import { useWatchedProducts } from '@/hooks/useWatchedProducts';
+import WatchedProducts from '@/components/modules/WatchedProducts/WatchedProducts';
 
 const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
 
   // pageName === 'catalog' делаем проверку, если мы находимся на каталоге, передаём переменную в хук
 
@@ -32,9 +32,9 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
     handleApplyFiltersWithSizes,
     handleApplyFiltersWithColors,
     handleApplyFiltersBySort,
-  } = useProductFilters(searchParams, pageName, pageName === 'catalog')
+  } = useProductFilters(searchParams, pageName, pageName === 'catalog');
 
-  const { watchedProducts } = useWatchedProducts()
+  const { watchedProducts } = useWatchedProducts();
 
   useEffect(() => {
     // pageName на какой странице мы сейчас находимся
@@ -63,8 +63,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
               href: '/catalog/equipment',
             },
           ],
-        })
-        break
+        });
+        break;
       case 'microgreen':
         setCatalogCategoryOptions({
           microgreenCategoryOptions: [
@@ -94,8 +94,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
               filterHandler: () => handleApplyFiltersWithCategory('arugulas'),
             },
           ],
-        })
-        break
+        });
+        break;
       case 'sprouts':
         setCatalogCategoryOptions({
           sproutsCategoryOptions: [
@@ -120,8 +120,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
               filterHandler: () => handleApplyFiltersWithCategory('wheat'),
             },
           ],
-        })
-        break
+        });
+        break;
       case 'seeds':
         setCatalogCategoryOptions({
           seedsCategoryOptions: [
@@ -151,8 +151,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
               filterHandler: () => handleApplyFiltersWithCategory('arugulas'),
             },
           ],
-        })
-        break
+        });
+        break;
       case 'equipment':
         setCatalogCategoryOptions({
           equipmentCategoryOptions: [
@@ -177,24 +177,20 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
               filterHandler: () => handleApplyFiltersWithCategory('agrovata'),
             },
           ],
-        })
-        break
+        });
+        break;
       default:
-        break
+        break;
     }
-  }, [lang])
+  }, [lang]);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <>
       <HeadeingWithCount
         count={products.count}
-        title={
-          (translations[lang].breadcrumbs as { [index: string]: string })[
-            pageName
-          ]
-        }
+        title={(translations[lang].breadcrumbs as { [index: string]: string })[pageName]}
         spinner={productsSpinner}
       />
       <CatalogFilters
@@ -217,11 +213,8 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
         </motion.ul>
       )}
       {!productsSpinner && (
-        <motion.ul
-          {...basePropsForMotion}
-          className={`list- reset ${styles.catalog__list}`}
-        >
-          {/* items могут появится не сразу, поэтому делаем провеку "products.items" */}
+        <motion.ul {...basePropsForMotion} className={`list- reset ${styles.catalog__list}`}>
+          {/* items могут появится не сразу, поэтому делаем провеку "products.items || []" */}
           {(products.items || []).map((item) => (
             <ProductListItem key={item._id} item={item} />
           ))}
@@ -236,17 +229,13 @@ const ProductsPage = ({ searchParams, pageName }: IProductsPage) => {
         <ReactPaginate
           {...paginationProps}
           nextLabel={<span>{translations[lang].catalog.next_page}</span>}
-          previousLabel={
-            <span>{translations[lang].catalog.previous_page}</span>
-          }
+          previousLabel={<span>{translations[lang].catalog.previous_page}</span>}
           onPageChange={handlePageChange}
         />
-        {!!watchedProducts.items?.length && (
-          <WatchedProducts watchedProducts={watchedProducts} />
-        )}
+        {!!watchedProducts.items?.length && <WatchedProducts watchedProducts={watchedProducts} />}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductsPage
+export default ProductsPage;

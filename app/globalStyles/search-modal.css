@@ -5,7 +5,7 @@
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333A47;
+  background-color: #333a47;
   padding: 24px;
   z-index: 101;
 }
@@ -79,7 +79,7 @@
   height: 48px;
   padding-left: 20px;
   overflow: hidden;
-  color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.9);
   padding-top: 18px;
 }
 
@@ -88,14 +88,20 @@
   left: 20px;
   top: 12px;
   pointer-events: none;
-  color: rgba(255, 255, 255, 0.40);
-  transition: top .2s ease-in-out, font-size .2s ease-in-out, color .2s ease-in-out;
+  color: rgba(255, 255, 255, 0.4);
+  transition:
+    top 0.2s ease-in-out,
+    font-size 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 .search-modal__input.with_value + .search-modal__floating_label {
   top: 4px;
   bottom: 10px;
   font-size: 12px;
-  transition: top .2s ease-in-out, font-size .2s ease-in-out, color .2s ease-in-out;
-  color: #9466FF;
+  transition:
+    top 0.2s ease-in-out,
+    font-size 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+  color: #9466ff;
 }

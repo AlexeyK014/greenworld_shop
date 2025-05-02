@@ -1,9 +1,9 @@
-import { useLang } from '@/hooks/useLang'
-import { IProductLabelProps } from '@/types/modules'
-import styles from '@/styles/product-list-item/index.module.scss'
+import { useLang } from '@/hooks/useLang';
+import { IProductLabelProps } from '@/types/modules';
+import styles from '@/styles/product-list-item/index.module.scss';
 
 const ProductLabel = ({ isNew, isBestseller }: IProductLabelProps) => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
 
   const bestsellerLabel = (
     <span
@@ -14,7 +14,7 @@ const ProductLabel = ({ isNew, isBestseller }: IProductLabelProps) => {
     >
       {translations[lang].main_page.is_bestseller}
     </span>
-  )
+  );
   const newLabel = (
     <span
       className={`${styles.list__item__label} ${styles.list__item__new}`}
@@ -22,23 +22,23 @@ const ProductLabel = ({ isNew, isBestseller }: IProductLabelProps) => {
     >
       {translations[lang].main_page.is_new}
     </span>
-  )
+  );
   const allLabel = (
     <div className={styles.list__item__label__all}>
       {newLabel}
       {bestsellerLabel}
     </div>
-  )
+  );
 
   if (isNew && isBestseller) {
-    return allLabel
+    return allLabel;
   }
 
   if (isBestseller) {
-    return bestsellerLabel
+    return bestsellerLabel;
   }
 
-  return newLabel
-}
+  return newLabel;
+};
 
-export default ProductLabel
+export default ProductLabel;

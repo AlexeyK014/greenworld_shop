@@ -1,45 +1,41 @@
 // для логикик фильтров
 
-import { useLang } from './useLang'
-import { useUnit } from 'effector-react'
-import { useEffect, useState } from 'react'
-import { getSearchParamUrl } from '@/lib/utils/common'
-import { $catalogCategoryOptions } from '@/context/catalog/state'
+import { useLang } from './useLang';
+import { useUnit } from 'effector-react';
+import { useEffect, useState } from 'react';
+import { getSearchParamUrl } from '@/lib/utils/common';
+import { $catalogCategoryOptions } from '@/context/catalog/state';
 
 export const useCategoryFilter = () => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
 
-  // чтобы получать options для конкретно выбранного селекта
-  const catalogCategoryOptions = useUnit($catalogCategoryOptions)
+  // чтобы получать options для конкретно выбранного селекта исп стор
+  const catalogCategoryOptions = useUnit($catalogCategoryOptions);
 
   // чтобы получать значение выбранного селекта options на который кликнули
-  const [option, setOption] = useState('')
+  const [option, setOption] = useState('');
 
-  // чтобы получать массив тех options которые сетнулись
-  const currentOptions = Object.values(catalogCategoryOptions)[0]
+  // чтобы получать массив тех options которые сетнулись в зависимости от странице в стор
+  const currentOptions = Object.values(catalogCategoryOptions)[0];
 
   // для options все категории, которые будут видны только на корневом layout
-  const allCategoriesTitle = translations[lang].catalog.all_categories
+  const allCategoriesTitle = translations[lang].catalog.all_categories;
 
   // сэтим в options
-  const handleSelectAllCategories = () => setOption(allCategoriesTitle)
+  const handleSelectAllCategories = () => setOption(allCategoriesTitle);
 
   // чтобы при перезагрузки сэтился выбранный options
   useEffect(() => {
-    const urlParams = getSearchParamUrl()
-    const typeParam = urlParams.get('type') // поределяем type
+    const urlParams = getSearchParamUrl();
+    const typeParam = urlParams.get('type'); // определяем type
 
     // делаем проверку, если при перезагрузки есть этот параметр, чтобы применился, делаем setOptions
     // в setOptions, получаем значение из переводов. Делаем проверку по тексту
     // если выделеный options будет равен тому title который наход в options, тогда isActive
     if (typeParam) {
-      setOption(
-        (translations[lang].comparison as { [index: string]: string })[
-          typeParam
-        ]
-      )
+      setOption((translations[lang].comparison as { [index: string]: string })[typeParam]);
     }
-  }, [lang, translations])
+  }, [lang, translations]);
 
   return {
     handleSelectAllCategories,
@@ -48,5 +44,5 @@ export const useCategoryFilter = () => {
     setOption,
     catalogCategoryOptions,
     allCategoriesTitle,
-  }
-}
+  };
+};

@@ -1,94 +1,88 @@
-'use client'
+'use client';
 
-import { onAuthSuccess } from '@/lib/utils/auth'
-import { ISignUpFx } from '@/types/authPopup'
-import { createDomain, createEffect } from 'effector'
-import toast from 'react-hot-toast'
-import api from '@/api/apiInstance'
+import { onAuthSuccess } from '@/lib/utils/auth';
+import { ISignUpFx } from '@/types/authPopup';
+import { createDomain, createEffect } from 'effector';
+import toast from 'react-hot-toast';
+import api from '@/api/apiInstance';
 
-export const auth = createDomain()
+export const auth = createDomain();
 
-export const openAuthPopup = auth.createEvent()
-export const closeAuthPopup = auth.createEvent()
-export const setIsAuth = auth.createEvent<boolean>() // авторизован пользватель иди нет
+export const openAuthPopup = auth.createEvent();
+export const closeAuthPopup = auth.createEvent();
+export const setIsAuth = auth.createEvent<boolean>(); // авторизован пользватель иди нет
 
 // тригеррит логин или регистрацию
-export const handleSignUp = auth.createEvent<ISignUpFx>()
-export const handleSignIn = auth.createEvent<ISignUpFx>()
+export const handleSignUp = auth.createEvent<ISignUpFx>();
+export const handleSignIn = auth.createEvent<ISignUpFx>();
 
-export const oauthFx = createEffect(
-  async ({ name, password, email }: ISignUpFx) => {
-    try {
-      const { data } = await api.post('/api/users/oauth', {
-        name,
-        password,
-        email,
-      })
-
-      await api.post('/api/users/email', {
-        password,
-        email,
-      })
-
-      onAuthSuccess('Авторизация выполнена!', data)
-      return data.user
-    } catch (error) {
-      toast.error((error as Error).message)
-    }
-  }
-)
-
-export const signUpFx = createEffect(
-  async ({ name, password, email, isOAuth }: ISignUpFx) => {
-    if (isOAuth) {
-      await oauthFx({
-        email,
-        password,
-        name,
-      })
-      return
-    }
-    const { data } = await api.post('/api/users/signup', {
+export const oauthFx = createEffect(async ({ name, password, email }: ISignUpFx) => {
+  try {
+    const { data } = await api.post('/api/users/oauth', {
       name,
       password,
       email,
-    })
+    });
 
-    if (data.warningMessage) {
-      toast.error(data.warningMessage)
-      return
-    }
+    await api.post('/api/users/email', {
+      password,
+      email,
+    });
 
-    onAuthSuccess('Регистрация прошла успешно', data)
-    return data
+    onAuthSuccess('Авторизация выполнена!', data);
+    return data.user;
+  } catch (error) {
+    toast.error((error as Error).message);
   }
-)
+});
 
-export const signInFx = createEffect(
-  async ({ email, password, isOAuth }: ISignUpFx) => {
-    if (isOAuth) {
-      await oauthFx({
-        email,
-        password,
-      })
-      return
-    }
-    const { data } = await api.post('/api/users/login', { email, password })
-
-    if (data.warningMessage) {
-      toast.error(data.warningMessage)
-      return
-    }
-    onAuthSuccess('Вход выполнен!', data)
-
-    return data
+export const signUpFx = createEffect(async ({ name, password, email, isOAuth }: ISignUpFx) => {
+  if (isOAuth) {
+    await oauthFx({
+      email,
+      password,
+      name,
+    });
+    return;
   }
-)
+  const { data } = await api.post('/api/users/signup', {
+    name,
+    password,
+    email,
+  });
+
+  if (data.warningMessage) {
+    toast.error(data.warningMessage);
+    return;
+  }
+
+  onAuthSuccess('Регистрация прошла успешно', data);
+  return data;
+});
+
+export const signInFx = createEffect(async ({ email, password, isOAuth }: ISignUpFx) => {
+  if (isOAuth) {
+    await oauthFx({
+      email,
+      password,
+    });
+    return;
+  }
+  const { data } = await api.post('/api/users/login', { email, password });
+
+  if (data.warningMessage) {
+    toast.error(data.warningMessage);
+    return;
+  }
+  onAuthSuccess('Вход выполнен!', data);
+
+  return data;
+});
 
 export const refreshTokenFx = createEffect(async ({ jwt }: { jwt: string }) => {
-  const { data } = await api.post('/api/users/refresh', { jwt })
+  const { data } = await api.post('/api/users/refresh', { jwt });
 
-  localStorage.setItem('auth', JSON.stringify(data))
+  localStorage.setItem('auth', JSON.stringify(data));
 
-  return data
-})
+  return data;
+});

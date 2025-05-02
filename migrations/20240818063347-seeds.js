@@ -1,10 +1,9 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { faker } = require('@faker-js/faker')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { faker } = require('@faker-js/faker');
 
-const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
+const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const seedsTypes = ['peas', 'radish', 'chickpeas', 'sunflower', 'arugulas']
+const seedsTypes = ['peas', 'radish', 'chickpeas', 'sunflower', 'arugulas'];
 
 const images = [
   '/img/seeds/arugulas.png',
@@ -12,61 +11,52 @@ const images = [
   '/img/seeds/peas.png',
   '/img/seeds/radish.png',
   '/img/seeds/sunflower.png',
-]
+];
 
-const culture = ['legumes', 'vegetables', 'salads', 'flowers']
-const lifeCycle = ['annual', 'multi-year']
-const features = ['unpeeled', 'peeled']
-const doesNotContain = [
-  'GMO',
-  'gluten',
-  'flavors',
-  'artificial colors',
-  'preservatives',
-]
+const nutritionalValue = [
+  'стимулирует метаболизм, антиоксидантной действие',
+  'антиоксидантной действие, придаёт энергии, улучшает мозговую деятельность',
+  'укрепляет сердечную мышцу, снижает холестерин',
+  'улучшает состояние кожи, укрепляет иммунитет',
+];
 
 module.exports = {
   async up(db) {
     return db.collection('seeds').insertMany(
       [...Array(50)].map(() => {
-        const type = getRandomArrayValue(seedsTypes)
+        const type = getRandomArrayValue(seedsTypes);
         const characteristics = [
           {
             type: 'peas',
-            culture: getRandomArrayValue(culture),
-            lifeCycle: getRandomArrayValue(lifeCycle),
-            features: getRandomArrayValue(features),
-            doesNotContain: getRandomArrayValue(doesNotContain),
+            nutritionalValue: getRandomArrayValue(nutritionalValue),
+            weight: '1 кг',
+            durationOfGrowth: '12-14 дней',
           },
           {
             type: 'radish',
-            culture: getRandomArrayValue(culture),
-            lifeCycle: getRandomArrayValue(lifeCycle),
-            features: getRandomArrayValue(features),
-            doesNotContain: getRandomArrayValue(doesNotContain),
+            nutritionalValue: getRandomArrayValue(nutritionalValue),
+            weight: '100 г',
+            durationOfGrowth: '5-7 дней',
           },
           {
             type: 'chickpeas',
-            culture: getRandomArrayValue(culture),
-            lifeCycle: getRandomArrayValue(lifeCycle),
-            features: getRandomArrayValue(features),
-            doesNotContain: getRandomArrayValue(doesNotContain),
+            nutritionalValue: getRandomArrayValue(nutritionalValue),
+            weight: '1 кг',
+            durationOfGrowth: '12-14 дней',
           },
           {
             type: 'sunflower',
-            culture: getRandomArrayValue(culture),
-            lifeCycle: getRandomArrayValue(lifeCycle),
-            features: getRandomArrayValue(features),
-            doesNotContain: getRandomArrayValue(doesNotContain),
+            nutritionalValue: getRandomArrayValue(nutritionalValue),
+            weight: '1 кг',
+            durationOfGrowth: '10-12 дней',
           },
           {
             type: 'arugulas',
-            culture: getRandomArrayValue(culture),
-            lifeCycle: getRandomArrayValue(lifeCycle),
-            features: getRandomArrayValue(features),
-            doesNotContain: getRandomArrayValue(doesNotContain),
+            nutritionalValue: getRandomArrayValue(nutritionalValue),
+            weight: '100 кг',
+            durationOfGrowth: '5-7 дней',
           },
-        ]
+        ];
 
         return {
           category: 'seeds',
@@ -82,12 +72,12 @@ module.exports = {
           isNew: faker.datatype.boolean(),
           popularity: +faker.string.numeric(3),
           sizes: {},
-        }
-      })
-    )
+        };
+      }),
+    );
   },
 
   async down(db) {
-    return db.collection('seeds').updateMany([])
+    return db.collection('seeds').updateMany([]);
   },
-}
+};

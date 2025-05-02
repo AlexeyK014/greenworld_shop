@@ -1,8 +1,8 @@
 // компонент отрисовывает товары
-import { IComparisonItem } from '@/types/comparison'
-import { AnimatePresence, motion } from 'framer-motion'
-import styles from '@/styles/comparison/index.module.scss'
-import ComparisonItem from './ComparisonItem'
+import { IComparisonItem } from '@/types/comparison';
+import { AnimatePresence, motion } from 'framer-motion';
+import styles from '@/styles/comparison/index.module.scss';
+import ComparisonItem from './ComparisonItem';
 
 const ComparisonList = ({ items }: { items: IComparisonItem[] }) => (
   <>
@@ -18,6 +18,6 @@ const ComparisonList = ({ items }: { items: IComparisonItem[] }) => (
       <div className={styles.comparison_main_links__empty} />
     )}
   </>
-)
+);
 
-export default ComparisonList
+export default ComparisonList;

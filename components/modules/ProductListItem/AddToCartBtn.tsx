@@ -1,6 +1,6 @@
-import { IAddToCartBtnProps } from '@/types/goods'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IAddToCartBtnProps } from '@/types/goods';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AddToCartBtn = ({
   handleAddToCart,
@@ -9,17 +9,9 @@ const AddToCartBtn = ({
   text,
   className,
 }: IAddToCartBtnProps) => (
-  <button
-    className={`btn-reset ${className}`}
-    disabled={btnDisabled}
-    onClick={handleAddToCart}
-  >
-    {addToCartSpinner ? (
-      <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
-    ) : (
-      text
-    )}
+  <button className={`btn-reset ${className}`} disabled={btnDisabled} onClick={handleAddToCart}>
+    {addToCartSpinner ? <FontAwesomeIcon icon={faSpinner} spin color="#fff" /> : text}
   </button>
-)
+);
 
-export default AddToCartBtn
+export default AddToCartBtn;

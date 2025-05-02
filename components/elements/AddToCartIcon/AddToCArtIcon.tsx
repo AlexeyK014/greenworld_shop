@@ -1,7 +1,7 @@
-import { IAddToCartIconProps } from '@/types/elements'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import { IAddToCartIconProps } from '@/types/elements';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 const AddToCArtIcon = ({
   isProductInCart,
@@ -16,14 +16,10 @@ const AddToCArtIcon = ({
       <span className={`${className} ${addedClassName}`} />
     ) : (
       <button className={`btn-reset ${className}`} onClick={callback}>
-        {addToCartSpinner ? (
-          <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
-        ) : (
-          <span />
-        )}
+        {addToCartSpinner ? <FontAwesomeIcon icon={faSpinner} spin color="#fff" /> : <span />}
       </button>
     )}
   </>
-)
+);
 
-export default AddToCArtIcon
+export default AddToCArtIcon;

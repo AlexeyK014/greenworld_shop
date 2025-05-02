@@ -1,6 +1,8 @@
-import { AllowedLangs } from '@/constants/lang'
-import { createDomain } from 'effector'
+'use client';
 
-export const lang = createDomain()
+import { AllowedLangs } from '@/constants/lang';
+import { createDomain } from 'effector';
 
-export const setLang = lang.createEvent<AllowedLangs>()
+export const lang = createDomain();
+
+export const setLang = lang.createEvent<AllowedLangs>();

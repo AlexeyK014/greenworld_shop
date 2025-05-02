@@ -1,30 +1,32 @@
-import { corsHeaders } from '@/constants/corsHeader'
-import clientPromise from '@/lib/mongodb'
-import { getDbAndReqBody } from '@/lib/utils/api-routes'
-import { ObjectId } from 'mongodb'
-import { NextResponse } from 'next/server'
+import { corsHeaders } from '@/constants/corsHeader';
+import clientPromise from '@/lib/mongodb';
+import { getDbAndReqBody } from '@/lib/utils/api-routes';
+import { ObjectId } from 'mongodb';
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   try {
-    const { db } = await getDbAndReqBody(clientPromise, null)
-    const url = new URL(req.url)
-    const id = url.searchParams.get('id')
-    const category = url.searchParams.get('category')
-    const isValidId = ObjectId.isValid(id as string)
+    const { db } = await getDbAndReqBody(clientPromise, null);
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+    const category = url.searchParams.get('category');
+    const isValidId = ObjectId.isValid(id as string);
 
+    // делаем проверку правильности id
     if (!isValidId) {
       return NextResponse.json(
         {
           message: 'Wrong product id',
           status: 404,
         },
-        corsHeaders
-      )
+        corsHeaders,
+      );
     }
 
+    // если id правильный
     const productItem = await db
       .collection(category as string)
-      .findOne({ _id: new ObjectId(id as string) })
+      .findOne({ _id: new ObjectId(id as string) });
 
     return NextResponse.json(
       {
@@ -38,11 +40,11 @@ export async function GET(req: Request) {
           })),
         },
       },
-      corsHeaders
-    )
+      corsHeaders,
+    );
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error((error as Error).message);
   }
 }
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';

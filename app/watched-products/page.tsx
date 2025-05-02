@@ -1,5 +1,5 @@
-import WatchedProductsPage from '@/components/templates/WatchedProductsPage/WatchedProductsPage'
+import WatchedProductsPage from '@/components/templates/WatchedProductsPage/WatchedProductsPage';
 
 export default function WatchedProducts() {
-  return <WatchedProductsPage />
+  return <WatchedProductsPage />;
 }

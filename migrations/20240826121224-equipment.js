@@ -1,49 +1,72 @@
-/* eslint-disable indent */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { faker } = require('@faker-js/faker')
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { faker } = require('@faker-js/faker');
 
-const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)]
+const getRandomArrayValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const equipmentTypes = ['box', 'lamps', 'shelf', 'agrovata']
+const equipmentTypes = ['box', 'lamps', 'shelf', 'agrovata'];
 
 const images = [
   '/img/equipment/box-equipment.png',
   '/img/equipment/lamps-equipment.png',
   '/img/equipment/shelf-equipment.png',
   '/img/equipment/agrovata-equipment.png',
-]
+];
 
-const power = ['10 W', '14 W', '18 W']
-const length = ['57.5 cm', '87.5 cm']
-const thicknessAgro = ['1 cm', '1.5 cm']
-const boxSize = ['11 x 18 x 3', '11 x 18 x 5']
-const shelfSize = ['1450 x 750 x 300', '1600 x 1000 x 400']
+// lamps
+const powerLamps = ['10', '14', '18'];
+const lengthLamps = ['1200 mm', '573 mm', '873 mm'];
+const colorTemperature = ['6000 K', '4500 K', '4000 K'];
+const spectrum = ['white', 'red-blue'];
+
+// box
+const lengthBox = ['190 mm'];
+const widthBox = ['114 mm'];
+const heightBox = ['35 mm', '55 mm'];
+
+//agrovata
+const heightAgro = ['10 mm', '15 mm', '20 mm'];
+const lengthArgo = ['160 mm'];
+const widthArgo = ['110 mm'];
+
+//shelf
+const heightShelf = ['2000 mm', '1800 mm'];
+const lengthShelf = ['1000 mm', '1220 mm'];
+const widthShelf = ['500 mm', '600 mm', '630 mm'];
 
 module.exports = {
   async up(db) {
     return db.collection('equipment').insertMany(
       [...Array(50)].map(() => {
-        const type = getRandomArrayValue(equipmentTypes)
+        const type = getRandomArrayValue(equipmentTypes);
 
         const characteristics = [
           {
             type: 'box',
-            boxSize: getRandomArrayValue(boxSize),
+            boxSize: getRandomArrayValue(lengthBox),
+            widthBox: getRandomArrayValue(widthBox),
+            heightBox: getRandomArrayValue(heightBox),
+            checkBox: '123',
           },
           {
             type: 'lamps',
-            power: getRandomArrayValue(power),
-            length: getRandomArrayValue(length),
+            power: getRandomArrayValue(powerLamps),
+            length: getRandomArrayValue(lengthLamps),
+            colorTemperature: getRandomArrayValue(colorTemperature),
+            spectrum: getRandomArrayValue(spectrum),
           },
           {
             type: 'shelf',
-            shelfSize: getRandomArrayValue(shelfSize),
+            heightShelf: getRandomArrayValue(heightShelf),
+            lengthShelf: getRandomArrayValue(lengthShelf),
+            widthShelf: getRandomArrayValue(widthShelf),
           },
           {
             type: 'agrovata',
-            thicknessAgro: getRandomArrayValue(thicknessAgro),
+            heightAgro: getRandomArrayValue(heightAgro),
+            lengthArgo: getRandomArrayValue(lengthArgo),
+            widthArgo: getRandomArrayValue(widthArgo),
           },
-        ]
+        ];
 
         return {
           category: 'equipment',
@@ -58,13 +81,17 @@ module.exports = {
           isBestseller: faker.datatype.boolean(),
           isNew: faker.datatype.boolean(),
           popularity: +faker.string.numeric(3),
-          sizes: {},
-        }
-      })
-    )
+          sizes: {
+            маленький: faker.datatype.boolean(),
+            средний: faker.datatype.boolean(),
+            большой: faker.datatype.boolean(),
+          },
+        };
+      }),
+    );
   },
 
   async down(db) {
-    return db.collection('equipment').updateMany([])
+    return db.collection('equipment').updateMany([]);
   },
-}
+};

@@ -7,14 +7,14 @@
     width: 32px;
     height: 32px;
     border-radius: 24px;
-    background-color: #1D2533;
+    background-color: #1d2533;
 
     &:not(:last-child) {
       margin-bottom: 16px;
     }
 
     &::before {
-      background-color: #E8E9EA;
+      background-color: #e8e9ea;
       content: '';
       height: 100%;
       width: 100%;
@@ -29,7 +29,8 @@
       mask: url(/img/favorites.svg) no-repeat 50% 50%;
     }
 
-    &_favorite_checked::before, &_comparison_checked::before {
+    &_favorite_checked::before,
+    &_comparison_checked::before {
       position: absolute;
       left: 7px;
       top: 7px;
@@ -38,7 +39,7 @@
     }
 
     &_favorite_checked::before {
-      background-color: #FF4747;
+      background-color: #ff4747;
       -webkit-mask: url(/img/checked-favorite.svg) no-repeat 50% 50%;
       mask: url(/img/checked-favorite.svg) no-repeat 50% 50%;
     }
@@ -66,7 +67,7 @@
 
     &.actions__btn_favorite_checked:hover::before {
       transition: background-color 0.2s ease-in-out;
-      background-color: #FF4747;
+      background-color: #ff4747;
     }
   }
 

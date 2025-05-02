@@ -1,7 +1,7 @@
-'use client'
-import { IProductSizesItemProps } from '@/types/goods'
-import styles from '@/styles/quick-view-modal/index.module.scss'
-import ProductCountBySize from './ProductCountBySize'
+'use client';
+import { IProductSizesItemProps } from '@/types/goods';
+import styles from '@/styles/quick-view-modal/index.module.scss';
+import ProductCountBySize from './ProductCountBySize';
 // import ProductCountBySize from './ProductCountBySize'
 
 const ProductSizesItem = ({
@@ -11,30 +11,23 @@ const ProductSizesItem = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   currentCartItems,
 }: IProductSizesItemProps) => {
-  const handleSelectSize = () => setSelectedSize(currentSize[0])
+  const handleSelectSize = () => setSelectedSize(currentSize[0]);
 
   return (
     <li
       className={`${styles.modal__right__info__sizes__item} ${
-        currentSize[1]
-          ? ''
-          : styles.modal__right__info__sizes__item__not_available
+        currentSize[1] ? '' : styles.modal__right__info__sizes__item__not_available
       }`}
       style={{
-        backgroundColor:
-          currentSize[0] === selectedSize ? '#D76F30' : '#6ab471',
+        backgroundColor: currentSize[0] === selectedSize ? '#D76F30' : '#6ab471',
       }}
     >
-      <ProductCountBySize
-        size={currentSize[0]}
-        products={currentCartItems}
-        withCartIcon={false}
-      />
-      <button className='btn-reset' onClick={handleSelectSize}>
+      <ProductCountBySize size={currentSize[0]} products={currentCartItems} withCartIcon={false} />
+      <button className="btn-reset" onClick={handleSelectSize}>
         {currentSize[0].toLocaleUpperCase()}
       </button>
     </li>
-  )
-}
+  );
+};
 
-export default ProductSizesItem
+export default ProductSizesItem;

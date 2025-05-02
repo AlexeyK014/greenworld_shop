@@ -1,14 +1,14 @@
-'use client'
-import EmptyPageContent from '@/components/modules/EmptyPageContent/EmptyPageContent'
-import { useLang } from '@/hooks/useLang'
-import styles from '@/styles/not-found/index.module.scss'
+'use client';
+import EmptyPageContent from '@/components/modules/EmptyPageContent/EmptyPageContent';
+import { useLang } from '@/hooks/useLang';
+import styles from '@/styles/not-found/index.module.scss';
 
 const NotFound = () => {
-  const { lang, translations } = useLang()
+  const { lang, translations } = useLang();
   return (
     <main>
       <section className={styles.not_found}>
-        <div className='container'>
+        <div className="container">
           <EmptyPageContent
             subtitle={translations[lang].common.not_found_subtitle}
             description={translations[lang].common.not_found_description}
@@ -22,7 +22,7 @@ const NotFound = () => {
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -1,36 +1,33 @@
 /* eslint-disable prettier/prettier */
-import { IComparisonItem } from '@/types/comparison'
-import styles from '@/styles/comparison/index.module.scss'
-import { motion } from 'framer-motion'
-import { basePropsForMotion } from '@/constants/motion'
-import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartItemBtn'
-import AddToCArtIcon from '@/components/elements/AddToCartIcon/AddToCArtIcon'
-import Image from 'next/image'
-import { useProductDelete } from '@/hooks/useProductDelete'
+import { IComparisonItem } from '@/types/comparison';
+import styles from '@/styles/comparison/index.module.scss';
+import { motion } from 'framer-motion';
+import { basePropsForMotion } from '@/constants/motion';
+import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartItemBtn';
+import AddToCArtIcon from '@/components/elements/AddToCartIcon/AddToCArtIcon';
+import Image from 'next/image';
+import { useProductDelete } from '@/hooks/useProductDelete';
 import {
   deleteProductFromComparison,
   setComparisonFromLS,
   setShouldShowEmptyComparison,
-} from '@/context/comparison/index'
-import { deleteProductFromLS, isUserAuth } from '@/lib/utils/common'
-import { productsWithoutSizes } from '@/constants/product'
-import { addCartItemToLS } from '@/lib/utils/cart'
-import { IProduct } from '@/types/common'
-import { useMemo, useState } from 'react'
-import { loadOneProduct } from '@/context/goods/index'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { addProductToCart } from '@/context/cart/index'
-import { $cart, $cartFromLs } from '@/context/cart/state'
+} from '@/context/comparison/index';
+import { deleteProductFromLS, isUserAuth } from '@/lib/utils/common';
+import { productsWithoutSizes } from '@/constants/product';
+import { addCartItemToLS } from '@/lib/utils/cart';
+import { IProduct } from '@/types/common';
+import { useMemo, useState } from 'react';
+import { loadOneProduct } from '@/context/goods/index';
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
+import { addProductToCart } from '@/context/cart/index';
+import { $cart, $cartFromLs } from '@/context/cart/state';
 
 const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
-  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
 
-  const [addToCartSpinner, setAddToCartSpinner] = useState(false)
-  const [loadProductSpinner, setLoadProductSpinner] = useState(false)
-  const { handleDelete, deleteSpinner } = useProductDelete(
-    item._id,
-    deleteProductFromComparison
-  )
+  const [addToCartSpinner, setAddToCartSpinner] = useState(false);
+  const [loadProductSpinner, setLoadProductSpinner] = useState(false);
+  const { handleDelete, deleteSpinner } = useProductDelete(item._id, deleteProductFromComparison);
 
   // если товар без размера, ищем по условию на id, без проверки на размер
   // иначе, образаемся к массиву товаров из корзины, получаем cartItem
@@ -39,40 +36,39 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
   const isProductInCart = useMemo(
     () =>
       productsWithoutSizes.includes(item.characteristics.type)
-        ? currentCartByAuth.find(
-          (cartItem) => cartItem.productId === item.productId
-        )
+        ? currentCartByAuth.find((cartItem) => cartItem.productId === item.productId)
         : currentCartByAuth.find(
-          (cartItem) =>
-            cartItem.productId === item.productId &&
+            (cartItem) =>
+              cartItem.productId === item.productId &&
               Object.entries(item.sizes)
                 .filter(([, value]) => value)
                 .map(([key]) => key) // проверяем что нужный товар из сравнения находится и в корзине
-                .includes(cartItem.size)
-        ),
-    [currentCartByAuth, item.characteristics.type, item.productId, item.sizes]
-  )
+                .includes(cartItem.size),
+          ),
+    [currentCartByAuth, item.characteristics.type, item.productId, item.sizes],
+  );
 
   const addToCart = () => {
-    // проверка, добавлени ли товар БЕЗ РАЗМЕРА
+    // проверка, добавлен ли товар в сравнение БЕЗ РАЗМЕРА
     if (productsWithoutSizes.includes(item.characteristics.type)) {
       // тогда добавляем товар не вызывая Таблицу размеров
       const product = {
         ...item, // разворачиваем comparisonItem
         _id: item.productId, // добавляем поле id с картинкой
         images: [item.image],
-      } as unknown as IProduct
+      } as unknown as IProduct;
 
       if (!isUserAuth()) {
-        addCartItemToLS(product, '', 1)
-        return
+        addCartItemToLS(product, '', 1);
+        return;
       }
 
+      // если юзер авторизован
       // получаем данные из LS
-      const auth = JSON.parse(localStorage.getItem('auth') as string)
+      const auth = JSON.parse(localStorage.getItem('auth') as string);
 
       // создаём переменную, вызывая фун-ю добавления в LS
-      const clientId = addCartItemToLS(product, '', 1, false)
+      const clientId = addCartItemToLS(product, '', 1, false);
 
       addProductToCart({
         jwt: auth.accessToken,
@@ -82,8 +78,8 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
         count: 1,
         size: '',
         clientId,
-      })
-      return
+      });
+      return;
     }
 
     // добавление товара С РАЗМЕРОМ
@@ -92,36 +88,33 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
       category: item.category,
       withShowingSizeTable: true, // чтобы появилась модалка с таблицей размеров
       setSpinner: setLoadProductSpinner,
-    })
-  }
+    });
+  };
 
   const handleDeleteComparisonItem = () => {
     if (!isUserAuth()) {
       deleteProductFromLS(
         item.clientId,
-        'comparison',
+        'comparison', // ключ для LS, удаляем под этим ключом
         setComparisonFromLS,
         setShouldShowEmptyComparison,
-        'Удалено из сравнения!'
-      )
-      return
+        'Удалено из сравнения!',
+      );
+      return;
     }
-    handleDelete()
+    handleDelete();
     deleteProductFromLS(
       item.clientId,
       'comparison',
       setComparisonFromLS,
       setShouldShowEmptyComparison,
       '',
-      false
-    )
-  }
+      false,
+    );
+  };
 
   return (
-    <motion.li
-      className={styles.comparison__list__item}
-      {...basePropsForMotion}
-    >
+    <motion.li className={styles.comparison__list__item} {...basePropsForMotion}>
       <DeleteItemBtn
         btnDisabled={deleteSpinner}
         callback={handleDeleteComparisonItem}
@@ -148,37 +141,34 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
         {Object.entries(item.characteristics).map(([key, value], i) => {
           // value - может быть boolean или массив
           // если массив - достаём из массив и перечисляем чурез запятую
-          let valueFromArray = null
-          let valueByBool = null
+          let valueFromArray = null;
+          let valueByBool = null;
 
           if (Array.isArray(value)) {
-            valueFromArray = value.join(', ')
+            valueFromArray = value.join(', ');
           }
 
           if (typeof value == 'boolean') {
             if (value) {
-              valueByBool = 'Есть'
+              valueByBool = 'Есть';
             } else {
-              valueByBool = 'Нет'
+              valueByBool = 'Нет';
             }
           }
 
           return (
-            <li
-              key={i}
-              className={styles.comparison__list__item__inner_list__item}
-            >
+            <li key={i} className={styles.comparison__list__item__inner_list__item}>
               {/* название хар-ки */}
               <span>{key}</span>
 
               {/* значение хар-ки */}
               <span>{valueByBool || valueFromArray || value}</span>
             </li>
-          )
+          );
         })}
       </ul>
     </motion.li>
-  )
-}
+  );
+};
 
-export default ComparisonItem
+export default ComparisonItem;

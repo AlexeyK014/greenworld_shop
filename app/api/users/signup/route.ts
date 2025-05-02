@@ -1,55 +1,27 @@
-import { NextResponse } from 'next/server'
-import clientPromise from '@/lib/mongodb'
+import { NextResponse } from 'next/server';
+import clientPromise from '@/lib/mongodb';
 import {
   createUserAndGenerateTokens,
   findUserByEmail,
   getDbAndReqBody,
-} from '@/lib/utils/api-routes'
+} from '@/lib/utils/api-routes';
 
 export async function POST(req: Request) {
   try {
-    const { db, reqBody } = await getDbAndReqBody(clientPromise, req)
-    const user = await findUserByEmail(db, reqBody.email)
+    const { db, reqBody } = await getDbAndReqBody(clientPromise, req);
+    const user = await findUserByEmail(db, reqBody.email); // находим по email юзера
 
     if (user) {
       return NextResponse.json({
+        // если юзер существует то возвращаем ошибку
         warningMessage: 'Пользователь уже существует',
-      })
+      });
     }
+    // если юзер новый - генерируем токены и возвращаем на клиент, это значит - юзер создался
+    const tokens = await createUserAndGenerateTokens(db, reqBody);
 
-    const tokens = await createUserAndGenerateTokens(db, reqBody)
-
-    return NextResponse.json(tokens)
+    return NextResponse.json(tokens);
   } catch (error) {
-    throw new Error((error as Error).message)
+    throw new Error((error as Error).message);
   }
 }
-
-// import clientPromise from '@/lib/mongodb'
-// import {
-//   createUserAndGenerateTokens,
-//   findUserByEmail,
-//   getDbAndReqBody,
-// } from '@/lib/utils/api-routes'
-// import { NextResponse } from 'next/server'
-
-// export async function POST(req: Request) {
-//   try {
-//     const { db, reqBody } = await getDbAndReqBody(clientPromise, req)
-//     const user = await findUserByEmail(db, reqBody.email) // находим по email юзера
-
-//     if (user) {
-//       return NextResponse.json({
-//         // если юзер существует то возвращаем ошибку
-//         warningMessage: 'Пользователь уже существует',
-//       })
-//     }
-
-//     // если юзер новый - генерируем токены и возвращаем на клиент, это значит - юзер создался
-//     const tokens = await createUserAndGenerateTokens(db, reqBody)
-
-//     return NextResponse.json(tokens)
-//   } catch (error) {
-//     throw new Error((error as Error).message)
-//   }
-// }

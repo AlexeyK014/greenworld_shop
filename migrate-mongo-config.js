@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-require('dotenv').config()
+require('dotenv').config();
 // In this file you can configure migrate-mongo
 
 const config = {
@@ -33,6 +33,6 @@ const config = {
 
   // Don't change this, unless you know what you're doing
   moduleSystem: 'commonjs',
-}
+};
 
-module.exports = config
+module.exports = config;

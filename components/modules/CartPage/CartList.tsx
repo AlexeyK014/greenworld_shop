@@ -1,12 +1,12 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import styles from '@/styles/cart-page/index.module.scss'
-import { basePropsForMotion } from '@/constants/motion'
-import CartListItem from './CartListItem'
-import { useGoodsByAuth } from '@/hooks/useGoodsByAuth'
-import { $cart, $cartFromLs } from '@/context/cart/state'
+import { AnimatePresence, motion } from 'framer-motion';
+import styles from '@/styles/cart-page/index.module.scss';
+import { basePropsForMotion } from '@/constants/motion';
+import CartListItem from './CartListItem';
+import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
+import { $cart, $cartFromLs } from '@/context/cart/state';
 
 const CartList = () => {
-  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs)
+  const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
 
   return (
     <>
@@ -22,7 +22,7 @@ const CartList = () => {
         ))}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default CartList
+export default CartList;

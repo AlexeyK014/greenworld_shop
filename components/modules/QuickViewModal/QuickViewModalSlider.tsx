@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import QuickViewModalSliderArrow from '@/components/elements/QuickViewModalSliderArrow/QuickViewModalSliderArrow'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import styles from '@/styles/quick-view-modal/index.module.scss'
-import Slider from 'react-slick'
+import QuickViewModalSliderArrow from '@/components/elements/QuickViewModalSliderArrow/QuickViewModalSliderArrow';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import styles from '@/styles/quick-view-modal/index.module.scss';
+import Slider from 'react-slick';
 
 const QuickViewModalSlider = ({
   images,
 }: {
   images: {
-    src: string
-    alt: string
-    id: string
-  }[]
+    src: string;
+    alt: string;
+    id: string;
+  }[];
 }) => {
-  const isMedia1070 = useMediaQuery(1070)
-  const isMedia890 = useMediaQuery(890)
+  const isMedia1070 = useMediaQuery(1070);
+  const isMedia890 = useMediaQuery(890);
 
   const setting = {
     dots: true,
@@ -27,11 +27,9 @@ const QuickViewModalSlider = ({
     prevArrow: <QuickViewModalSliderArrow directionClassName={styles.prev} />,
     appendDots: (dots: React.ReactNode) => <ul>{dots}</ul>, // список точек
     customPaging: () => (
-      <button
-        className={`btn-reset ${styles.modal__left__slider__slide__dot}`}
-      />
+      <button className={`btn-reset ${styles.modal__left__slider__slide__dot}`} />
     ),
-  }
+  };
   return (
     <Slider {...setting} className={styles.modal__left__slider}>
       {images.map((item) => (
@@ -44,7 +42,7 @@ const QuickViewModalSlider = ({
         </div>
       ))}
     </Slider>
-  )
-}
+  );
+};
 
-export default QuickViewModalSlider
+export default QuickViewModalSlider;

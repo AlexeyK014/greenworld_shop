@@ -10,13 +10,19 @@
     li {
       position: relative;
       height: 300px;
-      border: 1px solid #565C66;
-      transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+      border: 1px solid #565c66;
+      transition:
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
 
       &:hover {
-        transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
-        background-color: #3D4555;
-        box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.20), 0px 0px 20px 0px rgba(0, 0, 0, 0.10);
+        transition:
+          background-color 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+        background-color: #3d4555;
+        box-shadow:
+          0px 12px 20px 0px rgba(0, 0, 0, 0.2),
+          0px 0px 20px 0px rgba(0, 0, 0, 0.1);
       }
 
       a {
@@ -25,7 +31,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        color: #F1F3F5;
+        color: #f1f3f5;
         font-size: 22px;
         font-weight: 500;
         text-decoration: none;
@@ -41,7 +47,7 @@
       background-image: url('/img/comparison-icon.png');
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 300px
+      background-size: 300px;
     }
   }
 
@@ -61,23 +67,25 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #9466FF;
+      background-color: #9466ff;
       border-radius: 3px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: #70F;
+      background-color: #70f;
     }
 
     li {
       padding: 10px;
       position: relative;
-      border: 1px solid #565C66;
-      transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+      border: 1px solid #565c66;
+      transition:
+        background-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
       min-width: max-content;
 
       &.active {
-        background-color: #3D4555;
+        background-color: #3d4555;
       }
 
       &:not(:last-child) {
@@ -86,14 +94,16 @@
       }
 
       &:hover {
-        transition: background-color .2s ease-in-out, box-shadow .2s ease-in-out;
-        background-color: #3D4555;
+        transition:
+          background-color 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+        background-color: #3d4555;
       }
     }
 
     a {
       display: block;
-      color: #F1F3F5;
+      color: #f1f3f5;
       font-size: 18px;
       text-decoration: none;
 
@@ -127,17 +137,17 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #9466FF;
+      background-color: #9466ff;
       border-radius: 3px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: #70F;
+      background-color: #70f;
     }
 
     &__item {
       position: relative;
-      border: 1px solid #565C66;
+      border: 1px solid #565c66;
       padding: 15px;
       min-width: 478px;
 
@@ -162,7 +172,7 @@
         width: 24px;
 
         & span::before {
-          background-color: #A5A8AD;
+          background-color: #a5a8ad;
           content: '';
           height: 100%;
           width: 100%;
@@ -176,7 +186,7 @@
 
         &:hover span::before {
           transition: background-color 0.2s ease-in-out;
-          background-color: #FF0C0C;
+          background-color: #ff0c0c;
         }
       }
 
@@ -188,7 +198,7 @@
         right: 15px;
 
         & span::before {
-          background-color: #A5A8AD;
+          background-color: #a5a8ad;
           content: '';
           height: 100%;
           width: 100%;
@@ -224,7 +234,11 @@
       &__img {
         margin-bottom: 15px;
         text-align: center;
-        background: radial-gradient(52.53% 52.53% at 50% 47.47%, #333A47 0%, rgba(29, 37, 51, 0.00) 100%);
+        background: radial-gradient(
+          52.53% 52.53% at 50% 47.47%,
+          #333a47 0%,
+          rgba(29, 37, 51, 0) 100%
+        );
 
         img {
           object-fit: contain;
@@ -233,7 +247,7 @@
 
       &__inner_list {
         &__item {
-          border: 1px solid #565C66;
+          border: 1px solid #565c66;
           padding: 10px;
           color: #489765;
           font-size: 18px;

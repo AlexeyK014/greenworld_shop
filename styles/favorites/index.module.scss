@@ -1,9 +1,9 @@
 .favorites {
   padding-bottom: 20px;
 
-&__container {
-  min-height: 605px;
-}
+  &__container {
+    min-height: 605px;
+  }
 
   &__list {
     &__item {
@@ -28,7 +28,7 @@
         width: 24px;
 
         & span::before {
-          background-color: #A5A8AD;
+          background-color: #a5a8ad;
           content: '';
           height: 100%;
           width: 100%;
@@ -42,7 +42,7 @@
 
         &:hover span::before {
           transition: background-color 0.2s ease-in-out;
-          background-color: #FF0C0C;
+          background-color: #ff0c0c;
         }
       }
 
@@ -54,7 +54,7 @@
         right: 0;
 
         & span::before {
-          background-color: #A5A8AD;
+          background-color: #a5a8ad;
           content: '';
           height: 100%;
           width: 100%;
@@ -89,7 +89,9 @@
 
       &__img {
         margin-right: 32px;
-        background: radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0.00) 100%), #f8f8fa00;
+        background:
+          radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0) 100%),
+          #f8f8fa00;
 
         // background: radial-gradient(52.53% 52.53% at 50% 47.47%, #4E5D77 0%, rgba(42, 50, 63, 0.00) 100%), #2A323F;
 

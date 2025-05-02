@@ -1,60 +1,60 @@
-import { AllowedLangs } from '@/constants/lang'
-import { useLang } from '@/hooks/useLang'
-import { removeOverflowHiddenFromBody } from '@/lib/utils/common'
-import { useUnit } from 'effector-react'
-import React, { useState } from 'react'
-import Logo from '../../elements/Logo/logo'
-import { AnimatePresence, motion } from 'framer-motion'
-import Accordion from '../Accordion/Accordion'
-import { usePathname } from 'next/navigation'
-import MenuLinkItem from './MenuLinkItem'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
-import BuyersListItems from './BuyersListItems'
-import ContactsListItems from './ContactsListItems'
-import { setLang } from '@/context/lang/index'
-import { closeMenu } from '@/context/modals/index'
-import { $menuIsOpen } from '@/context/modals/state'
+import { AllowedLangs } from '@/constants/lang';
+import { useLang } from '@/hooks/useLang';
+import { removeOverflowHiddenFromBody } from '@/lib/utils/common';
+import { useUnit } from 'effector-react';
+import React, { useState } from 'react';
+import Logo from '../../elements/Logo/logo';
+import { AnimatePresence, motion } from 'framer-motion';
+import Accordion from '../Accordion/Accordion';
+import { usePathname } from 'next/navigation';
+import MenuLinkItem from './MenuLinkItem';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import BuyersListItems from './BuyersListItems';
+import ContactsListItems from './ContactsListItems';
+import { setLang } from '@/context/lang/index';
+import { closeMenu } from '@/context/modals/index';
+import { $menuIsOpen } from '@/context/modals/state';
 
 const Menu = () => {
   // id 0 - ничего непоказывает
-  const [activeListId, setActiveListId] = useState(0)
+  const [activeListId, setActiveListId] = useState(0);
 
-  const { lang, translations } = useLang()
-  const pathname = usePathname()
+  const { lang, translations } = useLang();
+  const pathname = usePathname();
 
-  const menuIsOpen = useUnit($menuIsOpen)
+  const menuIsOpen = useUnit($menuIsOpen);
 
-  const isMedia800 = useMediaQuery(800)
-  const isMedia640 = useMediaQuery(640)
+  const isMedia800 = useMediaQuery(800);
+  const isMedia640 = useMediaQuery(640);
 
   // переключение языка
   const handleSwitchLang = (lang: string) => {
-    setLang(lang as AllowedLangs)
-    localStorage.setItem('lang', JSON.stringify(lang))
-  }
+    setLang(lang as AllowedLangs);
+    localStorage.setItem('lang', JSON.stringify(lang));
+  };
 
-  const handleSwitchLangToRu = () => handleSwitchLang('ru')
-  const handleSwitchLangToEn = () => handleSwitchLang('en')
+  const handleSwitchLangToRu = () => handleSwitchLang('ru');
+  const handleSwitchLangToEn = () => handleSwitchLang('en');
 
-  const handleShowCatalogList = () => setActiveListId(1)
-  const handleShowBuyersList = () => setActiveListId(2)
-  const handleShowContactsList = () => setActiveListId(3)
+  const handleShowCatalogList = () => setActiveListId(1);
+  const handleShowBuyersList = () => setActiveListId(2);
+  const handleShowContactsList = () => setActiveListId(3);
 
   const handleCloseMenu = () => {
-    removeOverflowHiddenFromBody()
-    closeMenu()
-    setActiveListId(0)
-  }
+    removeOverflowHiddenFromBody();
+    closeMenu();
+    setActiveListId(0);
+  };
 
   const handleRedirectToCatalog = (path: string) => {
     // если pathname содержит 'catalog', делаем обновление с помощью объекта window
     if (pathname.includes('/catalog')) {
-      window.history.pushState({ path }, '', path)
-      window.location.reload()
+      window.history.pushState({ path }, '', path);
+      window.location.reload();
     }
 
-    handleCloseMenu()
-  }
+    handleCloseMenu();
+  };
 
   const microgreenLinks = [
     {
@@ -82,7 +82,7 @@ const Menu = () => {
       text: translations[lang].comparison.arugulas,
       href: '/catalog/microgreen?offset=0&type=arugulas',
     },
-  ]
+  ];
 
   const sproutsLinks = [
     {
@@ -110,7 +110,7 @@ const Menu = () => {
       text: translations[lang].comparison.arugulas,
       href: '/catalog/sprouts?offset=0&type=arugulas',
     },
-  ]
+  ];
 
   const seedsLinks = [
     {
@@ -138,7 +138,7 @@ const Menu = () => {
       text: translations[lang].comparison.arugulas,
       href: '/catalog/seeds?offset=0&type=arugulas',
     },
-  ]
+  ];
 
   const equipmentsLinks = [
     {
@@ -161,11 +161,11 @@ const Menu = () => {
       text: translations[lang].comparison.agrovata,
       href: '/catalog/equipment?offset=0&type=agrovata',
     },
-  ]
+  ];
 
   return (
     <nav className={`nav-menu ${menuIsOpen ? 'open' : 'close'}`}>
-      <div className='container nav-menu__container'>
+      <div className="container nav-menu__container">
         <div className={`nav-menu__logo ${menuIsOpen ? 'open' : ''}`}>
           <Logo />
         </div>
@@ -175,17 +175,13 @@ const Menu = () => {
         />
         <div className={`nav-menu__lang ${menuIsOpen ? 'open' : ''}`}>
           <button
-            className={`btn-reset nav-menu__lang__btn ${
-              lang === 'ru' ? 'lang-active' : ''
-            }`}
+            className={`btn-reset nav-menu__lang__btn ${lang === 'ru' ? 'lang-active' : ''}`}
             onClick={handleSwitchLangToRu}
           >
             RU
           </button>
           <button
-            className={`btn-reset nav-menu__lang__btn ${
-              lang === 'en' ? 'lang-active' : ''
-            }`}
+            className={`btn-reset nav-menu__lang__btn ${lang === 'en' ? 'lang-active' : ''}`}
             onClick={handleSwitchLangToEn}
           >
             EN
@@ -193,9 +189,9 @@ const Menu = () => {
         </div>
         <ul className={`list-reset nav-menu__list ${menuIsOpen ? 'open' : ''}`}>
           {!isMedia800 && (
-            <li className='nav-menu__list__item'>
+            <li className="nav-menu__list__item">
               <button
-                className='btn-reset nav-menu__list__item__btn'
+                className="btn-reset nav-menu__list__item__btn"
                 onMouseEnter={handleShowCatalogList}
               >
                 {translations[lang].main_menu.catalog}
@@ -206,14 +202,14 @@ const Menu = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className='list-reset nav-menu__accordion'
+                    className="list-reset nav-menu__accordion"
                   >
-                    <li className='nav-menu__accordion__item'>
+                    <li className="nav-menu__accordion__item">
                       <Accordion
                         title={translations[lang].main_menu.microgreen}
-                        titleClass='btn-reset nav-menu__accordion__item__title'
+                        titleClass="btn-reset nav-menu__accordion__item__title"
                       >
-                        <ul className='list-reset nav-menu__accordion__item__list'>
+                        <ul className="list-reset nav-menu__accordion__item__list">
                           {microgreenLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
@@ -224,12 +220,12 @@ const Menu = () => {
                         </ul>
                       </Accordion>
                     </li>
-                    <li className='nav-menu__accordion__item'>
+                    <li className="nav-menu__accordion__item">
                       <Accordion
                         title={translations[lang].main_menu.sprouts}
-                        titleClass='btn-reset nav-menu__accordion__item__title'
+                        titleClass="btn-reset nav-menu__accordion__item__title"
                       >
-                        <ul className='list-reset nav-menu__accordion__item__list'>
+                        <ul className="list-reset nav-menu__accordion__item__list">
                           {sproutsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
@@ -240,12 +236,12 @@ const Menu = () => {
                         </ul>
                       </Accordion>
                     </li>
-                    <li className='nav-menu__accordion__item'>
+                    <li className="nav-menu__accordion__item">
                       <Accordion
                         title={translations[lang].main_menu.seeds}
-                        titleClass='btn-reset nav-menu__accordion__item__title'
+                        titleClass="btn-reset nav-menu__accordion__item__title"
                       >
-                        <ul className='list-reset nav-menu__accordion__item__list'>
+                        <ul className="list-reset nav-menu__accordion__item__list">
                           {seedsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
@@ -256,12 +252,12 @@ const Menu = () => {
                         </ul>
                       </Accordion>
                     </li>
-                    <li className='nav-menu__accordion__item'>
+                    <li className="nav-menu__accordion__item">
                       <Accordion
                         title={translations[lang].main_menu.equipment}
-                        titleClass='btn-reset nav-menu__accordion__item__title'
+                        titleClass="btn-reset nav-menu__accordion__item__title"
                       >
-                        <ul className='list-reset nav-menu__accordion__item__list'>
+                        <ul className="list-reset nav-menu__accordion__item__list">
                           {equipmentsLinks.map((item) => (
                             <MenuLinkItem
                               key={item.id}
@@ -277,10 +273,10 @@ const Menu = () => {
               </AnimatePresence>
             </li>
           )}
-          <li className='nav-menu__list__item'>
+          <li className="nav-menu__list__item">
             {!isMedia640 && (
               <button
-                className='btn-reset nav-menu__list__item__btn'
+                className="btn-reset nav-menu__list__item__btn"
                 onMouseEnter={handleShowBuyersList}
               >
                 {translations[lang].main_menu.buyers}
@@ -293,7 +289,7 @@ const Menu = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className='list-reset nav-menu__accordion'
+                    className="list-reset nav-menu__accordion"
                   >
                     <BuyersListItems />
                   </motion.ul>
@@ -303,18 +299,18 @@ const Menu = () => {
             {isMedia640 && (
               <Accordion
                 title={translations[lang].main_menu.buyers}
-                titleClass='btn-reset nav-menu__list__item__btn'
+                titleClass="btn-reset nav-menu__list__item__btn"
               >
-                <ul className='list-reset nav-menu__accordion__item__list'>
+                <ul className="list-reset nav-menu__accordion__item__list">
                   <BuyersListItems />
                 </ul>
               </Accordion>
             )}
           </li>
-          <li className='nav-menu__list__item'>
+          <li className="nav-menu__list__item">
             {!isMedia640 && (
               <button
-                className='btn-reset nav-menu__list__item__btn'
+                className="btn-reset nav-menu__list__item__btn"
                 onMouseEnter={handleShowContactsList}
               >
                 {translations[lang].main_menu.contacts}
@@ -327,7 +323,7 @@ const Menu = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className='list-reset nav-menu__accordion'
+                    className="list-reset nav-menu__accordion"
                   >
                     <ContactsListItems />
                   </motion.ul>
@@ -337,9 +333,9 @@ const Menu = () => {
             {isMedia640 && (
               <Accordion
                 title={translations[lang].main_menu.contacts}
-                titleClass='btn-reset nav-menu__list__item__btn'
+                titleClass="btn-reset nav-menu__list__item__btn"
               >
-                <ul className='list-reset nav-menu__accordion__item__list'>
+                <ul className="list-reset nav-menu__accordion__item__list">
                   <ContactsListItems />
                 </ul>
               </Accordion>
@@ -348,7 +344,7 @@ const Menu = () => {
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

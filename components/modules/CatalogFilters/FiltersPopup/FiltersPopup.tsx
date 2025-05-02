@@ -1,38 +1,30 @@
-import { useCategoryFilter } from '@/hooks/useCategoryFilter'
-import { useLang } from '@/hooks/useLang'
-import { useMenuAnimation } from '@/hooks/useMenuAnimation'
-import {
-  removeOverflowHiddenFromBody,
-  showCountMessage,
-} from '@/lib/utils/common'
-import { ICatalogFiltersProps } from '@/types/catalog'
-import { useUnit } from 'effector-react'
-import styles from '@/styles/catalog/index.module.scss'
-import { AnimatePresence, motion } from 'framer-motion'
-import PriceFilter from './PriceFilter'
-import CatalogFilterList from '../CatalogFilterList'
-import SizesFilter from './SizesFilter'
-import ColorsFilter from './ColorsFilter'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { $products } from '@/context/goods/state'
-import { setFiltersPopup } from '@/context/catalog/index'
-import { $filtersPopup } from '@/context/catalog/state'
-import { loadProductsByFillterFx } from '@/context/goods/index'
+import { useCategoryFilter } from '@/hooks/useCategoryFilter';
+import { useLang } from '@/hooks/useLang';
+import { useMenuAnimation } from '@/hooks/useMenuAnimation';
+import { removeOverflowHiddenFromBody, showCountMessage } from '@/lib/utils/common';
+import { ICatalogFiltersProps } from '@/types/catalog';
+import { useUnit } from 'effector-react';
+import styles from '@/styles/catalog/index.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
+import PriceFilter from './PriceFilter';
+import CatalogFilterList from '../CatalogFilterList';
+import SizesFilter from './SizesFilter';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { $products } from '@/context/goods/state';
+import { setFiltersPopup } from '@/context/catalog/index';
+import { $filtersPopup } from '@/context/catalog/state';
+import { loadProductsByFillterFx } from '@/context/goods/index';
 
 const FiltersPopup = ({
   handleApplyFiltersWithPrice,
   handleApplyFiltersWithSizes,
-  handleApplyFiltersWithColors,
 }: Omit<ICatalogFiltersProps, 'handleApplyFiltersBySort'>) => {
-  const filtersPopup = useUnit($filtersPopup)
-  const products = useUnit($products)
-  const productsSpinner = useUnit(loadProductsByFillterFx.pending)
-  const { lang, translations } = useLang()
-  const { itemVariants, sideVariants, popupZIndex } = useMenuAnimation(
-    102,
-    filtersPopup
-  )
+  const filtersPopup = useUnit($filtersPopup);
+  const products = useUnit($products);
+  const productsSpinner = useUnit(loadProductsByFillterFx.pending);
+  const { lang, translations } = useLang();
+  const { itemVariants, sideVariants, popupZIndex } = useMenuAnimation(102, filtersPopup);
   const {
     currentOptions,
     catalogCategoryOptions,
@@ -40,19 +32,16 @@ const FiltersPopup = ({
     option,
     allCategoriesTitle,
     setOption,
-  } = useCategoryFilter()
+  } = useCategoryFilter();
 
-  // ддля закрытия попап
+  // для закрытия попапа
   const handleClosePopup = () => {
-    removeOverflowHiddenFromBody()
-    setFiltersPopup(false)
-  }
+    removeOverflowHiddenFromBody();
+    setFiltersPopup(false);
+  };
 
   return (
-    <div
-      style={{ zIndex: popupZIndex }}
-      className={styles.catalog__filters__popup}
-    >
+    <div style={{ zIndex: popupZIndex }} className={styles.catalog__filters__popup}>
       <AnimatePresence>
         {filtersPopup && (
           <motion.aside
@@ -68,9 +57,9 @@ const FiltersPopup = ({
           >
             <motion.div
               className={styles.catalog__filters__popup__inner}
-              initial='closed'
-              animate='open'
-              exit='closed'
+              initial="closed"
+              animate="open"
+              exit="closed"
               variants={sideVariants}
             >
               <motion.button
@@ -78,19 +67,11 @@ const FiltersPopup = ({
                 variants={itemVariants}
                 onClick={handleClosePopup}
               />
-              <motion.h2
-                variants={itemVariants}
-                className={styles.catalog__filters__popup__title}
-              >
+              <motion.h2 variants={itemVariants} className={styles.catalog__filters__popup__title}>
                 {translations[lang].catalog.filters}
               </motion.h2>
-              <motion.div
-                className={styles.catalog__filters__popup__price}
-                variants={itemVariants}
-              >
-                <PriceFilter
-                  handleApplyFiltersWithPrice={handleApplyFiltersWithPrice}
-                />
+              <motion.div className={styles.catalog__filters__popup__price} variants={itemVariants}>
+                <PriceFilter handleApplyFiltersWithPrice={handleApplyFiltersWithPrice} />
               </motion.div>
               <motion.div
                 className={styles.catalog__filters__popup__category}
@@ -109,21 +90,8 @@ const FiltersPopup = ({
                   setOption={setOption}
                 />
               </motion.div>
-              <motion.div
-                className={styles.catalog__filters__popup__price}
-                variants={itemVariants}
-              >
-                <SizesFilter
-                  handleApplyFiltersWithSizes={handleApplyFiltersWithSizes}
-                />
-              </motion.div>
-              <motion.div
-                className={styles.catalog__filters__popup__price}
-                variants={itemVariants}
-              >
-                <ColorsFilter
-                  handleApplyFiltersWithColors={handleApplyFiltersWithColors}
-                />
+              <motion.div className={styles.catalog__filters__popup__price} variants={itemVariants}>
+                <SizesFilter handleApplyFiltersWithSizes={handleApplyFiltersWithSizes} />
               </motion.div>
               <motion.button
                 className={`btn-reset ${styles.catalog__filters__popup__apply}`}
@@ -143,7 +111,7 @@ const FiltersPopup = ({
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default FiltersPopup
+export default FiltersPopup;

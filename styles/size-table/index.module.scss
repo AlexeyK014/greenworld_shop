@@ -1,13 +1,13 @@
 .size_table {
   position: fixed;
-  width: 975px;
+  // width: 975px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 103;
   padding: 32px;
   background-color: #2f6933;
-  color: rgba(255, 255, 255, .9);
+  color: rgba(255, 255, 255, 0.9);
 
   @media (max-width: 1070px) {
     width: 780px;
@@ -39,7 +39,7 @@
     top: 35px;
 
     &::before {
-      background-color: #E8E9EA;
+      background-color: #e8e9ea;
       content: '';
       height: 100%;
       width: 100%;
@@ -53,7 +53,7 @@
 
     &:hover::before {
       transition: background-color 0.2s ease-in-out;
-      background-color: #FF5E2D;
+      background-color: #5ec078;
     }
   }
 
@@ -85,7 +85,7 @@
     min-width: 127px;
     height: 43px;
     position: relative;
-    transition: background-color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
 
     svg {
       position: absolute;
@@ -94,8 +94,8 @@
     }
 
     &:hover {
-      background-color: #FF5E2D !important;
-      transition: background-color .2s ease-in-out;
+      background-color: #54a94b !important;
+      transition: background-color 0.2s ease-in-out;
     }
 
     &:disabled {
@@ -109,12 +109,12 @@
   }
 
   &__btn_added {
-    background-color: #16D9A6 !important;
+    background-color: #16d9a6 !important;
     pointer-events: none;
     cursor: none;
 
     &:hover {
-      background-color: #16D9A6;
+      background-color: #16d9a6;
     }
   }
 
@@ -128,7 +128,7 @@
 
     thead tr {
       background-color: #7dba6d;
-      color: rgba(255, 255, 255, .9);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     thead tr th {
@@ -143,11 +143,11 @@
 
     tbody tr {
       cursor: pointer;
-      transition: background-color .2s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
 
       &:hover {
-        background-color: #FF5E2D !important;
-        transition: background-color .2s ease-in-out;
+        background-color: #54a94b !important;
+        transition: background-color 0.2s ease-in-out;
       }
     }
   }

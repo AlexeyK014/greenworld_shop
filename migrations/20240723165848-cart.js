@@ -1,9 +1,9 @@
 module.exports = {
   async up(db) {
-    db.createCollection('cart')
+    db.createCollection('cart');
   },
 
   async down(db) {
-    db.collection('cart').drop()
+    db.collection('cart').drop();
   },
-}
+};

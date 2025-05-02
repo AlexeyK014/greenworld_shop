@@ -1,14 +1,14 @@
-import { useCategoryFilter } from '@/hooks/useCategoryFilter'
-import { useClickOutside } from '@/hooks/useClickOutside'
-import { useLang } from '@/hooks/useLang'
-import styles from '@/styles/catalog/index.module.scss'
-import { AnimatePresence } from 'framer-motion'
-import CatalogFilterList from './CatalogFilterList'
-import SelectBtn from './SelectBtn'
+import { useCategoryFilter } from '@/hooks/useCategoryFilter';
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { useLang } from '@/hooks/useLang';
+import styles from '@/styles/catalog/index.module.scss';
+import { AnimatePresence } from 'framer-motion';
+import CatalogFilterList from './CatalogFilterList';
+import SelectBtn from './SelectBtn';
 
 const CategorySelect = () => {
-  const { lang, translations } = useLang()
-  const { open, ref, toggle } = useClickOutside()
+  const { lang, translations } = useLang();
+  const { open, ref, toggle } = useClickOutside();
   const {
     currentOptions,
     catalogCategoryOptions,
@@ -16,7 +16,7 @@ const CategorySelect = () => {
     option,
     allCategoriesTitle,
     setOption,
-  } = useCategoryFilter()
+  } = useCategoryFilter();
   return (
     <div className={styles.catalog__filters__select} ref={ref}>
       <SelectBtn
@@ -39,7 +39,7 @@ const CategorySelect = () => {
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
-export default CategorySelect
+export default CategorySelect;

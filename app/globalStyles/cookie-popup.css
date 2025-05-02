@@ -34,7 +34,7 @@
 }
 
 .cookie-popup__close::before {
-  background-color: #E8E9EA;
+  background-color: #e8e9ea;
   content: '';
   height: 100%;
   width: 100%;
@@ -53,7 +53,6 @@
   color: #fff;
   background-color: #9466ff !important;
 }
-
 
 @media (max-width: 560px) {
   .cookie-popup {

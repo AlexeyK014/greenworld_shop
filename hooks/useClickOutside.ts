@@ -1,22 +1,23 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
+// хук для обощения логики открытия-закрытия селекта
 export const useClickOutside = () => {
-  const ref = useRef() as MutableRefObject<HTMLDivElement>
-  const [open, setOpen] = useState(false)
+  const ref = useRef() as MutableRefObject<HTMLDivElement>;
+  const [open, setOpen] = useState(false);
 
-  const toggle = () => setOpen(!open)
+  const toggle = () => setOpen(!open);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!ref.current.contains(e.target as HTMLDivElement)) {
-        setOpen(false)
+        setOpen(false);
       }
-    }
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside);
 
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [ref])
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [ref]);
 
-  return { open, setOpen, toggle, ref }
-}
+  return { open, setOpen, toggle, ref };
+};

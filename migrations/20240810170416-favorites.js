@@ -1,9 +1,9 @@
 module.exports = {
   async up(db) {
-    db.createCollection('favorites')
+    db.createCollection('favorites');
   },
 
   async down(db) {
-    db.collection('favorites').drop()
+    db.collection('favorites').drop();
   },
-}
+};

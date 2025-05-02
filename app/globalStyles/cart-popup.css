@@ -10,7 +10,7 @@
   padding: 12px;
   padding-right: 5px;
   border-radius: 12px;
-  background-color: #3D4555;
+  background-color: #3d4555;
   transform-origin: top right;
 }
 
@@ -33,25 +33,25 @@
   height: 24px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.06) !important;
-  transition: background-color .2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   background-image: url(/img/close-small.svg);
   background-repeat: no-repeat;
   background-position: center center;
 }
 
 .cart-popup__close:hover {
-  background-color: #9466FF !important;
-  transition: background-color .2s ease-in-out;
+  background-color: #9466ff !important;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .cart-popup__title {
   margin: 0;
   padding-bottom: 16px;
   margin-bottom: 12px;
-  color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 16px;
   font-weight: 700;
-  border-bottom: #565C66 1px solid;
+  border-bottom: #565c66 1px solid;
 }
 
 .cart-popup__cart-list {
@@ -69,12 +69,12 @@
 }
 
 .cart-popup__cart-list::-webkit-scrollbar-thumb {
-  background-color: #9466FF;
+  background-color: #9466ff;
   border-radius: 3px;
 }
 
 .cart-popup__cart-list::-webkit-scrollbar-thumb:hover {
-  background-color: #70F;
+  background-color: #70f;
 }
 
 .cart-popup__cart-list__empty-cart {
@@ -87,7 +87,7 @@
   background-image: url('/img/empty-cart.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 18px;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .cart-list__item__delete span::before {
-  background-color: #A5A8AD;
+  background-color: #a5a8ad;
   content: '';
   height: 100%;
   width: 100%;
@@ -121,13 +121,14 @@
 
 .cart-list__item__delete:hover span::before {
   transition: background-color 0.2s ease-in-out;
-  background-color: #FF0C0C;
+  background-color: #ff0c0c;
 }
 
 .cart-list__item__img {
   width: 96px;
   margin-right: 13px;
-  background: radial-gradient(52.53% 52.53% at 50% 47.47%, #4E5D77 0%, rgba(42, 50, 63, 0.00) 100%), #2A323F;
+  background:
+    radial-gradient(52.53% 52.53% at 50% 47.47%, #4e5d77 0%, rgba(42, 50, 63, 0) 100%), #2a323f;
 }
 
 .cart-list__item__img img {
@@ -135,13 +136,13 @@
 }
 
 .cart-list__item__title {
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 16px;
-  transition: color .2s ease-in-out;
+  transition: color 0.2s ease-in-out;
   text-decoration: none;
   width: max-content;
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 .cart-list__item__title span:first-child {
@@ -153,8 +154,8 @@
 }
 
 .cart-list__item__title:hover {
-  color: #9466FF;
-  transition: color .2s ease-in-out;
+  color: #9466ff;
+  transition: color 0.2s ease-in-out;
 }
 
 .cart-list__item__inner {
@@ -176,7 +177,7 @@
   justify-content: space-between;
   width: 106px;
   border-radius: 16px;
-  background: #333A47;
+  background: #333a47;
   padding: 4px 6px;
 }
 
@@ -213,18 +214,18 @@
 }
 
 .cart-list__item__counter span {
-  color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
 }
 
 .cart-list__item__price {
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 16px;
   font-weight: 500;
 }
 
 .cart-popup__footer {
-  border-top: #565C66 1px solid;
+  border-top: #565c66 1px solid;
   padding-top: 12px;
 }
 
@@ -236,12 +237,12 @@
 }
 
 .cart-popup__footer__inner span:first-child {
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 16px;
 }
 
 .cart-popup__footer__inner span:last-child {
-  color: #E8E9EA;
+  color: #e8e9ea;
   font-size: 16px;
   font-weight: 500;
 }
@@ -252,18 +253,18 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #FFF;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   border-radius: 24px;
-  background-color: #9466FF;
+  background-color: #9466ff;
   height: 32px;
-  transition: background-color .2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .cart-popup__footer__link:hover {
-  background-color: #70F;
-  transition: background-color .2s ease-in-out;
+  background-color: #70f;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .cart-popup__footer__link--disabled {

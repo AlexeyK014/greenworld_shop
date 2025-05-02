@@ -1,80 +1,76 @@
-'use client'
+'use client';
 
-import { useUnit } from 'effector-react'
-import React, { useEffect, useState } from 'react'
-import { rock } from '@/public/fonts/fonts'
-import Layout from './Layout'
+import { useUnit } from 'effector-react';
+import React, { useEffect, useState } from 'react';
+import { rock } from '@/public/fonts/fonts';
+import Layout from './Layout';
 import {
   closeSizeTableByCheck,
   handleCloseAuthPopup,
   handleCloseShareModule,
   removeOverflowHiddenFromBody,
-} from '@/lib/utils/common'
-import { Toaster } from 'react-hot-toast'
-import { EarthoOneProvider } from '@eartho/one-client-react'
-import CookieAlert from '../modules/CookieAlert/CookieAlert'
-import { motion } from 'framer-motion'
-import { Next13ProgressBar } from 'next13-progressbar'
-import '@/context/goods/init'
-import {
-  $shareModal,
-  $showQuickModal,
-  $showSizeTable,
-} from '@/context/modals/state'
-import { $openAuthPopup } from '@/context/auth/state'
-import { closeQuickModal } from '@/context/modals/index'
+} from '@/lib/utils/common';
+import { Toaster } from 'react-hot-toast';
+import { EarthoOneProvider } from '@eartho/one-client-react';
+import CookieAlert from '../modules/CookieAlert/CookieAlert';
+import { motion } from 'framer-motion';
+import { Next13ProgressBar } from 'next13-progressbar';
+import '@/context/goods/init';
+import { $shareModal, $showQuickModal, $showSizeTable } from '@/context/modals/state';
+import { $openAuthPopup } from '@/context/auth/state';
+import { closeQuickModal } from '@/context/modals/index';
+import '@/context/goods/init';
+import '@/context/auth/init';
+import '@/context/cart/init';
+import '@/context/comparison/init';
+import '@/context/favorites/init';
+import '@/context/user/init';
+import '@/context/order/init';
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
 
   // для показа cookieAlert
-  const [cookieAlertOpne, setCookieAlertOpne] = useState(false)
+  const [cookieAlertOpne, setCookieAlertOpne] = useState(false);
 
-  const showQuickViewModal = useUnit($showQuickModal)
-  const showSizeTable = useUnit($showSizeTable)
-  const openAuthPopup = useUnit($openAuthPopup)
-  const shareModal = useUnit($shareModal)
+  const showQuickViewModal = useUnit($showQuickModal);
+  const showSizeTable = useUnit($showSizeTable);
+  const openAuthPopup = useUnit($openAuthPopup);
+  const shareModal = useUnit($shareModal);
 
-  useEffect(() => setIsClient(true), [])
+  useEffect(() => setIsClient(true), []);
 
-  const handleCloseSizeTable = () => closeSizeTableByCheck(showQuickViewModal)
+  const handleCloseSizeTable = () => closeSizeTableByCheck(showQuickViewModal);
 
   const handleCloseQuickViewModal = () => {
-    removeOverflowHiddenFromBody()
-    closeQuickModal()
-  }
+    removeOverflowHiddenFromBody();
+    closeQuickModal();
+  };
 
   //  определяем включины cookie или нет
   useEffect(() => {
     // получаем cookie
     // и делаем провеку, если они включены, значит они есть и не показываем alert
     // иначе показываем alert
-    const checkCookie = document.cookie.indexOf('CookieBy=Microgreen')
+    const checkCookie = document.cookie.indexOf('CookieBy=Microgreen');
     checkCookie != -1
       ? setCookieAlertOpne(false)
-      : setTimeout(() => setCookieAlertOpne(true), 3000)
-  }, [])
+      : setTimeout(() => setCookieAlertOpne(true), 3000);
+  }, []);
   return (
     <>
       {isClient ? (
-        <EarthoOneProvider
-          clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}
-          domain={''}
-        >
-          <html lang='en'>
+        <EarthoOneProvider clientId={`${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`} domain={''}>
+          <html lang="en">
             <body className={rock.variable}>
-              <Next13ProgressBar height='4px' color='#9466FF' showOnShallow />
+              <Next13ProgressBar height="4px" color="#9466FF" showOnShallow />
               <Layout>{children}</Layout>
               <div
-                className={`quick-view-modal-overlay ${
-                  showQuickViewModal ? 'overlay-active' : ''
-                }`}
+                className={`quick-view-modal-overlay ${showQuickViewModal ? 'overlay-active' : ''}`}
                 onClick={handleCloseQuickViewModal}
               />
               <div
-                className={`size-table-overlay ${
-                  showSizeTable ? 'overlay-active' : ''
-                }`}
+                className={`size-table-overlay ${showSizeTable ? 'overlay-active' : ''}`}
                 onClick={handleCloseSizeTable}
               />
               <div
@@ -90,24 +86,24 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.5 }}
-                  className='cookie-popup'
+                  className="cookie-popup"
                 >
                   <CookieAlert setCookieAlertOpen={setCookieAlertOpne} />
                 </motion.div>
               )}
-              <Toaster position='top-center' reverseOrder={false} />
+              <Toaster position="top-center" reverseOrder={false} />
             </body>
           </html>
         </EarthoOneProvider>
       ) : (
-        <html lang='en'>
+        <html lang="en">
           <body className={rock.variable}>
             <></>
           </body>
         </html>
       )}
     </>
-  )
-}
+  );
+};
 
-export default PagesLayout
+export default PagesLayout;

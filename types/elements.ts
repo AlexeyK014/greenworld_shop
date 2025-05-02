@@ -1,40 +1,40 @@
-import { CustomArrowProps } from 'react-slick'
+import { CustomArrowProps } from 'react-slick';
 
 export interface IProductItemActionBtnProps {
-  text: string
-  iconClass: string
-  callback?: VoidFunction
-  withTooltip?: boolean
-  marginBottom?: number
-  spinner?: boolean
+  text: string;
+  iconClass: string;
+  callback?: VoidFunction;
+  withTooltip?: boolean;
+  marginBottom?: number;
+  spinner?: boolean;
 }
 
 export interface IProductAvailableProps {
-  vendorCode: string
-  inStock: number
+  vendorCode: string;
+  inStock: number;
 }
 
 export interface IQuickViewModalSliderArrowProps extends CustomArrowProps {
-  directionClassName: string
+  directionClassName: string;
 }
 
 export interface IHeadingWithCount {
-  count: number
-  title: string
-  spinner?: boolean
+  count: number;
+  title: string;
+  spinner?: boolean;
 }
 
 export interface IAddToCartIconProps {
-  isProductInCart: boolean
-  addedClassName: string
-  className: string
-  addToCartSpinner: boolean
-  callback: VoidFunction
+  isProductInCart: boolean;
+  addedClassName: string;
+  className: string;
+  addToCartSpinner: boolean;
+  callback: VoidFunction;
 }
 
 export interface ISkeletonProps {
   styles: {
-    readonly [key: string]: string
-  }
-  count?: number
+    readonly [key: string]: string;
+  };
+  count?: number;
 }

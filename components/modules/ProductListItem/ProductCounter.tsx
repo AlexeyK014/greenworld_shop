@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { updateCartItemCount } from '@/context/cart/index'
-import { updateCartItemCountInLS } from '@/lib/utils/cart'
-import { isUserAuth } from '@/lib/utils/common'
-import { IProductCounterProps } from '@/types/goods'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect, useState } from 'react'
+import { updateCartItemCount } from '@/context/cart/index';
+import { updateCartItemCountInLS } from '@/lib/utils/cart';
+import { isUserAuth } from '@/lib/utils/common';
+import { IProductCounterProps } from '@/types/goods';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect, useState } from 'react';
 
 const ProductCounter = ({
   className,
@@ -18,86 +18,78 @@ const ProductCounter = ({
   cartItem,
   updateCountAsync,
 }: IProductCounterProps) => {
-  const [spinner, setSpinner] = useState(false)
-  const [disableIncrease, setDisableIncrease] = useState(false)
-  const [disableDecrease, setDisableDecrease] = useState(false)
+  const [spinner, setSpinner] = useState(false);
+  const [disableIncrease, setDisableIncrease] = useState(false);
+  const [disableDecrease, setDisableDecrease] = useState(false);
 
-  const currentTotalCount = +cartItem?.inStock || totalCount
-  const currentInitialCount = +cartItem?.count || initialCount || 1
+  const currentTotalCount = +cartItem?.inStock || totalCount;
+  const currentInitialCount = +cartItem?.count || initialCount || 1;
 
   useEffect(() => {
     if (count === 1) {
-      setDisableDecrease(true) // чтобы юзер не мог дальше вычитать
+      setDisableDecrease(true); // чтобы юзер не мог дальше вычитать
     } else {
-      setDisableDecrease(false)
+      setDisableDecrease(false);
     }
 
     if (count === currentTotalCount) {
-      setDisableIncrease(true)
+      setDisableIncrease(true);
     } else {
-      setDisableIncrease(false)
+      setDisableIncrease(false);
     }
-  }, [count, currentTotalCount])
+  }, [count, currentTotalCount]);
 
   // для обновления setCount
   useEffect(() => {
-    setCount(currentInitialCount as number)
-  }, [currentInitialCount])
+    setCount(currentInitialCount as number);
+  }, [currentInitialCount]);
 
   // фун-я обновления count, делаея запрос на сервер
   const updateCountWithRequest = (count: number) => {
-    updateCartItemCountInLS(cartItem.clientId, count)
+    updateCartItemCountInLS(cartItem.clientId, count);
     // если юзер не авторизован, загружаем count в ЛС
     if (!isUserAuth()) {
-      return
+      return;
     }
 
-    const auth = JSON.parse(localStorage.getItem('auth') as string)
+    const auth = JSON.parse(localStorage.getItem('auth') as string);
 
     updateCartItemCount({
       jwt: auth.accessToken,
       id: cartItem._id,
       setSpinner,
       count,
-    })
-  }
+    });
+  };
 
   // +
   const increase = async () => {
-    increasePrice && increasePrice()
-    setDisableDecrease(false) // раздизабливаем минус
-    setCount(count + 1)
+    increasePrice && increasePrice();
+    setDisableDecrease(false); // раздизабливаем минус
+    setCount(count + 1);
 
     // по провуерке вызываем фун-ю обнуления count на сервере
     if (updateCountAsync) {
-      updateCountWithRequest(count + 1)
+      updateCountWithRequest(count + 1);
     }
-  }
+  };
 
   const decrease = async () => {
-    decreasePrice && decreasePrice()
-    setDisableIncrease(false)
-    setCount(count - 1)
+    decreasePrice && decreasePrice();
+    setDisableIncrease(false);
+    setCount(count - 1);
 
     if (updateCountAsync) {
-      updateCountWithRequest(count - 1)
+      updateCountWithRequest(count - 1);
     }
-  }
+  };
   return (
     <div className={className}>
-      <button
-        className='btn-reset'
-        onClick={decrease}
-        disabled={disableDecrease || spinner}
-      />
+      <button className="btn-reset" onClick={decrease} disabled={disableDecrease || spinner} />
       <span>{spinner ? <FontAwesomeIcon icon={faSpinner} spin /> : count}</span>
-      <button
-        className='btn-reset'
-        onClick={increase}
-        disabled={disableIncrease || spinner}
-      />
+      <button className="btn-reset" onClick={increase} disabled={disableIncrease || spinner} />
     </div>
-  )
-}
+  );
+};
 
-export default ProductCounter
+export default ProductCounter;
