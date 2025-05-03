@@ -15,7 +15,9 @@ const AuthPopupRegistration = ({
   isSideActive, //какая сторона активная
 }: IAuthSideProps) => {
   const { lang, translations } = useLang();
-  const { spinner, register, errors, handleSubmit, handleSignupWithOAuth } = useAuthForm(
+  const { spinner, register, errors, handleSubmit,
+    // handleSignupWithOAuth
+  } = useAuthForm(
     signUpFx.pending,
     isSideActive,
     handleSignUp,
@@ -63,7 +65,7 @@ const AuthPopupRegistration = ({
             </div>
           </div>
         </form>
-        <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} />
+        {/* <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} /> */}
       </div>
     </div>
   );

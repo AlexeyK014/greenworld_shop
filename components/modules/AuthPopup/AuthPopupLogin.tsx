@@ -12,7 +12,9 @@ import { signInFx, handleSignIn } from '@/context/auth/index';
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
   const { lang, translations } = useLang();
-  const { spinner, register, errors, handleSubmit, handleSignupWithOAuth } = useAuthForm(
+  const { spinner, register, errors, handleSubmit,
+    // handleSignupWithOAuth
+  } = useAuthForm(
     signInFx.pending,
     isSideActive,
     handleSignIn,
@@ -55,7 +57,7 @@ const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
             </div>
           </div>
         </form>
-        <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} />
+        {/* <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} /> */}
       </div>
     </div>
   );
