@@ -8,7 +8,6 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import AuthPopupSocials from './AuthPopupSocials';
 
 const AuthPopupRegistration = ({
   toggleAuth, // для переключения стороны
@@ -65,7 +64,6 @@ const AuthPopupRegistration = ({
             </div>
           </div>
         </form>
-        {/* <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} /> */}
       </div>
     </div>
   );

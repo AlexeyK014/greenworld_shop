@@ -7,7 +7,6 @@ import { useLang } from '@/hooks/useLang';
 import AuthPopupClose from './AuthPopupClose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import AuthPopupSocials from './AuthPopupSocials';
 import { signInFx, handleSignIn } from '@/context/auth/index';
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
@@ -57,7 +56,6 @@ const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
             </div>
           </div>
         </form>
-        {/* <AuthPopupSocials handleSignupWithOAuth={handleSignupWithOAuth} /> */}
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 import { $cart, $cartFromLs } from '@/context/cart/state';
-import { makePayment, makePaymentFx, setScrollToRequiredBlock } from '@/context/order';
+import { makePayment, makePaymentFx } from '@/context/order';
 import {
   $chosenCourierAdressData,
   $chosenPickupAdressData,
   $onlinePaymentTab,
   $orderDetailsValues,
   $pickupTab,
-  $scrollToRequiredBlock,
 } from '@/context/order/state';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { useLang } from '@/hooks/useLang';
