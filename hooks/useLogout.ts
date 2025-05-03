@@ -1,10 +1,8 @@
 import { setIsAuth } from '@/context/auth/index';
-// import { useEarthoOne } from '@eartho/one-client-react';
 import { useRouter } from 'next/navigation';
 
 export const useUserLogout = () => {
   const router = useRouter();
-  // const { logout } = useEarthoOne();
 
   // возвращаем фун-ю, где у хука useEarthoOne получаем фун-ю логаут
   // в clientId передаём NEXT_PUBLIC_OAUTH_CLIENT_ID

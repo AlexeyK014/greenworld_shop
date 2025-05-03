@@ -75,7 +75,7 @@ const OrderPage = () => {
                     <table className={styles.order__list__item__table}>
                       <thead>
                         <tr>
-                          <th>{translations[lang].order.name}</th>
+                          <th>{translations[lang].order.name} </th>
                           <th>{translations[lang].order.size}</th>
                           <th>{translations[lang].order.color}</th>
                           <th>{translations[lang].order.count}</th>
