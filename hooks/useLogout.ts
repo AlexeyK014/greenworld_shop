@@ -14,6 +14,5 @@ export const useUserLogout = () => {
     localStorage.removeItem('auth');
     setIsAuth(false);
     router.push('/');
-    window.location.reload();
   };
 };

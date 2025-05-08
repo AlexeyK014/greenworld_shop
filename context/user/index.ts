@@ -1,23 +1,27 @@
 'use client';
 
 import { handleJWTError } from '@/lib/utils/errors';
-import { createDomain, createEffect } from 'effector';
+import { createDomain, createEffect, createEvent } from 'effector';
 import toast from 'react-hot-toast';
 import { setIsAuth } from '../auth';
 import api from '@/api/apiInstance';
-import { IUserGeolocation } from '@/types/user';
+import { ILoginCheckFx, IUserGeolocation } from '@/types/user';
 import { IGetGeolocationFx } from '@/types/common';
 
 export const user = createDomain();
 
-export const loginCheck = user.createEvent<{ jwt: string }>();
+export const loginCheck = user.createEvent<ILoginCheckFx>();
 
 // для определения местоположения для оформления заказа
 export const setUserGeolocation = user.createEvent<IUserGeolocation>();
 
+export const updateUsername = createEvent<string>()
+export const updateUserImage = createEvent<string>()
+export const updateUserEmail = createEvent<string>()
+
 // делаем запрос на route
 // передаём токен
-export const loginCheckFx = createEffect(async ({ jwt }: { jwt: string }) => {
+export const loginCheckFx = createEffect(async ({ jwt }: ILoginCheckFx) => {
   try {
     const { data } = await api.get('/api/users/login-check', {
       headers: { Authorization: `Bearer ${jwt}` },
@@ -27,7 +31,7 @@ export const loginCheckFx = createEffect(async ({ jwt }: { jwt: string }) => {
     // и передаём название метода, чтобы повторитьб запрос, если токен протух
     if (data?.error) {
       handleJWTError(data.error.name, {
-        repeatRequestMethodName: 'loginCheckFx',
+        repeatRequestMethodName: 'loginCheckFx'
       });
       return;
     }

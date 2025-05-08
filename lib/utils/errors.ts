@@ -24,6 +24,7 @@ import {
   getFavoriteItemsFx,
 } from '@/context/favorites/index';
 import { makePaymentFx } from '@/context/order';
+import { deleteUserFx, editUserEmailFx, editUsernameFx, uploadUserAvatarFx, verifyCodeFx, verifyEmailFx } from '@/context/profile';
 import { loginCheckFx } from '@/context/user/index';
 import { IAddProductsFromLSToCartFx, IAddProductToCartFx, IDeleteCartItemsFx } from '@/types/cart';
 import {
@@ -33,6 +34,7 @@ import {
 } from '@/types/comparison';
 import { IAddProductsFromLSToFavoriteFx } from '@/types/favorites';
 import { IMakePaymentFx } from '@/types/order';
+import { IDeleteUserFx, IEditUserEmailFx, IEditUsernameFx, IUploadUserAvatarFx, IVerifyCodeFx, IVerifyEmailFx } from '@/types/profile';
 
 // после того как мы обновим токен
 export const handleJWTError = async (
@@ -62,6 +64,16 @@ export const handleJWTError = async (
             ...(payload as IAddProductToCartFx),
             jwt: newTokens.accessToken,
           });
+        case 'uploadUserAvatarFx':
+          return uploadUserAvatarFx({
+            ...(payload as IUploadUserAvatarFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'editUsernameFx':
+          return editUsernameFx({
+            ...(payload as IEditUsernameFx),
+            jwt: newTokens.accessToken,
+          })
         case 'makePaymentFx':
           makePaymentFx({
             ...(payload as IMakePaymentFx),
@@ -122,6 +134,27 @@ export const handleJWTError = async (
             ...(payload as IDeleteComparisonItemsFx),
             jwt: newTokens.accessToken,
           });
+        case 'verifyEmailFx':
+          return verifyEmailFx({
+            ...(payload as IVerifyEmailFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'verifyCodeFx':
+          return verifyCodeFx({
+            ...(payload as IVerifyCodeFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'editUserEmailFx':
+          return editUserEmailFx({
+            ...(payload as IEditUserEmailFx),
+            jwt: newTokens.accessToken,
+          })
+        case 'deleteUserFx':
+          deleteUserFx({
+            ...(payload as IDeleteUserFx),
+            jwt: newTokens.accessToken,
+          })
+          break
         case 'loginCheckFx':
           await loginCheckFx({
             jwt: newTokens.accessToken, // если протухнет токен, то повторяем запрос

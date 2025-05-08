@@ -38,11 +38,31 @@ const CatalogMenu = () => {
       name: translations[lang].main_menu.microgreen,
       id: 1,
       items: [
-        translations[lang].comparison.peas,
-        translations[lang].comparison.radish,
-        translations[lang].comparison.cabbage,
-        translations[lang].comparison.sunflower,
-        translations[lang].comparison.arugulas,
+        {
+          title: translations[lang].comparison.peas,
+          href: '/catalog/microgreen?offset=0&type=peas',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.radish,
+          href: '/catalog/microgreen?offset=0&type=radish',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.cabbage,
+          href: '/catalog/microgreen?offset=0&type=cabbage',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.sunflower,
+          href: '/catalog/microgreen?offset=0&type=sunflower',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.arugulas,
+          href: '/catalog/microgreen?offset=0&type=arugulas',
+          handleCloseMenu
+        },
       ],
       // при выполнение хэндлера у нас сетится id = 1, для этого списка
       handler: () => setActiveListId(1),
@@ -51,10 +71,31 @@ const CatalogMenu = () => {
       name: translations[lang].main_menu.sprouts,
       id: 2,
       items: [
-        translations[lang].comparison.peas,
-        translations[lang].comparison.buckwheat,
-        translations[lang].comparison.chickpeas,
-        translations[lang].comparison.wheat,
+        {
+          title: translations[lang].comparison.peas,
+          href: '/catalog/sprouts?offset=0&type=peas',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.radish,
+          href: '/catalog/sprouts?offset=0&type=radish',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.chickpeas,
+          href: '/catalog/sprouts?offset=0&type=chickpeas',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.wheat,
+          href: '/catalog/sprouts?offset=0&type=sunflower',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.arugulas,
+          href: '/catalog/sprouts?offset=0&type=arugulas',
+          handleCloseMenu
+        },
       ],
       handler: () => setActiveListId(2),
     },
@@ -62,11 +103,31 @@ const CatalogMenu = () => {
       name: translations[lang].main_menu.seeds,
       id: 3,
       items: [
-        translations[lang].comparison.peas,
-        translations[lang].comparison.radish,
-        translations[lang].comparison.chickpeas,
-        translations[lang].comparison.sunflower,
-        translations[lang].comparison.arugulas,
+        {
+          title: translations[lang].comparison.peas,
+          href: '/catalog/seeds?offset=0&type=peas',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.radish,
+          href: '/catalog/seeds?offset=0&type=radish',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.chickpeas,
+          href: '/catalog/seeds?offset=0&type=chickpeas',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.sunflower,
+          href: '/catalog/seeds?offset=0&type=sunflower',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.arugulas,
+          href: '/catalog/seeds?offset=0&type=arugulas',
+          handleCloseMenu
+        },
       ],
       handler: () => setActiveListId(3),
     },
@@ -74,10 +135,26 @@ const CatalogMenu = () => {
       name: translations[lang].main_menu.equipment,
       id: 4,
       items: [
-        translations[lang].comparison.box,
-        translations[lang].comparison.lamps,
-        translations[lang].comparison.shelf,
-        translations[lang].comparison.agrovata,
+        {
+          title: translations[lang].comparison.box,
+          href: '/catalog/equipment?offset=0&type=box',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.lamps,
+          href: '/catalog/equipment?offset=0&type=lamps',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.shelf,
+          href: '/catalog/equipment?offset=0&type=shelf',
+          handleCloseMenu
+        },
+        {
+          title: translations[lang].comparison.agrovata,
+          href: '/catalog/equipment?offset=0&type=agrovata',
+          handleCloseMenu
+        },
       ],
       handler: () => setActiveListId(4),
     },
@@ -156,14 +233,14 @@ const CatalogMenu = () => {
                           titleClass="btn-reset nav-menu__accordion__item__title"
                         >
                           <ul className="list-reset catalog__accordion__list">
-                            {items.map((title, i) => (
+                            {items.map((item, i) => (
                               <li key={i} className="catalog__accordion__list__item">
                                 <Link
-                                  href="/catalog"
+                                  href={item.href}
                                   className="nav-menu__accordion__item__list__item__link"
-                                  // onClick={item.handleCloseMenu}
+                                  onClick={item.handleCloseMenu}
                                 >
-                                  {title}
+                                  {item.title}
                                 </Link>
                               </li>
                             ))}

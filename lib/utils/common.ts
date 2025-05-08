@@ -278,3 +278,33 @@ export const addScriptToHead = (src: string) => {
 
   script.src = src
 }
+
+// image - принимаем картинку из input
+export const isValidAvatarImage = (image: File) => {
+  const allowedExtension = /^image\/(png|jpe?g|gif|bmp|webp)$/
+
+  // проверяем наличик картинки
+  if (!image) {
+    return false
+  }
+
+  // определяем расширение файла. Если нет такого расширения allowedExtension
+  // тогда показываем toast с ошибкой
+  const imageType = image.type
+
+  if (!allowedExtension.test(imageType)) {
+    toast.error(
+      `Недопустимый формат ${imageType.split('/')[1]
+      }! Допускается только jpeg, jpg, png, gif, bmp и webp`
+    )
+    return false
+  }
+
+  // также смотрим на размер и делаем проверку
+  if (Math.round(image.size / 1024) > 2000) {
+    toast.error('Вес картинки не должен превышать 2 МБ!')
+    return false
+  }
+
+  return true
+}
