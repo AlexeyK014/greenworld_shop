@@ -8,6 +8,8 @@ import AuthPopupClose from './AuthPopupClose';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { signInFx, handleSignIn } from '@/context/auth/index';
+import Link from 'next/link';
+import { handleCloseAuthPopup } from '@/lib/utils/common';
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
   const { lang, translations } = useLang();
@@ -45,6 +47,13 @@ const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
                 )}
               </button>
             </div>
+            <Link
+              href="/password-restore"
+              className='inner__reset'
+              onClick={handleCloseAuthPopup}
+            >
+                {translations[lang].auth_popup.forgot_password}
+            </Link>
 
             <div className="inner__bottom">
               <span className="inner__bottom__text">

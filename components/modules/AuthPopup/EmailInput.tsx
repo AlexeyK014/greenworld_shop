@@ -20,7 +20,9 @@ const EmailInput = ({ register, errors }: IAuthInput) => {
           ),
         )}
       />
-      {errors.email && <span className={styles.error_alert}>{errors.email?.message}</span>}
+      {errors.email && (
+        <span className={styles.error_alert}>{errors.email?.message}</span>
+      )}
     </div>
   );
 };
