@@ -270,12 +270,7 @@ const SizeTable = () => {
   };
 
   return (
-    <div
-      // className={`${styles.size_table} ${
-      //   isRadishType ? styles.size_table_headdress : ''
-      // }`}
-      className={styles.size_table}
-    >
+    <div className={styles.size_table}>
       <button className={`btn-reset ${styles.size_table__close}`} onClick={handleCloseSizeTable} />
       <h2 className={styles.size_table__title}>{translations[lang].size_table.title}</h2>
       <div className={styles.size_table__inner}>

@@ -1,5 +1,5 @@
 import { closeAuthPopup, openAuthPopup, setIsAuth } from '@/context/auth/index'
-import { setCurrentProduct } from '@/context/goods/index';
+import { resetProductBySearch, setCurrentProduct } from '@/context/goods/index';
 import {
   closeSearchModal,
   closeShareModal,
@@ -38,6 +38,7 @@ export const getWindowWidth = () => {
 export const handleCloseSearchModal = () => {
   closeSearchModal()
   removeOverflowHiddenFromBody()
+  resetProductBySearch()
 }
 
 // фун-я перемашивает массив, чтобы каждый раз товары приходили в разном порядке

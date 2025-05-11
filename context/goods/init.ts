@@ -9,8 +9,10 @@ import {
   getBestsellerProductsFx,
   getNewProductsFx,
   MainPageGate,
+  loadProductBySearch,
+  loadProductBySearchFx,
 } from '.';
-import { $currentProduct, $products, $watchedProducts } from './state';
+import { $currentProduct, $productBySearch, $products, $watchedProducts } from './state';
 import { Gate } from 'effector-react';
 
 const goodsSampleInstance = (effect: Effect<void, [], Error>, gate: Gate<unknown>) =>
@@ -42,4 +44,11 @@ sample({
   source: $watchedProducts,
   fn: (_, data) => data,
   target: loadWatchedProductsFx,
+});
+
+sample({
+  clock: loadProductBySearch,
+  source: $productBySearch,
+  fn: (_, data) => data,
+  target: loadProductBySearchFx,
 });

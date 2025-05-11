@@ -11,6 +11,8 @@ import {
   loadWatchedProductsFx,
   getNewProductsFx,
   getBestsellerProductsFx,
+  loadProductBySearchFx,
+  resetProductBySearch,
 } from '.';
 
 const goodsStoreInstace = (effect: Effect<void, [], Error>) =>
@@ -38,3 +40,9 @@ export const $products = goods
 export const $watchedProducts = goods
   .createStore<IProducts>({} as IProducts)
   .on(loadWatchedProductsFx.done, (_, { result }) => result);
+
+// для получения товаров из поиска
+export const $productBySearch = goods
+  .createStore<IProducts>({} as IProducts)
+  .on(loadProductBySearchFx.done, (_, { result }) => result)
+  .on(resetProductBySearch, () => ({ count: 0, items: [] }))
