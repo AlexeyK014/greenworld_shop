@@ -100,71 +100,71 @@ const SizeTable = () => {
   //   },
   // ];
 
-  const boxSize = [
-    {
-      id: 1,
-      manufacturerSize: '190 mm X 114 mm X 35 mm',
-      selectHandler: handleSelectSSizeBox,
-      isSelected: isSizeSelected('190 mm X 114 mm X 35 mm'),
-      isAvailable: productSizes.sizes[0],
-      isInFavorites: checkInFavorites('190 mm X 114 mm X 35 mm'),
-    },
-    {
-      id: 2,
-      manufacturerSize: '190 mm X 114 mm X 55 mm',
-      selectHandler: handleSelectMSizeBox,
-      isSelected: isSizeSelected('190 mm X 114 mm X 55 mm'),
-      isAvailable: productSizes.sizes[1],
-      isInFavorites: checkInFavorites('190 mm X 114 mm X 55 mm'),
-    },
-    {
-      id: 3,
-      manufacturerSize: '190 mm X 114 mm X 75 mm',
-      selectHandler: handleSelectLSizeBox,
-      isSelected: isSizeSelected('190 mm X 114 mm X 75 mm'),
-      isAvailable: productSizes.sizes[2],
-      isInFavorites: checkInFavorites('190 mm X 114 mm X 75 mm'),
-    },
-  ];
+  // const boxSize = [
+  //   {
+  //     id: 1,
+  //     manufacturerSize: '190 mm X 114 mm X 35 mm',
+  //     selectHandler: handleSelectSSizeBox,
+  //     isSelected: isSizeSelected('190 mm X 114 mm X 35 mm'),
+  //     isAvailable: productSizes.sizes[0],
+  //     isInFavorites: checkInFavorites('190 mm X 114 mm X 35 mm'),
+  //   },
+  //   {
+  //     id: 2,
+  //     manufacturerSize: '190 mm X 114 mm X 55 mm',
+  //     selectHandler: handleSelectMSizeBox,
+  //     isSelected: isSizeSelected('190 mm X 114 mm X 55 mm'),
+  //     isAvailable: productSizes.sizes[1],
+  //     isInFavorites: checkInFavorites('190 mm X 114 mm X 55 mm'),
+  //   },
+  //   {
+  //     id: 3,
+  //     manufacturerSize: '190 mm X 114 mm X 75 mm',
+  //     selectHandler: handleSelectLSizeBox,
+  //     isSelected: isSizeSelected('190 mm X 114 mm X 75 mm'),
+  //     isAvailable: productSizes.sizes[2],
+  //     isInFavorites: checkInFavorites('190 mm X 114 mm X 75 mm'),
+  //   },
+  // ];
 
-  const lampsSize = [
-    {
-      id: 1,
-      manufacturerSize: 'маленький',
-      length: '1200',
-      power: '10',
-      colorTemperature: '6000',
-      spectrum: 'white',
-      selectHandler: handleSelectSSize,
-      isSelected: isSizeSelected('маленький'),
-      isAvailable: productSizes.sizes.маленький,
-      isInFavorites: checkInFavorites('маленький'),
-    },
-    {
-      id: 2,
-      manufacturerSize: 'средний',
-      length: '573',
-      power: '14',
-      colorTemperature: '4000',
-      spectrum: 'red-blue',
-      selectHandler: handleSelectMSize,
-      isSelected: isSizeSelected('средний'),
-      isAvailable: productSizes.sizes.средний,
-      isInFavorites: checkInFavorites('средний'),
-    },
-    {
-      id: 3,
-      manufacturerSize: 'большой',
-      length: '873',
-      power: '18',
-      colorTemperature: '4500',
-      spectrum: 'red-blue',
-      selectHandler: handleSelectLSize,
-      isSelected: isSizeSelected('большой'),
-      isAvailable: productSizes.sizes.большой,
-      isInFavorites: checkInFavorites('большой'),
-    },
-  ];
+  // const lampsSize = [
+  //   {
+  //     id: 1,
+  //     manufacturerSize: 'маленький',
+  //     length: '1200',
+  //     power: '10',
+  //     colorTemperature: '6000',
+  //     spectrum: 'white',
+  //     selectHandler: handleSelectSSize,
+  //     isSelected: isSizeSelected('маленький'),
+  //     isAvailable: productSizes.sizes.маленький,
+  //     isInFavorites: checkInFavorites('маленький'),
+  //   },
+  //   {
+  //     id: 2,
+  //     manufacturerSize: 'средний',
+  //     length: '573',
+  //     power: '14',
+  //     colorTemperature: '4000',
+  //     spectrum: 'red-blue',
+  //     selectHandler: handleSelectMSize,
+  //     isSelected: isSizeSelected('средний'),
+  //     isAvailable: productSizes.sizes.средний,
+  //     isInFavorites: checkInFavorites('средний'),
+  //   },
+  //   {
+  //     id: 3,
+  //     manufacturerSize: 'большой',
+  //     length: '873',
+  //     power: '18',
+  //     colorTemperature: '4500',
+  //     spectrum: 'red-blue',
+  //     selectHandler: handleSelectLSize,
+  //     isSelected: isSizeSelected('большой'),
+  //     isAvailable: productSizes.sizes.большой,
+  //     isInFavorites: checkInFavorites('большой'),
+  //   },
+  // ];
 
   // const shelfSize = [
   //   {
@@ -295,71 +295,8 @@ const SizeTable = () => {
             )}
           </thead>
           <tbody>
-            {/* {isAgroType &&
-              agroSize.map((item) => (
-                <tr key={item.id} {...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
-                  <td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
-                    {item.isInFavorites && <span className={styles.size_table__favorite} />}
-                    {item.manufacturerSize}
-                  </td>
-                  <td>{item.length}</td>
-                  <td>{item.width}</td>
-                  <td>
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                    {item.height}
-                  </td>
-                </tr>
-              ))} */}
-            {isBoxType &&
-              boxSize.map((item) => (
-                <tr key={item.id} {...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
-                  <td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
-                    {item.isInFavorites && <span className={styles.size_table__favorite} />}
-                    {item.manufacturerSize}
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                  </td>
-                  {/* <td>
-                    {item.length}
-                  </td>
-                  <td>{item.width}</td>
-                  <td>
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                    {item.height}
-                  </td> */}
-                </tr>
-              ))}
-            {/* {isLampsType &&
-              lampsSize.map((item) => (
-                <tr key={item.id} {...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
-                  <td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
-                    {item.isInFavorites && <span className={styles.size_table__favorite} />}
-                    {item.manufacturerSize}
-                  </td>
-                  <td>{item.length}</td>
-                  <td>{item.power}</td>
-                  <td>{item.colorTemperature}</td>
-                  <td style={{ paddingRight: '35px', paddingLeft: '35px' }}>
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                    {item.spectrum}
-                  </td>
-                </tr>
-              ))} */}
-            {/* {isShelfType &&
-              shelfSize.map((item) => (
-                <tr key={item.id} {...(trProps(item) as React.HTMLAttributes<HTMLTableRowElement>)}>
-                  <td style={{ paddingLeft: '30px', paddingRight: '30px' }}>
-                    {item.isInFavorites && <span className={styles.size_table__favorite} />}
-                    {item.manufacturerSize}
-                  </td>
-                  <td>{item.length}</td>
-                  <td>{item.height}</td>
-                  <td>
-                    <ProductCountBySize size={item.manufacturerSize} products={currentCartItems} />
-                    {item.width}
-                  </td>
-                </tr>
-              ))} */}
-            {/* } */}
+
+
           </tbody>
         </table>
       </div>

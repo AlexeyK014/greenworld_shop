@@ -182,9 +182,11 @@ const ProductPageContent = () => {
             <ProductInfoAccordion title={translations[lang].product.characteristics}>
               <ul className={`list-reset ${styles.product__top__description__characteristics}`}>
                 {displayedProductKeys.map((key) => {
+                  // @ts-ignore
                   const value = product[key];
                   if (value === undefined || value === null || value === '') return null;
 
+                  // @ts-ignore
                   const label = translations[lang].fields?.[key] || key;
 
                   return (

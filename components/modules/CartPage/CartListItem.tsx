@@ -35,6 +35,7 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
 
       {/* блок с картинкой */}
       <div className={`${styles.cart__list__item__img} ${styles.cart__list__item__block}`}>
+        {/* @ts-ignore */}
         <Image src={item.image.url} alt={item.name} width={imageSize} height={imageSize} />
       </div>
 
