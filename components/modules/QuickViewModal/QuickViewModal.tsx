@@ -4,7 +4,6 @@ import { formatPrice, removeOverflowHiddenFromBody } from '@/lib/utils/common';
 import styles from '@/styles/quick-view-modal/index.module.scss';
 import QuickViewModalSlider from './QuickViewModalSlider';
 import { useCartAction } from '@/hooks/useCartAction';
-import { useProductImages } from '@/hooks/useProfuctImages';
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
 import ProductComposition from '../ProductListItem/ProductComposition';
 import { useLang } from '@/hooks/useLang';
@@ -15,7 +14,6 @@ import AddToCartBtn from '../ProductListItem/AddToCartBtn';
 import Link from 'next/link';
 import stylesForProduct from '@/styles/product-list-item/index.module.scss';
 import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn';
-import ProductColor from '../ProductListItem/ProductColor';
 import { ICartItem } from '@/types/cart';
 import { useComparisonAction } from '@/hooks/useComparisonAction';
 import { useFavoritesAction } from '@/hooks/useFavoritesAction';
@@ -45,8 +43,6 @@ const QuickViewModal = () => {
   // для иконки избранное
   const { handleAddProductToFavorites, addToFavoritesSpinner, isProductInFavorites } =
     useFavoritesAction(product);
-
-  const images = useProductImages(product);
 
   const handleCloseModal = () => {
     removeOverflowHiddenFromBody();
@@ -90,20 +86,16 @@ const QuickViewModal = () => {
         />
       </div>
       <div className={styles.modal__left}>
-        <QuickViewModalSlider images={images} />
+        <QuickViewModalSlider images={product.images} />
       </div>
       <div className={styles.modal__right}>
         <h3 className={styles.modal__right__title}>{product.name}</h3>
         <div className={styles.modal__right__price}>{formatPrice(+product.price)} P</div>
         <div className={styles.modal__right__info}>
           <ProductAvailable vendorCode={product.vendorCode} inStock={+product.inStock} />
-          <ProductColor color={product.characteristics.color} />
-          {product.characteristics?.composition && (
-            <ProductComposition composition={product.characteristics.composition} />
-          )}
 
           {/* Блок с размерами */}
-          {Object.keys(product.sizes).length ? (
+          {/* {Object.keys(product.sizes).length ? (
             <div className={styles.modal__right__info__size}>
               <div className={styles.modal__right__info__size__inner}>
                 <span className={stylesForProduct.product__size_title}>
@@ -127,9 +119,9 @@ const QuickViewModal = () => {
                 ))}
               </ul>
             </div>
-          ) : (
+          ) : ( */}
             ''
-          )}
+          {/* )} */}
           <div className={styles.modal__right__bottom}>
             <span className={stylesForProduct.product__count_title}>
               {translations[lang].product.count}

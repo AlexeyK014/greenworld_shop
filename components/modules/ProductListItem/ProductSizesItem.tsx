@@ -23,9 +23,10 @@ const ProductSizesItem = ({
       }}
     >
       <ProductCountBySize size={currentSize[0]} products={currentCartItems} withCartIcon={false} />
-      <button className="btn-reset" onClick={handleSelectSize}>
-        {currentSize[0].toLocaleUpperCase()}
-      </button>
+      {/* <button className="btn-reset" onClick={handleSelectSize}>
+
+        {currentSize[1].toLocaleUpperCase()}
+      </button> */}
     </li>
   );
 };

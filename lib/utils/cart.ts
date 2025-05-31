@@ -107,7 +107,7 @@ export const addCartItemToLS = (
       price: product.price,
       inStock: product.inStock,
       category: product.category,
-      color: product.characteristics.color,
+      // color: product.characteristics.color,
     },
   ];
   localStorage.setItem('cart', JSON.stringify(cart));

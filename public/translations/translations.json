@@ -267,6 +267,17 @@
       "we_sent_code": "We sent the code to",
       "creaete_pasword": "Create a new password",
       "repeat_pasword": "Repeat pasword"
+    },
+    "fields": {
+      "length": "Length, mm",
+      "height": "Height, mm",
+      "width": "Width, mm",
+      "color": "Color",
+      "power": "Power, W",
+      "material": "Material",
+      "shelves": "Shelves",
+      "colortemperature": "Color Temperature",
+      "spectrum": "Spectrum"
     }
   },
   "ru": {
@@ -538,6 +549,17 @@
       "we_sent_code": "Мы отправили код на почту",
       "creaete_pasword": "Придумайте новый пароль",
       "repeat_pasword": "Повторите пароль"
+    },
+    "fields": {
+      "length": "Длина, мм",
+      "height": "Высота, мм",
+      "width": "Ширина, мм",
+      "color": "Цвет",
+      "power": "Мощность, вт",
+      "material": "Материал",
+      "shelves": "Кол-во полок",
+      "colortemperature": "Цветовая температура, К",
+      "spectrum": "Спектр"
     }
   }
 }

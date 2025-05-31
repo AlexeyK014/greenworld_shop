@@ -35,7 +35,7 @@ module.exports = {
           {
             type: 'radish',
             nutritionalValue: getRandomArrayValue(nutritionalValue),
-            weight: '100 г',
+            weight: '1 кг',
             durationOfGrowth: '5-7 дней',
           },
           {

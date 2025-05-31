@@ -7,6 +7,10 @@ export const productsWithoutSizes = [
   'chickpeas',
   'buckwheat',
   'wheat',
+  'lamps',
+  'box',
+  'agrovata',
+  'shelf'
 ];
 
 export const productTypes = [

@@ -1,3 +1,8 @@
+.modal__sizes {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal {
   width: 992px;
   height: 568px;
@@ -180,13 +185,16 @@
       &__sizes {
         display: flex;
         align-items: center;
+        flex-direction: column;
+
 
         &__item {
           position: relative;
-          min-width: 109px;
-          height: 32px;
+          min-width: 220px;
+          height: 42px;
           border-radius: 24px;
           transition: background-color 0.2s ease-in-out;
+          margin: 5px;
 
           &:not(:last-child) {
             margin-right: 12px;

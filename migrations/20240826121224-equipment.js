@@ -19,6 +19,11 @@ const colorTemperature = ['6000 K', '4500 K', '4000 K'];
 const spectrum = ['white', 'red-blue'];
 
 // box
+const sizeBox = [
+    '190 mm X 114 mm X 35 mm',
+    '190 mm X 114 mm X 55 mm',
+    '190 mm X 114 mm X 70 mm'
+]
 const lengthBox = ['190 mm'];
 const widthBox = ['114 mm'];
 const heightBox = ['35 mm', '55 mm'];
@@ -42,10 +47,9 @@ module.exports = {
         const characteristics = [
           {
             type: 'box',
-            boxSize: getRandomArrayValue(lengthBox),
-            widthBox: getRandomArrayValue(widthBox),
-            heightBox: getRandomArrayValue(heightBox),
-            checkBox: '123',
+            boxSize: getRandomArrayValue(sizeBox),
+            // widthBox: getRandomArrayValue(widthBox),
+            // heightBox: getRandomArrayValue(heightBox),
           },
           {
             type: 'lamps',
@@ -81,11 +85,6 @@ module.exports = {
           isBestseller: faker.datatype.boolean(),
           isNew: faker.datatype.boolean(),
           popularity: +faker.string.numeric(3),
-          sizes: {
-            маленький: faker.datatype.boolean(),
-            средний: faker.datatype.boolean(),
-            большой: faker.datatype.boolean(),
-          },
         };
       }),
     );

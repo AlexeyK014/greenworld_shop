@@ -47,9 +47,8 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
       <li className={styles.list__item}>
         {title ? (
           <span
-            className={`${styles.list__item__label} ${
-              isTitleForNew ? styles.list__item__new : styles.list__item__bestseller
-            }`}
+            className={`${styles.list__item__label} ${isTitleForNew ? styles.list__item__new : styles.list__item__bestseller
+              }`}
           >
             {isTitleForNew
               ? translations[lang].main_page.is_new
@@ -64,26 +63,24 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
           <ProductItemActionBtn
             spinner={addToFavoritesSpinner}
             text={translations[lang].product.add_to_favorites}
-            iconClass={`${
-              addToFavoritesSpinner
+            iconClass={`${addToFavoritesSpinner
                 ? 'actions__btn_spinner'
                 : isProductInFavorites
                   ? 'actions__btn_favorite_checked'
                   : 'actions__btn_favorite'
-            }`}
+              }`}
             callback={handleAddProductToFavorites}
           />
           <ProductItemActionBtn
             spinner={addToComparisonSpinner}
             text={translations[lang].product.add_to_comparison}
             callback={handleAddToComparison}
-            iconClass={`${
-              addToComparisonSpinner
+            iconClass={`${addToComparisonSpinner
                 ? 'actions__btn_spinner'
                 : isProductInComparison
                   ? 'actions__btn_comparison_checked'
                   : 'actions__btn_comparison'
-            }`}
+              }`}
           />
           {!isMedia800 && (
             <ProductItemActionBtn
@@ -93,8 +90,14 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
             />
           )}
         </div>
-        <Link href={`/catalog/${item.category}/${item._id}`} className={styles.list__item__img}>
-          <Image src={item.images[0]} alt={item.name} fill />
+        <Link
+          href={`/catalog/${item.category}/${item._id}`}
+          className={styles.list__item__img}>
+          <Image
+            src={item.images[0].url}
+            alt={item.name}
+            fill
+          />
         </Link>
 
         <div className={styles.list__item__inner}>
@@ -108,9 +111,8 @@ const ProductListItem = ({ item, title }: IProductListItemProps) => {
         {productsWithoutSizes.includes(item.type) ? (
           <button
             onClick={addToCart}
-            className={`btn-reset ${styles.list__item__cart} ${
-              isProductInCart ? styles.list__item__cart_added : ''
-            }`}
+            className={`btn-reset ${styles.list__item__cart} ${isProductInCart ? styles.list__item__cart_added : ''
+              }`}
             disabled={addToCartSpinner}
             style={addToCartSpinner ? { minWidth: 125, height: 48 } : {}}
           >

@@ -9,8 +9,8 @@ const ProductImagesItem = ({ image, imgSize }: IProductImagesItemProps) => {
   return (
     <li className={`${styles.product__top__images__item} ${imgSpinner ? styles.img_loading : ''}`}>
       <Image
-        src={image.src}
-        alt={image.alt}
+        src={image.url}
+        alt={image.desc}
         width={imgSize}
         height={imgSize}
         className="translation-opacity opacity-0 duration"

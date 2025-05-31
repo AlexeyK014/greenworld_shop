@@ -41,6 +41,18 @@ const ProductPageContent = () => {
     setCount,
   } = useCartAction();
   const product = useUnit($currentProduct);
+  console.log(product);
+
+  const displayedProductKeys = [
+  'height',
+  'power',
+  'spectrum',
+  'color',
+  'colortemperature',
+  'width',
+  'length',
+  'shelves',
+];
 
   // добавляем товар в просмотренные
   useEffect(() => {
@@ -107,13 +119,12 @@ const ProductPageContent = () => {
                 <ProductItemActionBtn
                   spinner={addToFavoritesSpinner}
                   text={translations[lang].product.add_to_favorites}
-                  iconClass={`${
-                    addToFavoritesSpinner
-                      ? 'actions__btn_spinner'
-                      : isProductInFavorites
-                        ? 'actions__btn_favorite_checked'
-                        : 'actions__btn_favorite'
-                  }`}
+                  iconClass={`${addToFavoritesSpinner
+                    ? 'actions__btn_spinner'
+                    : isProductInFavorites
+                      ? 'actions__btn_favorite_checked'
+                      : 'actions__btn_favorite'
+                    }`}
                   withTooltip={false}
                   callback={handleAddProductToFavorites}
                 />
@@ -127,39 +138,9 @@ const ProductPageContent = () => {
           <div className={styles.product__top__available}>
             <ProductAvailable vendorCode={product.vendorCode} inStock={+product.inStock} />
           </div>
-          {!!product.characteristics.collection && (
-            <span className={styles.product__top__collection}>
-              <span>{translations[lang].catalog.collection}:</span>{' '}
-              {capitalizeFirstLetter(product.characteristics.collection)}
-            </span>
-          )}
 
-          {/* делаем проверку, если есть размеры, тогда показываем таблицу с размерами */}
-          {!!Object.keys(product.sizes).length && (
-            <>
-              <span className={styles.product__top__size}>
-                <span>{translations[lang].catalog.size}:</span> {selectedSize.toUpperCase()}
-              </span>
-              <ul className={`list-reset ${styles.product__top__sizes}`}>
-                {Object.entries(product.sizes).map(([key, value], i) => (
-                  <ProductSizesItem
-                    key={i}
-                    currentSize={[key, value]}
-                    selectedSize={selectedSize}
-                    setSelectedSize={setSelectedSize}
-                    currentCartItems={currentCartItems}
-                  />
-                ))}
-              </ul>
-              <ProductSizeTableBtn
-                sizes={product.sizes}
-                type={product.type}
-                className={`sizes-table-btn ${styles.product__top__sizes_btn}`}
-              />
-            </>
-          )}
           <div className={styles.product__top__bottom}>
-            <span className={styles.product__top__count}>{translations[lang].product.count}</span>
+            <span className={styles.product__top__count}>{translations[lang].product.count}:</span>
             <div className={styles.product__top__inner}>
               {!!selectedSize ? (
                 <ProductCounter
@@ -200,11 +181,18 @@ const ProductPageContent = () => {
             </ProductInfoAccordion>
             <ProductInfoAccordion title={translations[lang].product.characteristics}>
               <ul className={`list-reset ${styles.product__top__description__characteristics}`}>
-                {Object.entries(product.characteristics).map(([key, value]) => (
-                  <li key={key} className={styles.product__top__description__text}>
-                    {capitalizeFirstLetter(key)}: {value}
-                  </li>
-                ))}
+                {displayedProductKeys.map((key) => {
+                  const value = product[key];
+                  if (value === undefined || value === null || value === '') return null;
+
+                  const label = translations[lang].fields?.[key] || key;
+
+                  return (
+                    <li key={key} className={styles.product__top__description__text}>
+                      {label}: {value}
+                    </li>
+                  );
+                })}
               </ul>
             </ProductInfoAccordion>
           </div>

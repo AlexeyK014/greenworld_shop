@@ -118,7 +118,7 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
       />
 
       <div className={styles.favorites__list__item__img}>
-        <Image src={item.image} alt={item.name} width={imgSize} height={imgSize} />
+        <Image src={item.image.url} alt={item.name} width={imgSize} height={imgSize} />
       </div>
       <p className={styles.favorites__list__item__info}>
         <span className={styles.favorites__list__item__info__name}>{item.name}</span>

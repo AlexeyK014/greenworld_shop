@@ -73,6 +73,7 @@ export const createUserAndGenerateTokens = async (
     password: hash,
     email: reqBody.email,
     image: '',
+    // role: 'admin',
     role: 'user',
   });
 

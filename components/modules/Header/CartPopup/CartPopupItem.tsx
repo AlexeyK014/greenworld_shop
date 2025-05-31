@@ -6,6 +6,7 @@ import React from 'react';
 import ProductCounter from '../../ProductListItem/ProductCounter';
 import { formatPrice } from '@/lib/utils/common';
 import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartItemBtn';
+import ProductImages from '../../ProductPage/ProductImages';
 
 const CartPopupItem = ({ item }: { item: ICartItem }) => {
   const {
@@ -22,7 +23,7 @@ const CartPopupItem = ({ item }: { item: ICartItem }) => {
     <>
       <DeleteItemBtn btnDisabled={deleteSpinner} callback={handleDeleteCartItem} />
       <div className="cart-list__item__img">
-        <Image src={item.image} alt={item.name} width={96} height={96} />
+        <Image src={item.image.url} alt={item.name} width={96} height={96} />
       </div>
       <div className="cart-list__item__inner">
         <Link
@@ -33,7 +34,7 @@ const CartPopupItem = ({ item }: { item: ICartItem }) => {
             {item.name.replace('.', '')}
             {item.size ? ', ' : ''}
           </span>
-          <span>{item.size.toLocaleLowerCase()}</span>
+          <span>{item.size?.toLocaleLowerCase()}</span>
         </Link>
 
         <div className="cart-list__item__bottom">
