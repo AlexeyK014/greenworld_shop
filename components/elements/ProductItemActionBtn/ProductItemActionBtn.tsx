@@ -18,7 +18,7 @@ const ProductItemActionBtn = ({
   const [open, setOpen] = useState(false);
   const [tooltipLeft, setTooltipLeft] = useState(0); // для позиционирование слева
   const showTooltip = () => setOpen(true);
-  const hideTooltip = () => setOpen(false);
+  const hideTooltip = () => setOpen(false)
 
   // для получения актуальной ширины
   const tooltipRef = useRef() as MutableRefObject<HTMLDivElement>;
