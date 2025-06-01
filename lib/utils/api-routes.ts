@@ -18,18 +18,16 @@ export const getDbAndReqBody = async (clientPromise: Promise<MongoClient>, req: 
 };
 
 export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
-  const microgreen = await db.collection('equipment').find().toArray();
-  const sprouts = await db.collection('microgreen').find().toArray();
+  const equipment = await db.collection('equipment').find().toArray();
+  const microgreen = await db.collection('microgreen').find().toArray();
 
   return shuffle([
-    ...microgreen
-      .filter((item) => item[fieldName] && Object.values(item.sizes).some((value) => value))
+    ...equipment
+      .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
       .slice(0, 2),
-    ...sprouts
+    ...microgreen
       .filter(
-        (item) => item[fieldName] && !Object.values(item.sizes).length,
-        // (item) =>
-        //   item[fieldName] && Object.values(item.sizes).some((value) => value)
+        (item) => item[fieldName] && Object.values(item).some((value) => value)
       )
       .slice(0, 2),
   ]);
