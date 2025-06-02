@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 
 export const useAuthForm = (
   initialSpinner: Store<boolean>,
-  isSideActive: boolean,
-  event: EventCallable<ISignUpFx>,
+  // isSideActive: boolean,
+  // event: EventCallable<ISignUpFx>,
 ) => {
   const spinner = useUnit(initialSpinner);
   // connectWithPopup - фун-я которую вызывает сам popup

@@ -30,6 +30,7 @@ import '@/context/profile/init';
 import '@/context/passwordRestore/init';
 import { usePathname, useRouter } from 'next/navigation';
 import { loginCheckFx } from '@/context/user';
+import { AnalyticScripts } from '../modules/Analytics';
 
 const PagesLayout = ({ children }: { children: React.ReactNode }) => {
   const [isClient, setIsClient] = useState(false);
@@ -124,6 +125,8 @@ const PagesLayout = ({ children }: { children: React.ReactNode }) => {
               </motion.div>
             )}
             <Toaster position="top-center" reverseOrder={false} />
+
+            <AnalyticScripts />
           </body>
         </html>
       ) : (

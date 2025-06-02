@@ -13,12 +13,10 @@ import { handleCloseAuthPopup } from '@/lib/utils/common';
 
 const AuthPopupLogin = ({ toggleAuth, isSideActive }: IAuthSideProps) => {
   const { lang, translations } = useLang();
-  const { spinner, register, errors, handleSubmit,
-    // handleSignupWithOAuth
-  } = useAuthForm(
+  const { spinner, register, errors, handleSubmit } = useAuthForm(
     signInFx.pending,
-    isSideActive,
-    handleSignIn,
+    // isSideActive,
+    // handleSignIn,
   );
 
   const submitForm = (data: IInputs) =>

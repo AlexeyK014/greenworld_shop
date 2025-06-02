@@ -11,16 +11,9 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const AuthPopupRegistration = ({
   toggleAuth, // для переключения стороны
-  isSideActive, //какая сторона активная
 }: IAuthSideProps) => {
   const { lang, translations } = useLang();
-  const { spinner, register, errors, handleSubmit,
-    // handleSignupWithOAuth
-  } = useAuthForm(
-    signUpFx.pending,
-    isSideActive,
-    handleSignUp,
-  );
+  const { spinner, register, errors, handleSubmit } = useAuthForm(signUpFx.pending);
 
   // фун-я для отправки формы
   const submitForm = (data: IInputs) =>
