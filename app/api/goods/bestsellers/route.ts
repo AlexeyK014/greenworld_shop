@@ -1,4 +1,5 @@
 //  возвращаем бестселлеры
+export const dynamic = 'force-dynamic';
 
 import clientPromise from '@/lib/mongodb';
 import { getDbAndReqBody, getNewAndBestsellerGoods } from '@/lib/utils/api-routes';
