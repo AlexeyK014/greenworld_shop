@@ -21,24 +21,38 @@ export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
   const equipment = await db.collection('equipment').find().toArray();
   const microgreen = await db.collection('microgreen').find().toArray();
 
-  return shuffle([
-    ...equipment
-      // .filter(
-      //   (item) =>
-      //     item[fieldName]
-      // )
-      .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
-      .slice(0, 2),
-    ...microgreen
-      // .filter(
-      //   (item) =>
-      //     item[fieldName]
-      // )
-      .filter(
-        (item) => item[fieldName] && Object.values(item).some((value) => value)
-      )
-      .slice(0, 2),
-  ]);
+  // Фильтруем и добавляем поле category (если его ещё нет в БД)
+  const formattedEquipment = equipment
+    .filter(item => item[fieldName])
+    .slice(0, 2)
+    .map(item => ({ ...item, category: 'equipment' }));
+
+  const formattedMicrogreen = microgreen
+    .filter(item => item[fieldName])
+    .slice(0, 2)
+    .map(item => ({ ...item, category: 'microgreen' }));
+
+  // Возвращаем перемешанный массив
+  return shuffle([...formattedEquipment, ...formattedMicrogreen]);
+
+  // return shuffle([
+  //   ...equipment
+  //     .filter(
+  //       (item) =>
+  //         item[fieldName]
+  //     )
+  //     // .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
+  //     .slice(0, 2),
+  //   ...microgreen
+  //     // .filter(
+  //     //   (item) =>
+  //     //     item[fieldName]
+  //     // )
+  //     .filter(
+  //       (item) => item[fieldName] && Object.values(item).some((value) => value)
+  //     )
+  //     .slice(0, 2),
+  // ]);
 };
 
 export const generateTokens = (name: string, email: string) => {
