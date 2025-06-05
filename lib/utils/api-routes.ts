@@ -14,7 +14,7 @@ export const getDbAndReqBody = async (clientPromise: Promise<MongoClient>, req: 
     return { db, reqBody };
   }
 
-  return { db };
+  return { db }
 };
 
 export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
