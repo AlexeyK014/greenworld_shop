@@ -23,20 +23,20 @@ export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
 
   return shuffle([
     ...equipment
-      .filter(
-        (item) =>
-          item[fieldName]
-      )
-      // .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
+      // .filter(
+      //   (item) =>
+      //     item[fieldName]
+      // )
+      .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
       .slice(0, 2),
     ...microgreen
-      .filter(
-        (item) =>
-          item[fieldName]
-      )
       // .filter(
-      //   (item) => item[fieldName] && Object.values(item).some((value) => value)
+      //   (item) =>
+      //     item[fieldName]
       // )
+      .filter(
+        (item) => item[fieldName] && Object.values(item).some((value) => value)
+      )
       .slice(0, 2),
   ]);
 };
