@@ -10,6 +10,10 @@ const NewGoods = () => {
   const spinner = useUnit(getNewProductsFx.pending);
   const { lang, translations } = useLang();
 
+  if (!goods.length) {
+    return null
+  }
+
   return (
     <MainPageSection
       title={translations[lang].main_page.new_title}
