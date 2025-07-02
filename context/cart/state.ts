@@ -19,11 +19,22 @@ export const $cart = cart
   .createStore<ICartItem[]>([])
   .on(getCartItemsFx.done, (_, { result }) => result)
   .on(addProductsFromLSToCartFx.done, (_, { result }) => result.items)
-  .on(addProductToCartFx.done, (cart, { result }) => [
-    // для добавления эл-ов в корзину на сервере
-    // чтобы не дублировались объекты у которых одно и тоже поле
-    ...new Map([...cart, result.newCartItem].map((item) => [item.clientId, item])).values(),
-  ])
+  // .on(addProductToCartFx.done, (cart, { result }) => [
+  //   // для добавления эл-ов в корзину на сервере
+  //   // чтобы не дублировались объекты у которых одно и тоже поле
+  //   ...new Map([...cart, result.newCartItem].map((item) => [item.clientId, item])).values(),
+  // ])
+  .on(addProductToCartFx.done, (cart, { result }) => {
+    if (!result?.newCartItem) {
+      return cart; // Если нет нового элемента, возвращаем текущую корзину
+    }
+
+    // Фильтруем undefined элементы и создаем Map
+    const validCartItems = cart.filter(item => item !== undefined && item.clientId);
+    const newItems = [...validCartItems, result.newCartItem].filter(Boolean);
+
+    return [...new Map(newItems.map((item) => [item.clientId, item])).values()];
+  })
   .on(updateCartItemCountFx.done, (cart, { result }) =>
     // проходимся по стору, находим искомый эл-т, меняем у него count
     cart.map((item) => (item._id === result.id ? { ...item, count: result.count } : item)),

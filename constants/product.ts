@@ -26,6 +26,10 @@ export const productTypes = [
   'lamps',
   'shelf',
   'agrovata',
+  'microgreen',
+  'seeds',
+  'sprouts',
+  'equipment',
 ];
 
 export const productCategory = ['microgreen', 'sprouts', 'seeds', 'equipment'];

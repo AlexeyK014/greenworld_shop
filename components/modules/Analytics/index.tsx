@@ -1,11 +1,3 @@
-// import GoogleAnalytics from "./GoogleAnalytics/GoogleAnalytics"
-
-// export const AnalyticsScript = () => {
-//   const gaId = process.env.NEXT_PUBLIC_GA_ID
-//   return <>{Boolean(gaId) && <GoogleAnalytics id={gaId || ''} />}</>
-
-// }
-
 import GoogleAnalytics from './GoogleAnalytics/GoogleAnalytics'
 import YandexMetrika from './YandexMetrika/YandexMetrika'
 

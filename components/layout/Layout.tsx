@@ -9,7 +9,6 @@ import { useUnit } from 'effector-react';
 import { handleCloseAuthPopup, handleCloseSearchModal } from '@/lib/utils/common';
 import Footer from '../modules/Footer/Footer';
 import QuickViewModal from '../modules/QuickViewModal/QuickViewModal';
-import SizeTable from '../modules/SizeTable/SizeTable';
 import AuthPopup from '../modules/AuthPopup/AuthPopup';
 import { $openAuthPopup } from '@/context/auth/state';
 import { $searchModal, $shareModal, $showQuickModal, $showSizeTable } from '@/context/modals/state';
@@ -68,11 +67,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <ShareModal />
           </motion.div>
         )}
-        {showSizeTable && (
+        {/* {showSizeTable && (
           <motion.div {...basePropsForMotion}>
             <SizeTable />
           </motion.div>
-        )}
+        )} */}
       </AnimatePresence>
       {!isMedia800 && (
         <AnimatePresence>

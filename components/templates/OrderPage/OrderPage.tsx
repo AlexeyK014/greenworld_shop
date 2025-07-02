@@ -2,7 +2,6 @@
 
 import Breadcrumbs from '@/components/modules/Breadcrumbs/Breadcrumbs';
 import OrderInfoBlock from '@/components/modules/OrderInfoBlock/OrderInfoBlock';
-import MapModal from '@/components/modules/OrderPage/MapModal';
 import OrderCartItem from '@/components/modules/OrderPage/OrderCartItem';
 import OrderDelivery from '@/components/modules/OrderPage/OrderDelivery';
 import OrderDetailsForm from '@/components/modules/OrderPage/OrderDetailsForm';
@@ -47,6 +46,17 @@ const OrderPage = () => {
     router.push('/payment-success');
   };
 
+  useEffect(() => {
+    const paymentId = JSON.parse(localStorage.getItem('paymentId') as string);
+
+    // Добавьте дополнительную проверку, например, статус оплаты
+    if (isUserAuth() && paymentId) {
+      router.push('/payment-success');
+      // Очищаем paymentId после перенаправления
+      localStorage.removeItem('paymentId');
+    }
+  }, [router]);
+
   return (
     <main>
       <Breadcrumbs
@@ -76,8 +86,6 @@ const OrderPage = () => {
                       <thead>
                         <tr>
                           <th>{translations[lang].order.name} </th>
-                          <th>{translations[lang].order.size}</th>
-                          <th>{translations[lang].order.color}</th>
                           <th>{translations[lang].order.count}</th>
                           <th>{translations[lang].order.sum}</th>
                         </tr>
@@ -123,7 +131,7 @@ const OrderPage = () => {
       <AnimatePresence>
         {mapModal && (
           <motion.div className={styles.map_modal} {...basePropsForMotion}>
-            <MapModal />
+            {/* <MapModal /> */}
           </motion.div>
         )}
       </AnimatePresence>

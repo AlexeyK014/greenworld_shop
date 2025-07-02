@@ -60,18 +60,9 @@ const CatalogFilters = ({
               <>
                 <div className={styles.catalog__filters__top__left}>
                   <CategorySelect />
-                  {isMedia910 && (
-                    <SizesSelect handleApplyFiltersWithSizes={handleApplyFiltersWithSizes} />
-                  )}
                   <PriceSelect handleApplyFiltersWithPrice={handleApplyFiltersWithPrice} />
                 </div>
-                {!isMedia910 && (
-                  <SizesSelect handleApplyFiltersWithSizes={handleApplyFiltersWithSizes} />
-                )}
                 <div className={styles.catalog__filters__top__right}>
-                  {/* <ColorsSelect
-                  handleApplyFiltersWithColors={handleApplyFiltersWithColors}
-                /> */}
                   <SortSelect handleApplyFiltersBySort={handleApplyFiltersBySort} />
                 </div>
               </>

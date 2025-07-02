@@ -6,7 +6,6 @@ import React from 'react';
 import ProductCounter from '../../ProductListItem/ProductCounter';
 import { formatPrice } from '@/lib/utils/common';
 import DeleteItemBtn from '@/components/elements/DeleteCartItemBtn/DeleteCartItemBtn';
-import ProductImages from '../../ProductPage/ProductImages';
 
 const CartPopupItem = ({ item }: { item: ICartItem }) => {
   const {
@@ -33,9 +32,9 @@ const CartPopupItem = ({ item }: { item: ICartItem }) => {
         >
           <span>
             {item.name.replace('.', '')}
-            {item.size ? ', ' : ''}
+            {/* {item.size ? ', ' : ''} */}
           </span>
-          <span>{item.size?.toLocaleLowerCase()}</span>
+          {/* <span>{item.size?.toLocaleLowerCase()}</span> */}
         </Link>
 
         <div className="cart-list__item__bottom">

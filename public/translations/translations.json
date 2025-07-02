@@ -68,7 +68,11 @@
       "lamps": "Lamps",
       "shelf": "Shelf",
       "agrovata": "Agrovata",
-      "main_heading": "Comparison"
+      "main_heading": "Comparison",
+      "microgreen": "Microgreen",
+      "sprouts": "Sprouts",
+      "seeds": "Seeds",
+      "equipment": "Equipment"
     },
     "breadcrumbs": {
       "main": "Main",
@@ -85,7 +89,9 @@
       "personal_data_policy": "Data processing policy",
       "privacy_policy": "Privacy policy",
       "watched_products": "Watched products",
-      "collection_products": "Products by Collection"
+      "collection_products": "Products by Collection",
+      "news": "News",
+      "type": "Type"
     },
     "footer": {
       "copyright": "«Rostelecom» All rights reserved",
@@ -116,7 +122,8 @@
       "tShirt": "T-Shirt",
       "violet": "violet",
       "orange": "orange",
-      "black": "black"
+      "black": "black",
+      "our_news": "Our news"
     },
     "product": {
       "available": "Available",
@@ -277,7 +284,16 @@
       "material": "Material",
       "shelves": "Shelves",
       "colortemperature": "Color Temperature",
-      "spectrum": "Spectrum"
+      "spectrum": "Spectrum",
+      "taste": "Taste",
+      "nutritionalValue": "Nutritiona Value",
+      "expirationDate": "Expiration Date, days",
+      "volume": "Volume, gm",
+      "germinationPeriod": "Germination Period, days",
+      "name": "Name",
+      "price": "Price",
+      "inStock": "In stock",
+      "category": "Category"
     }
   },
   "ru": {
@@ -349,7 +365,11 @@
       "lamps": "Лампы",
       "shelf": "Стеллажи",
       "agrovata": "Агровата",
-      "main_heading": "Сравнение"
+      "main_heading": "Сравнение",
+      "microgreen": "Микрозелень",
+      "sprouts": "Проростки",
+      "seeds": "Семена",
+      "equipment": "Оборудование"
     },
     "breadcrumbs": {
       "main": "Главная",
@@ -366,7 +386,8 @@
       "personal_data_policy": "Политика обработки данных",
       "privacy_policy": "Политика конфиденциальности",
       "watched_products": "Просмотренные товары",
-      "collection_products": "Товары по коллекции"
+      "collection_products": "Товары по коллекции",
+      "news": "Новости"
     },
     "footer": {
       "copyright": "«Ростелеком» Все права защищены",
@@ -397,7 +418,8 @@
       "tShirt": "Футболка",
       "violet": "фиолетовая",
       "orange": "оранжевая",
-      "black": "черная"
+      "black": "черная",
+      "our_news": "Наши новости"
     },
     "product": {
       "available": "Есть в наличии",
@@ -559,7 +581,16 @@
       "material": "Материал",
       "shelves": "Кол-во полок",
       "colortemperature": "Цветовая температура, К",
-      "spectrum": "Спектр"
+      "spectrum": "Спектр",
+      "taste": "Вкус",
+      "nutritionalValue": "Полезные свойства",
+      "expirationDate": "Срок годности, дней",
+      "germinationPeriod": "Период прорастания. дней",
+      "weight": "Вес, гр",
+      "name": "Название",
+      "price": "Цена",
+      "inStock": "Колличество на складе",
+      "category": "Категория товара"
     }
   }
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '@/lib/mongodb'
-import { findUserByEmail, getDbAndReqBody, parseJwt } from '@/lib/utils/api-routes'
+import { findUserByEmail, getDbAndReqBody } from '@/lib/utils/api-routes'
 import { sendMail } from '@/service/mailService'
 
 export async function POST(req: Request) {

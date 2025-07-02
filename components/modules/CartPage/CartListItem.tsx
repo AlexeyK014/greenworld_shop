@@ -44,9 +44,9 @@ const CartListItem = ({ item }: { item: ICartItem }) => {
         <div className={`${styles.cart__list__item__name} ${styles.cart__list__item__block}`}>
           {item.name}
         </div>
-        <div className={`${styles.cart__list__item__size} ${styles.cart__list__item__block}`}>
+        {/* <div className={`${styles.cart__list__item__size} ${styles.cart__list__item__block}`}>
           Размер: {item.size.toUpperCase()}
-        </div>
+        </div> */}
       </div>
 
       {/* блок с ценой и счетчиком */}

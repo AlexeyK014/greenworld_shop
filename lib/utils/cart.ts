@@ -10,17 +10,21 @@ import {
   setShouldShowEmpty,
 } from '@/context/cart/index';
 import { productsWithoutSizes } from '@/constants/product';
+import { $cartFromLs } from '@/context/cart/state';
 
 // добавление товара в корзину с запросом на сервер
 export const addItemToCart = (
   product: IProduct,
   setSpinner: (arg0: boolean) => void,
   count: number,
-  selectedSize = '',
+  // selectedSize = '',
 ) => {
   // если не авторизован, просто добавляем товар в LS на клиенте
   if (!isUserAuth()) {
-    addCartItemToLS(product, selectedSize, count);
+    addCartItemToLS(
+      product,
+      // selectedSize,
+      count);
     return;
   }
 
@@ -28,14 +32,18 @@ export const addItemToCart = (
   const auth = JSON.parse(localStorage.getItem('auth') as string);
 
   // добавляем товар в LS на клиенте
-  const clientId = addCartItemToLS(product, selectedSize, count, false);
+  const clientId = addCartItemToLS(
+    product,
+    // selectedSize,
+    count,
+    false);
   addProductToCart({
     jwt: auth.accessToken, // чтобы найти юзера и прикрепить id
     setSpinner,
     productId: product._id,
     category: product.category,
     count,
-    size: selectedSize,
+    // size: selectedSize,
     clientId,
   });
 };
@@ -43,7 +51,7 @@ export const addItemToCart = (
 // добавление товара в ЛС
 export const addCartItemToLS = (
   product: IProduct,
-  selectedSize: string,
+  // selectedSize: string,
   count: number,
   withToast = true,
 ) => {
@@ -63,32 +71,41 @@ export const addCartItemToLS = (
 
   /////// если товар уже существует в корзине, тогда увеличиваем его counts  ////////////
   const existingItem = cartFromLS.find(
-    (item) => item.productId === product._id && item.size === selectedSize,
+    (item) => item.productId === product._id
+    // && item.size === selectedSize,
   );
 
   // условие обновления count в ЛС
   if (existingItem) {
     // если существующий count не равен тому count который поступает к нам
-    const updatedCountWithSize = existingItem.count !== count ? count : +existingItem.count + 1;
+    // const updatedCountWithSize = existingItem.count !== count ? count : +existingItem.count + 1;
 
     // проходимся по корзине методом map
     // ищем нужный товар, если товар найдем обновляем count иначе пропускам item
     const updatedCart = cartFromLS.map((item) =>
-      item.productId === existingItem.productId && item.size === selectedSize
+      item.productId === existingItem.productId
         ? {
-            ...existingItem,
-            count: selectedSize.length
-              ? updatedCountWithSize // делаем проверкку, если был выбран размер то устанавливаем обновлённую переменную
-              : +existingItem.count + 1,
-          }
-        : item,
+          ...item,               // или ...existingItem
+          count: item.count + 1, // или updatedCountWithSize
+        }
+        : item
+      // && item.size === selectedSize
+      //   ? {
+      //       ...existingItem,
+      //       count: selectedSize.length
+      //         ? updatedCountWithSize // делаем проверкку, если был выбран размер то устанавливаем обновлённую переменную
+      //         : +existingItem.count + 1,
+      //     }
+      //   : item,
     );
 
     // устанавливаем обновлённую корзину в LS с обновлённым count
     // обновляем state
     // возвращаем id товара(existingItem.clientId)
+    // localStorage.setItem('cart', JSON.stringify(updatedCart));
+    // setCartFromLS(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    setCartFromLS(updatedCart);
+    setCartFromLS([...updatedCart]); // Создаем новый массив для триггера обновления
     toast.success('Добавлено в корзину');
     return existingItem.clientId;
   }
@@ -100,7 +117,7 @@ export const addCartItemToLS = (
     {
       clientId,
       productId: product._id,
-      size: selectedSize,
+      // size: selectedSize,
       count,
       image: product.images[0],
       name: product.name,
@@ -131,27 +148,57 @@ export const addProductToCartBySizeTable = (
   }
 
   if (selectedSize) {
-    addItemToCart(product, setSpinner, count, selectedSize);
+    addItemToCart(
+      product,
+      setSpinner,
+      count,
+      // selectedSize
+    );
     return;
   }
 
   handleShowSizeTable(product);
 };
 
+// export const updateCartItemCountInLS = (cartItemId: string, count: number) => {
+//   let cart: ICartItem[] = JSON.parse(localStorage.getItem('cart') as string) || [];
+
+//   // if (!cart) {
+//   //   cart = [];
+//   // }
+
+//   // обновляем count по cartItemId
+//   // const updatedCart = cart.map((item) =>
+//   //   item.clientId === cartItemId ? { ...item, count } : item,
+//   // );
+//   const updatedCart = cart.map((item) => {
+//     if (!item) { // Проверка на undefined/null элементы
+//       return null;
+//     }
+//     return item.clientId === cartItemId ? { ...item, count } : item;
+//   }).filter(Boolean); // Удаляем все null/undefined элементы
+
+//   localStorage.setItem('cart', JSON.stringify(updatedCart));
+//   setCartFromLS(updatedCart as ICartItem[]);
+// };
+
 export const updateCartItemCountInLS = (cartItemId: string, count: number) => {
-  let cart: ICartItem[] = JSON.parse(localStorage.getItem('cart') as string);
+  const cart: ICartItem[] = JSON.parse(localStorage.getItem('cart') || '[]');
 
-  if (!cart) {
-    cart = [];
-  }
-
-  // обновляем count по cartItemId
-  const updatedCart = cart.map((item) =>
-    item.clientId === cartItemId ? { ...item, count } : item,
-  );
+  const updatedCart = cart
+    .filter(item => item && item.clientId) // Фильтруем битые элементы
+    .map(item =>
+      item.clientId === cartItemId
+        ? { ...item, count }
+        : item
+    );
 
   localStorage.setItem('cart', JSON.stringify(updatedCart));
-  setCartFromLS(updatedCart as ICartItem[]);
+  setCartFromLS(updatedCart); // Явно триггерим обновление
+
+  // Для дебага:
+  console.log('Updated cart:', updatedCart);
+  $cartFromLs.watch(state => console.log('Current store state:', state));
 };
 
 // фун-я для подсчёта общего кол-ва товара в корзине

@@ -38,18 +38,6 @@ export async function POST(req: Request) {
       productId: productItem._id,
       image: productItem.images[0],
       name: productItem.name,
-      // size:
-      //   productItem.type === 'sunflower' &&
-      //   'arugulas' &&
-      //   'cabbage' &&
-      //   'radish' &&
-      //   'peas' &&
-      //   'chickpeas' &&
-      //   'buckwheat' &&
-      //   'wheat' &&
-      //   'lamps'
-      //     ? ''
-      //     : reqBody.size,
       count: reqBody.count,
       price: productItem.price,
       totalPrice: productItem.price,

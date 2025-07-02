@@ -32,7 +32,9 @@ export const useFavoritesAction = (product: IProduct) => {
       // если товара не было в избранном, тогда просто на клиенте добавляем товар в избранное
       // передавая туда пустой размер и сам товар
       if (!isUserAuth()) {
-        addFavoriteItemToLs(product, '');
+        addFavoriteItemToLs(product,
+          // ''
+        );
         return;
       }
 
@@ -40,13 +42,16 @@ export const useFavoritesAction = (product: IProduct) => {
       // получаем то что в LS
       // получаем clientId при добавление товара в избранное для синронизации с сервером
       const auth = JSON.parse(localStorage.getItem('auth') as string);
-      const clientId = addFavoriteItemToLs(product, '', false);
+      const clientId = addFavoriteItemToLs(
+        product,
+        // '',
+        false);
 
       addProductToFavorites({
         jwt: auth.accessToken,
         productId: product._id,
         setSpinner: setAddToFavoritesSpinner,
-        size: '',
+        // size: '',
         category: product.category,
         clientId,
       });

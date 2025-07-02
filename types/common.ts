@@ -1,5 +1,24 @@
 import { StoreWritable } from 'effector';
 
+export interface INews {
+  _id: string;
+  title: string;
+  images: { url: string, desc: string }[];
+  text: string;
+  errorMessage?: string;
+}
+
+export interface INewsItem {
+  _id: string;
+  category: string;
+  characteristics: {
+    titlePost: string;
+    testPost: string;
+  }[];
+  images: string;
+  errorMessage?: string;
+}
+
 export interface IProduct {
   _id: string;
   type: string;
@@ -9,7 +28,7 @@ export interface IProduct {
   name: string;
   description: string;
   characteristics: { [index: string]: string };
-  images: {url: string, desc: string}[];
+  images: { url: string, desc: string }[];
   vendorCode: string;
   inStock: string;
   isBestseller: boolean;

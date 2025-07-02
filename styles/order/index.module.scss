@@ -121,7 +121,7 @@
         &__name {
           padding-right: 24px;
           display: flex;
-          align-items: start;
+          align-items: flex-start;
 
           span:first-child {
             width: 35px;
@@ -133,8 +133,8 @@
           img {
             object-fit: contain;
             background:
-              radial-gradient(52.53% 52.53% at 50% 47.47%, #4e5d77 0%, rgba(42, 50, 63, 0) 100%),
-              #2a323f;
+                radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0) 100%),
+                #f8f8fa00;
             margin-right: 32px;
           }
 
@@ -173,7 +173,7 @@
         &__item {
           padding: 16px 0;
           display: flex;
-          align-items: start;
+          align-items: flex-start;
           position: relative;
 
           @media (max-width: 400px) {
@@ -204,7 +204,6 @@
             }
 
             img {
-              // background: radial-gradient(52.53% 52.53% at 50% 47.47%, #4E5D77 0%, rgba(42, 50, 63, 0.00) 100%), #2A323F;
               background:
                 radial-gradient(52.53% 52.53% at 50% 47.47%, #13e44e 0%, rgba(42, 50, 63, 0) 100%),
                 #f8f8fa00;
@@ -214,7 +213,7 @@
           &__inner {
             display: flex;
             flex-direction: column;
-            align-items: start;
+            align-items: flex-start;
           }
 
           &__name {
@@ -259,7 +258,6 @@
           position: relative;
           padding: 20px 0;
           color: #489765;
-          // color: rgba(255, 255, 255, 0.90);
           font-variant-numeric: lining-nums tabular-nums stacked-fractions;
           font-weight: 500;
           border-bottom: 2px solid rgba(255, 255, 255, 0.1);
@@ -292,12 +290,12 @@
           }
 
           &.active::after {
-            background-color: #9466ff;
+            background-color: #04a81a;
             transform: translateX(0%);
           }
 
           &.active {
-            color: #9466ff;
+            color: #04a81a;
           }
         }
       }

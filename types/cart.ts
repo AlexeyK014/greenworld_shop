@@ -5,21 +5,20 @@ export interface ICartItem {
   clientId: string;
   userId: string;
   productId: string;
-  image: string;
+  image: { url: string };
   name: string;
-  size: string;
-  count: string | number;
+  // size: string;
+  count: number;
   price: string;
   totalPrice: string;
   inStock: string;
-  color: string;
   category: string;
 }
 
 export interface IAddProductToCartFx {
   productId: string;
   category: string;
-  size: string;
+  // size: string;
   count: number;
   jwt: string;
   clientId: string;

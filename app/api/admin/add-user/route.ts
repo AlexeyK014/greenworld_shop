@@ -1,7 +1,7 @@
-import bcrypt, { hashSync } from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
-import { getAuthRouteData, getDbAndReqBody, parseJwt } from '@/lib/utils/api-routes';
+import { getDbAndReqBody } from '@/lib/utils/api-routes';
 import { corsHeaders } from '@/constants/corsHeader';
 import { idGenerator } from '@/lib/utils/common';
 

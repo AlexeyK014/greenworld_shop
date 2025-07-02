@@ -14,22 +14,22 @@ const OrderCartItem = ({ item, position }: IOrderCartItemProps) => {
         <li className={styles.order__list__item__list__item}>
           <span className={styles.order__list__item__list__item__pos}>{position}.</span>
           <div className={styles.order__list__item__list__item__img}>
-            <Image src={item.image} alt={item.name} width={156} height={156} />
+            <Image src={item.image.url} alt={item.name} width={156} height={156} />
           </div>
           <div className={styles.order__list__item__list__item__inner}>
             <span className={styles.order__list__item__list__item__name}>{item.name}</span>
-            <span className={styles.order__list__item__list__item__info}>
+            {/* <span className={styles.order__list__item__list__item__info}>
               <span>{translations[lang].order.color}: </span>
               {(translations[lang].catalog as { [index: string]: string })[item.color]}
-            </span>
+            </span> */}
 
             {/* Размер */}
-            {item.size && (
+            {/* {item.size && (
               <span className={styles.order__list__item__list__item__info}>
                 <span>{translations[lang].order.size}: </span>
                 {item.size.toUpperCase()}
               </span>
-            )}
+            )} */}
 
             {/* Кол-во товаров */}
             <span className={styles.order__list__item__list__item__info}>
@@ -48,15 +48,15 @@ const OrderCartItem = ({ item, position }: IOrderCartItemProps) => {
         <tr>
           <td className={styles.order__list__item__table__name}>
             <span>{position}.</span>
-            <Image src={item.image} alt={item.name} width={109} height={109} />
+            <Image src={item.image.url} alt={item.name} width={120} height={120} />
             <span>{item.name}</span>
           </td>
-          <td className={styles.order__list__item__table__block}>
+          {/* <td className={styles.order__list__item__table__block}>
             <span>{item.size.toUpperCase()}</span>
           </td>
           <td className={styles.order__list__item__table__block}>
             <span>{(translations[lang].catalog as { [index: string]: string })[item.color]}</span>
-          </td>
+          </td> */}
           <td className={styles.order__list__item__table__block}>
             <span>{item.count} шт.</span>
           </td>

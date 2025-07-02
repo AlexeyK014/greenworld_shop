@@ -4,23 +4,16 @@ import { useUnit } from 'effector-react';
 import { useLang } from '@/hooks/useLang';
 import {
   addOverflowHiddenToBody,
-  capitalizeFirstLetter,
   formatPrice,
   getWatchedProductFromLS,
 } from '@/lib/utils/common';
 import { useFavoritesAction } from '@/hooks/useFavoritesAction';
 import ProductItemActionBtn from '@/components/elements/ProductItemActionBtn/ProductItemActionBtn';
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
-import ProductColor from '../ProductListItem/ProductColor';
 import { useCartAction } from '@/hooks/useCartAction';
-import ProductSizesItem from '../ProductListItem/ProductSizesItem';
-import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn';
-import ProductCounter from '../ProductListItem/ProductCounter';
-import { ICartItem } from '@/types/cart';
 import AddToCartBtn from '../ProductListItem/AddToCartBtn';
 import { setIsAddToFavorites } from '@/context/favorites/index';
 import ProductInfoAccordion from './ProductInfoAccordion';
-import ProductsByCollection from './ProductsByCollection';
 import { $currentProduct } from '@/context/goods/state';
 import { useEffect } from 'react';
 import WatchedProducts from '../WatchedProducts/WatchedProducts';
@@ -29,8 +22,8 @@ import { openShareModal } from '@/context/modals/index';
 
 const ProductPageContent = () => {
   const {
-    selectedSize,
-    setSelectedSize,
+    // selectedSize,
+    // setSelectedSize,
     handleAddToCart,
     addToCartSpinner,
     updateCountSpinner,
@@ -44,15 +37,21 @@ const ProductPageContent = () => {
   console.log(product);
 
   const displayedProductKeys = [
-  'height',
-  'power',
-  'spectrum',
-  'color',
-  'colortemperature',
-  'width',
-  'length',
-  'shelves',
-];
+    'height',
+    'power',
+    'spectrum',
+    'color',
+    'colortemperature',
+    'width',
+    'length',
+    'shelves',
+    'taste',
+    'nutritionalValue',
+    'expirationDate',
+    'germinationPeriod',
+    'nutritionalValue',
+    'weight'
+  ];
 
   // добавляем товар в просмотренные
   useEffect(() => {
@@ -142,7 +141,7 @@ const ProductPageContent = () => {
           <div className={styles.product__top__bottom}>
             <span className={styles.product__top__count}>{translations[lang].product.count}:</span>
             <div className={styles.product__top__inner}>
-              {!!selectedSize ? (
+              {/* {!!selectedSize ? (
                 <ProductCounter
                   className={`counter ${styles.product__top__counter}`}
                   count={count}
@@ -152,7 +151,7 @@ const ProductPageContent = () => {
                   cartItem={existingItem as ICartItem}
                   updateCountAsync={false}
                 />
-              ) : (
+              ) : ( */}
                 <div
                   className={`counter ${styles.product__top__counter}`}
                   style={{ justifyContent: 'center' }}
@@ -161,7 +160,7 @@ const ProductPageContent = () => {
                     {translations[lang].product.total_in_cart} {allCurrentCartItemCount}
                   </span>
                 </div>
-              )}
+              {/* )}` */}
               <AddToCartBtn
                 className={styles.product__top__add}
                 text={translations[lang].product.to_cart}

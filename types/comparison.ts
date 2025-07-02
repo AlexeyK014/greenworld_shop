@@ -8,12 +8,17 @@ export interface IAddProductToComparisonFx {
   setSpinner: (arg0: boolean) => void;
 }
 
+export interface IImage {
+  url: string;        // ссылка на картинку
+  desc?: string;      // опционально: подпись/описание
+}
+
 export interface IComparisonItem {
   _id: string;
   userId: string;
   clientId: string;
   productId: string;
-  image: string;
+  image: string |  IImage;
   name: string;
   sizes: ISizes;
   size: string;

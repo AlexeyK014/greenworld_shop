@@ -44,7 +44,6 @@ export async function POST(req: Request) {
       productId: productItem._id,
       image: productItem.images[0],
       name: productItem.name,
-      sizes: productItem.sizes,
       price: productItem.price,
       category: reqBody.category,
       characteristics: { ...productItem.characteristics },

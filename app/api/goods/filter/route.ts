@@ -26,8 +26,7 @@ export async function GET(req: Request) {
     // получаем параметры которые получаем с клиента
     const priceFromParam = url.searchParams.get('priceFrom');
     const priceToParam = url.searchParams.get('priceTo');
-    const sizesParam = url.searchParams.get('sizes');
-    const colorsParam = url.searchParams.get('colors');
+    // const sizesParam = url.searchParams.get('sizes');
     // const colectionParam = url.searchParams.get('collection')
     const sortParam = url.searchParams.get('sort') || 'default';
 
@@ -37,11 +36,11 @@ export async function GET(req: Request) {
       priceToParam &&
       checkPriceParam(+priceFromParam) &&
       checkPriceParam(+priceToParam);
-    const sizesArr = getCheckedArrayParam(sizesParam as string);
+    // const sizesArr = getCheckedArrayParam(sizesParam as string);
     // const colorsArr = getCheckedArrayParam(colorsParam as string)
 
-    const isValidSizes =
-      sizesArr && sizesArr.every((size) => allowedSizes.includes(size.toLowerCase()));
+    // const isValidSizes =
+    //   sizesArr && sizesArr.every((size) => allowedSizes.includes(size.toLowerCase()));
 
     const filter = {
       // указываем динамическое поле, чтобы с помощью mongodb достать параметры у которых совпадает type
@@ -51,14 +50,14 @@ export async function GET(req: Request) {
       ...(isFullPriceRange && {
         price: { $gt: +priceFromParam, $lt: +priceToParam },
       }), // чтобы через mongodb доставать товары в нужном диапазоне
-      ...(isValidSizes && {
-        // $and - возвращает несколько совпадений
-        // получаем размеры которые true. В and передаём массив с объектами в котором
-        // ключ для размера 's', 'l'... и берём только true
-        $and: (sizesArr as string[]).map((sizes) => ({
-          [`sizes.${sizes.toLowerCase()}`]: true, // специальный ключ к которому образаемся
-        })),
-      }),
+      // ...(isValidSizes && {
+      //   // $and - возвращает несколько совпадений
+      //   // получаем размеры которые true. В and передаём массив с объектами в котором
+      //   // ключ для размера 's', 'l'... и берём только true
+      //   $and: (sizesArr as string[]).map((sizes) => ({
+      //     [`sizes.${sizes.toLowerCase()}`]: true, // специальный ключ к которому образаемся
+      //   })),
+      // }),
     };
 
     const sort = {

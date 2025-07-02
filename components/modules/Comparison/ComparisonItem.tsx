@@ -21,8 +21,10 @@ import { loadOneProduct } from '@/context/goods/index';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { addProductToCart } from '@/context/cart/index';
 import { $cart, $cartFromLs } from '@/context/cart/state';
+import { useLang } from '@/hooks/useLang';
 
 const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
+  const { lang, translations } = useLang();
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
 
   const [addToCartSpinner, setAddToCartSpinner] = useState(false);
@@ -33,33 +35,28 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
   // иначе, образаемся к массиву товаров из корзины, получаем cartItem
   // и сравниваем равен ли cartItem.productId и item.productId(из сравнения)
   // чтобы понимать находится ли такой размер у этого товара преобразовываем объект(item.sizes) в массив
+
   const isProductInCart = useMemo(
-    () =>
-      productsWithoutSizes.includes(item.characteristics.type)
-        ? currentCartByAuth.find((cartItem) => cartItem.productId === item.productId)
-        : currentCartByAuth.find(
-            (cartItem) =>
-              cartItem.productId === item.productId &&
-              Object.entries(item.sizes)
-                .filter(([, value]) => value)
-                .map(([key]) => key) // проверяем что нужный товар из сравнения находится и в корзине
-                .includes(cartItem.size),
-          ),
-    [currentCartByAuth, item.characteristics.type, item.productId, item.sizes],
+    () => currentCartByAuth.find((cartItem) => cartItem.productId === item.productId),
+    [currentCartByAuth, item.productId]
   );
 
   const addToCart = () => {
     // проверка, добавлен ли товар в сравнение БЕЗ РАЗМЕРА
-    if (productsWithoutSizes.includes(item.characteristics.type)) {
+    if (productsWithoutSizes.includes(item.category)) {
       // тогда добавляем товар не вызывая Таблицу размеров
       const product = {
         ...item, // разворачиваем comparisonItem
         _id: item.productId, // добавляем поле id с картинкой
-        images: [item.image],
+        //@ts-ignore
+        images: [item.image.url],
       } as unknown as IProduct;
 
       if (!isUserAuth()) {
-        addCartItemToLS(product, '', 1);
+        addCartItemToLS(
+          product,
+          // '',
+          1);
         return;
       }
 
@@ -68,7 +65,11 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
       const auth = JSON.parse(localStorage.getItem('auth') as string);
 
       // создаём переменную, вызывая фун-ю добавления в LS
-      const clientId = addCartItemToLS(product, '', 1, false);
+      const clientId = addCartItemToLS(
+        product,
+        // '',
+        1,
+        false);
 
       addProductToCart({
         jwt: auth.accessToken,
@@ -76,7 +77,7 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
         productId: item.productId,
         category: item.category,
         count: 1,
-        size: '',
+        // size: '',
         clientId,
       });
       return;
@@ -113,6 +114,14 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
     );
   };
 
+  const excludedKeys = ['productId', 'image', 'clientId'];
+  const displayedProductKeys = [
+    'name',
+    'price',
+    'inStock',
+    'category',
+  ];
+
   return (
     <motion.li className={styles.comparison__list__item} {...basePropsForMotion}>
       <DeleteItemBtn
@@ -132,37 +141,42 @@ const ComparisonItem = ({ item }: { item: IComparisonItem }) => {
 
       {/* блок для картинки */}
       <div className={styles.comparison__list__item__img}>
-        <Image src={item.image} alt={item.name} width={160} height={160} />
+        <Image
+          // src={item.image.url}
+          src={typeof item.image === 'string' ? item.image : item.image.url}
+          alt={item.name}
+          width={160}
+          height={160}
+        />
       </div>
 
       {/* список с характеристиками */}
       <ul className={`list-reset ${styles.comparison__list__item__inner_list}`}>
         {/* преобразуем массив */}
-        {Object.entries(item.characteristics).map(([key, value], i) => {
-          // value - может быть boolean или массив
-          // если массив - достаём из массив и перечисляем чурез запятую
+        {Object.entries(item)
+        .filter(([key]) => !excludedKeys.includes(key) && displayedProductKeys.includes(key)) // ⬅️ исключаем нужные поля
+        .map(([key, value], i) => {
           let valueFromArray = null;
           let valueByBool = null;
+          let valueFromObject = null;
 
           if (Array.isArray(value)) {
             valueFromArray = value.join(', ');
+          } else if (typeof value === 'boolean') {
+            valueByBool = value ? 'Есть' : 'Нет';
+          } else if (typeof value === 'object' && value !== null) {
+            // Преобразуем объект в строку для вывода (например: "desc: ..., url: ...")
+            valueFromObject = Object.entries(value)
+              .map(([k, v]) => `${k}: ${v}`)
+              .join(', ');
           }
-
-          if (typeof value == 'boolean') {
-            if (value) {
-              valueByBool = 'Есть';
-            } else {
-              valueByBool = 'Нет';
-            }
-          }
+          //@ts-ignore
+          const label = translations[lang].fields?.[key] || key;
 
           return (
             <li key={i} className={styles.comparison__list__item__inner_list__item}>
-              {/* название хар-ки */}
-              <span>{key}</span>
-
-              {/* значение хар-ки */}
-              <span>{valueByBool || valueFromArray || value}</span>
+              <span>{label}</span>
+              <span>{valueByBool || valueFromArray || valueFromObject || value}</span>
             </li>
           );
         })}

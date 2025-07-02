@@ -21,29 +21,26 @@ export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
   const equipment = await db.collection('equipment').find({ [fieldName]: true }).toArray();
   const microgreen = await db.collection('microgreen').find({ [fieldName]: true }).toArray();
 
+
   return shuffle([
     ...equipment.slice(0, 2).map(item => ({ ...item, category: 'equipment' })),
     ...microgreen.slice(0, 2).map(item => ({ ...item, category: 'microgreen' })),
   ]);
-  // const equipment = await db.collection('equipment').find().toArray();
-  // const microgreen = await db.collection('microgreen').find().toArray();
+};
 
-  // return shuffle([
-  //   ...equipment
-  //     .filter(
-  //       (item) => item[fieldName])
-  //     // .filter((item) => item[fieldName] && Object.values(item).some((value) => value))
-  //     .slice(0, 2),
-  //   ...microgreen
-  //     // .filter(
-  //     //   (item) =>
-  //     //     item[fieldName]
-  //     // )
-  //     .filter(
-  //       (item) => item[fieldName] && Object.values(item).some((value) => value)
-  //     )
-  //     .slice(0, 2),
-  // ]);
+export const getNews = async (db: Db) => {
+  // Забираем максимум 3 элемента
+  const news = await db
+    .collection('news')
+    .find({ type: 'news' }) // фильтр по категории, если нужно
+    .limit(8)
+    .toArray();
+
+  // Убеждаемся, что у всех есть поле category: 'news'
+  return news.map((item) => ({
+    ...item,
+    category: 'news',
+  }));
 };
 
 export const generateTokens = (name: string, email: string) => {
@@ -96,20 +93,6 @@ export const findUserByEmail = async (db: Db, email: string) =>
   db.collection('users').findOne({ email });
 
 // для передачи в заголовках токена
-// export const getAuthRouteData = async (
-//   clientPromise: Promise<MongoClient>,
-//   req: Request,
-//   withReqBody = true
-// ) => {
-//   const { db, reqBody } = await getDbAndReqBody(
-//     clientPromise,
-//     withReqBody ? req : null
-//   )
-//   const token = req.headers.get('authorization')?.split(' ')[1]
-//   const validatedTokenResult = await isValidAccessToken(token)
-
-//   return { db, reqBody, validatedTokenResult, token }
-// }
 export const getAuthRouteData = async (
   clientPromise: Promise<MongoClient>,
   req: Request,

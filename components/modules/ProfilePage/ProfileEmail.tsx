@@ -59,8 +59,8 @@ const ProfileEmail = () => {
 
   const allowEdit = () => {
     handleEdit()
-    setValue(emailRegister.name, user.email)
-    trigger(emailRegister.name)
+    setValue(emailRegister.name, user.email) //сэтим имя
+    trigger(emailRegister.name) // тригреим валидацию
   }
 
   return (
@@ -68,6 +68,7 @@ const ProfileEmail = () => {
       {loginCheckSpinner && (
         <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
       )}
+      {/* когда есть изменение */}
       {edit && !loginCheckSpinner && !showCodeInput && !verifyEmailSpinner && (
         <motion.div
           className={styles.profile__info__inner}
@@ -94,6 +95,8 @@ const ProfileEmail = () => {
           />
         </motion.div>
       )}
+
+      {/* когда ничего не изменяется */}
       {!edit && !loginCheckSpinner && !showCodeInput && (
         <ProfileInfoBlock allowEdit={allowEdit} text={user.email} />
       )}
@@ -121,117 +124,3 @@ const ProfileEmail = () => {
 }
 
 export default ProfileEmail
-
-// import React from 'react'
-// import styles from '@/styles/profile/index.module.scss'
-// import NameErrorMessage from '@/components/elements/NameErrorMessage/NameErrorMessage';
-// import { basePropsForMotion } from '@/constants/motion';
-// import { editUsernameFx, verifyEmailFx } from '@/context/profile';
-// import { loginCheckFx } from '@/context/user';
-// import { $user } from '@/context/user/state';
-// import { useProfileEdit } from '@/hooks/useProfileEdit';
-// import { emailValidationRules, nameValidationRules } from '@/lib/utils/auth';
-// import { IInputs } from '@/types/authPopup';
-// import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { useUnit } from 'effector-react';
-// import { motion } from 'framer-motion';
-// import { useForm } from 'react-hook-form';
-// import ProfileInfoActions from './ProfileInfoActions';
-// import ProfileInfoBlock from './ProfileInfoBlock';
-// import CodeInputBlock from './CodeInputBlock/CodeInputBlock';
-
-// const ProfileEmail = () => {
-//   const user = useUnit($user);
-//   const loginCheckSpinner = useUnit(loginCheckFx.pending)
-//   const verifyEmailSpinner = useUnit(verifyEmailFx.pending)
-//   const {
-//     edit,
-//     handleEdit,
-//     handleCancelEdit,
-//     spinner,
-//     showCodeInput,
-//     handleChange,
-//     handleVerifyEmail,
-//     handleCompleteEmailVerification
-//   } = useProfileEdit(user.name, editUsernameFx)
-
-//   const {
-//     register,
-//     formState: { errors, isValid },
-//     trigger,
-//     setValue
-//   } = useForm<IInputs & { [index: string]: string }>()
-
-//   const emailRegister = register(
-//     'email',
-//     emailValidationRules('Неправильный email!', 'Введите email')
-//   )
-
-//   const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     emailRegister.onChange({
-//         target: {
-//           name: emailRegister.name,
-//           value: e.target.value.trim(),
-//         },
-//       })
-
-//       trigger(emailRegister.name)
-//       handleChange(e)
-//     }
-
-//     const allowEdit = () => {
-//       handleEdit()
-//       setValue(emailRegister.name, user.email) //сэтим имя
-//       trigger(emailRegister.name) // тригреим валидацию
-//     }
-//   return (
-//     <div className={styles.profile__info}>
-//       {loginCheckSpinner && (
-//         <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
-//       )}
-//       {/* когда есть изменение */}
-//       {edit && !loginCheckSpinner && !showCodeInput && !verifyEmailSpinner && (
-//         <motion.div
-//           className={styles.profile__info__inner}
-//           {...basePropsForMotion}
-//         >
-//           {errors.email && (
-//             <span className={styles.profile__info__warn}>
-//               {errors.email?.message}
-//             </span>
-//           )}
-//           <input
-//             className={styles.profile__info__input}
-//             type='text'
-//             name={emailRegister.name}
-//             ref={emailRegister.ref}
-//             onChange={handleEmailInputChange}
-//             autoFocus
-//           />
-//           <ProfileInfoActions
-//             spinner={spinner}
-//             disabled={spinner || !isValid}
-//             handleCancelEdit={handleCancelEdit}
-//             handleSaveInfo={handleVerifyEmail}
-//           />
-//         </motion.div>
-//       )}
-
-//       {/* когда ничего не изменяется */}
-//       {!edit && !loginCheckSpinner && !showCodeInput && (
-//         <ProfileInfoBlock allowEdit={allowEdit} text={user.email} />
-//       )}
-//       {showCodeInput && !verifyEmailSpinner && <span>TEST</span>
-//       // && !verifyEmailSpinner && (
-//       //   <CodeInputBlock onComplete={handleCompleteEmailVerification}/>
-//       // )
-//       }
-//       {verifyEmailSpinner && (
-//         <FontAwesomeIcon icon={faSpinner} spin color='#fff' />
-//       )}
-//     </div>
-//   )
-// }
-
-// export default ProfileEmail

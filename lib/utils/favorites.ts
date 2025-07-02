@@ -5,7 +5,10 @@ import toast from 'react-hot-toast';
 import { setFavoritesFromLS, setShouldShowEmptyFavorites } from '@/context/favorites/index';
 
 // добавление товаров в избранное на клиенте
-export const addFavoriteItemToLs = (product: IProduct, selectedSize: string, withToast = true) => {
+export const addFavoriteItemToLs = (
+  product: IProduct,
+  // selectedSize: string,
+  withToast = true) => {
   // получаем данные из LS
   let favoritesFromLS: IFavoriteItem[] = JSON.parse(localStorage.getItem('favorites') as string);
   // генерируем id для добавляемого товара
@@ -21,7 +24,8 @@ export const addFavoriteItemToLs = (product: IProduct, selectedSize: string, wit
   // проверяем, при добавление нет ли этого товар УЖЕ в избранном
   // в массиве favoritesFromLS ищем элемент по id и по размеру
   const existingItem = favoritesFromLS.find(
-    (item) => item.productId === product._id && item.size === selectedSize,
+    (item) => item.productId === product._id
+    // && item.size === selectedSize,
   );
 
   // если элемент УЖЕ СУЩЕСТВУЕТ в избранном, тогда делаем проверку и показываем сообщение
@@ -35,7 +39,7 @@ export const addFavoriteItemToLs = (product: IProduct, selectedSize: string, wit
     {
       clientId,
       productId: product._id,
-      size: selectedSize,
+      // size: selectedSize,
       image: product.images[0],
       name: product.name,
       price: product.price,

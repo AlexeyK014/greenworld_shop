@@ -9,16 +9,20 @@ import { $cart, $cartFromLs } from '@/context/cart/state';
 
 export const useCartAction = (isSizeTable = false) => {
   const product = useUnit($currentProduct);
-  const [selectedSize, setSelectedSize] = useState('');
+  // const [selectedSize, setSelectedSize] = useState('');
   const currentCartByAuth = useGoodsByAuth($cart, $cartFromLs);
 
   // переменная для показа индикатора сколько товаров в корзине
   const currentCartItems = currentCartByAuth.filter((item) => item.productId === product._id);
+
   // изменяем count у товара
-  const cartItemBySize = currentCartItems.find((item) => item.size === selectedSize);
+  // const cartItemBySize = currentCartItems.find((item) => item.size
+    // === selectedSize
+  // );
 
   const existingItem = currentCartByAuth.find(
-    (item) => item.productId === product._id && item.size === selectedSize,
+    (item) => item.productId === product._id
+    // && item.size === selectedSize,
   );
   // переменная для спиннера
   const [addToCartSpinner, setAddToCartSpinner] = useState(false);
@@ -26,7 +30,7 @@ export const useCartAction = (isSizeTable = false) => {
 
   // локально состояние для count
   // если у товара уже есть count ставим его, иначе = 1
-  const [count, setCount] = useState(+(existingItem?.count as string) || 1);
+  const [count, setCount] = useState(+(existingItem?.count as string | number) || 1);
 
   // если увеличивают или именьшают счётчик
   const handleAddToCart = (countFromCounter?: number) => {
@@ -36,38 +40,56 @@ export const useCartAction = (isSizeTable = false) => {
     // и если юзер не авторизован, добавляем товар в LS
     if (existingItem) {
       if (!isUserAuth()) {
-        addCartItemToLS(product, selectedSize, countFromCounter || 1);
+        addCartItemToLS(
+          product,
+          // selectedSize,
+          countFromCounter || 1);
         return;
       }
 
       const auth = JSON.parse(localStorage.getItem('auth') as string);
       // проверяем если старый count не равен новому, значит юзер его обновил
       // если юзер не трогал count, тогда просто увелчиваем на 1
-      const updatedCountWithSize = !!countFromCounter
-        ? +existingItem.count !== countFromCounter
-          ? countFromCounter
-          : +existingItem.count + 1
-        : +existingItem.count + 1;
+      // const updatedCountWithSize = !!countFromCounter
+      //   ? +existingItem.count !== countFromCounter
+      //     ? countFromCounter
+      //     : +existingItem.count + 1
+      //   : +existingItem.count + 1;
 
       updateCartItemCount({
         jwt: auth.accessToken,
         id: existingItem._id as string,
         setSpinner: setUpdateCountSpinner,
-        count: selectedSize.length ? updatedCountWithSize : +existingItem.count + 1,
+        count:
+          // selectedSize.length ? updatedCountWithSize :
+          +existingItem.count + 1,
       });
 
-      addCartItemToLS(product, selectedSize, countFromCounter || 1);
+      addCartItemToLS(
+        product,
+        // selectedSize,
+        countFromCounter || 1);
       return;
     }
 
     // если, при добавление товара мы находимся в модалке размеров
     if (isSizeTable) {
-      addItemToCart(product, setAddToCartSpinner, countFromCounter || 1, selectedSize);
+      addItemToCart(
+        product,
+        setAddToCartSpinner,
+        countFromCounter || 1,
+        // selectedSize
+      );
       return;
     }
 
     // если мы не находимся в таблице размеров, тогда вызываем фун-ю
-    addProductToCartBySizeTable(product, setAddToCartSpinner, countFromCounter || 1, selectedSize);
+    addProductToCartBySizeTable(
+      product,
+      setAddToCartSpinner,
+      countFromCounter || 1,
+      // selectedSize
+    );
   };
 
   // счетаем обшее кол-во товаров
@@ -79,10 +101,10 @@ export const useCartAction = (isSizeTable = false) => {
 
   return {
     product,
-    setSelectedSize,
-    selectedSize,
+    // setSelectedSize,
+    // selectedSize,
     addToCartSpinner,
-    cartItemBySize,
+    // cartItemBySize,
     currentCartItems,
     handleAddToCart,
     count,

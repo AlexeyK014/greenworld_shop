@@ -2,16 +2,21 @@
 import React from 'react';
 import Hero from '../../modules/MainPage/Hero/Hero';
 import Categories from '@/components/modules/MainPage/Categories/Categories';
-import { useGate } from 'effector-react';
+import { useGate, useUnit } from 'effector-react';
 import { MainPageGate } from '@/context/goods/index';
 import BestsellersGoods from '@/components/modules/MainPage/BestsellersGoods';
 import NewGoods from '@/components/modules/MainPage/NewGoods';
 import BrandLife from '@/components/modules/MainPage/BrandLife';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { $news } from '@/context/news/state';
 
 const MainPage = () => {
   useGate(MainPageGate);
   usePageTitle('main');
+
+  const news = useUnit($news)
+
+  console.log(news);
 
   return (
     <main>

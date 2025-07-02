@@ -56,6 +56,7 @@ export const POST = async (req: Request) => {
   try {
     await writeFile(
       path.join(process.cwd(), 'public/avatars/' + filename),
+      //@ts-ignore
       buffer
     )
 

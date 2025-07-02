@@ -74,6 +74,7 @@ export const loadProductsByFillterFx = goods.createEffect(
     }
   },
 );
+
 export const loadWatchedProductsFx = goods.createEffect(async ({ payload }: ILoadWatchedProductsFx) => {
   try {
     // возвращаем по id и category соответсвующие товары

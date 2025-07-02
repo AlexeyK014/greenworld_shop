@@ -27,6 +27,7 @@ import '@/context/favorites/init';
 import '@/context/user/init';
 import '@/context/order/init';
 import '@/context/profile/init';
+import '@/context/news/init';
 import '@/context/passwordRestore/init';
 import { usePathname, useRouter } from 'next/navigation';
 import { loginCheckFx } from '@/context/user';

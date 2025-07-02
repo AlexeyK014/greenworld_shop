@@ -4,7 +4,6 @@ import {
   closeMenu,
   openCatalogMenu,
   openMenu,
-  // openProfile,
 } from '@/context/modals/index';
 import { useLang } from '@/hooks/useLang';
 import { addOverflowHiddenToBody } from '@/lib/utils/common';
@@ -14,7 +13,6 @@ import CatalogMenu from '../Header/CatalogMenu';
 import { useGoodsByAuth } from '@/hooks/useGoodsByAuth';
 import { $cart, $cartFromLs } from '@/context/cart/state';
 import { $favorites, $favoritesFromLS } from '@/context/favorites/state';
-// import Profile from '../Profile/Profile'
 
 const MobileNavbar = () => {
   const { lang, translations } = useLang();
@@ -33,16 +31,9 @@ const MobileNavbar = () => {
     closeMenu();
   };
 
-  // const handleOpenProfile = () => {
-  //   addOverflowHiddenToBody()
-  //   openProfile()
-  //   closeMenu()
-  // }
-
   return (
     <>
       <CatalogMenu />
-      {/* <Profile /> */}
       <div className="mobile-navbar">
         <Link href="/" className="mobile-navbar__btn">
           {translations[lang].breadcrumbs.main}

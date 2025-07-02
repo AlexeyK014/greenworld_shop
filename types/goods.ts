@@ -8,6 +8,7 @@ export interface ILoadOneProductFx {
   withShowingSizeTable?: boolean;
 }
 
+
 export interface IProductSizesItemProps {
   currentSize: [string, boolean];
   selectedSize: string;
@@ -37,7 +38,8 @@ export interface IAddToCartBtnProps {
 
 export interface IProductCountBySizeProps {
   products: ICartItem[];
-  size: string;
+  _id: string;
+  // size: string;
   withCartIcon?: boolean;
 }
 

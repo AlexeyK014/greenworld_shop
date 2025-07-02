@@ -149,13 +149,12 @@ export const handleShowSizeTable = (product: IProduct) => {
 }
 
 //  поределяем нужное кол-во товаров
-export const getCartItemCountBySize = (
-  cartItems: ICartItem[],
-  currentSize: string
-) =>
-  // с помщью метода find находим размер и определяем count
-  cartItems.find((item) => item.size === currentSize.toLocaleLowerCase())
-    ?.count || 0
+// export const getCartItemCountBySize = (
+//   cartItems: ICartItem[],
+//   currentId: string,
+//   // currentSize: string
+// ) =>
+//   cartItems.find((item) => item._id === currentId)?.count || 0
 
 // общая фун-я для удаления товара
 export const deleteProductFromLS = <T>(

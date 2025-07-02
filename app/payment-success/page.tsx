@@ -38,22 +38,6 @@ export default function Favorites() {
 
   //отправляем пользователю инфо на почту
   useEffect(() => {
-    // if (paymentData.description && user.email) {
-    //   let description
-    //   if(paymentData.metadata && Object.values(paymentData.metadata).some((item) => !!item)) {
-    //     const recipientData = [
-    //       paymentData.metadata.name_label,
-    //       paymentData.metadata.surname_label,
-    //       paymentData.metadata.phone_label,
-    //       paymentData.metadata.email_label,
-    //       paymentData.metadata.message_label,
-    //     ]
-
-    //     description = `${description} Данные получателя: ${recipientData.join(', ')}`
-    //   }
-    //   paymentNotifyFx({ email: user.email, message: description })
-    // }
-
     if (paymentData.description && user.email) {
       let description = paymentData.description;
 

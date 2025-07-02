@@ -48,17 +48,6 @@ export async function POST(req: Request) {
       productId: productItem._id,
       image: productItem.images[0],
       name: productItem.name,
-      size:
-        productItem.type === 'sunflower' &&
-        'arugulas' &&
-        'cabbage' &&
-        'radish' &&
-        'peas' &&
-        'chickpeas' &&
-        'buckwheat' &&
-        'wheat'
-          ? ''
-          : reqBody.size,
       price: productItem.price,
       vendorCode: productItem.vendorCode,
       category: reqBody.category,

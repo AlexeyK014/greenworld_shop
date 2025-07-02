@@ -29,7 +29,8 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
   // находим конкретный товар их корзины
   // ищем, есть ли избранный товар в корзине, делая проверку по productId и по размеру
   const isProductInCart = currentCartByAuth.find(
-    (cartItem) => cartItem.productId === item.productId && cartItem.size === item.size,
+    (cartItem) => cartItem.productId === item.productId
+    // && cartItem.size === item.size,
   );
 
   const isMedia485 = useMediaQuery(485);
@@ -53,7 +54,11 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
 
     // если юзер не авторизован
     if (!isUserAuth()) {
-      addCartItemToLS(cartItem as unknown as IProduct, item.size, 1);
+      addCartItemToLS(
+        cartItem as unknown as IProduct,
+        // item.size,
+        1
+      );
       return;
     }
 
@@ -62,7 +67,12 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
 
     // делаем добавление товара на клиенте
     // и синхронизируемся с сервером
-    const clientId = addCartItemToLS(cartItem as unknown as IProduct, item.size, 1, false);
+    const clientId = addCartItemToLS(
+      cartItem as unknown as IProduct,
+      // item.size,
+      1,
+      false
+    );
 
     addProductToCart({
       jwt: auth.accessToken,
@@ -70,7 +80,7 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
       productId: item.productId,
       category: item.category,
       count: 1,
-      size: item.size,
+      // size: item.size,
       clientId,
     });
   };
@@ -125,7 +135,7 @@ const FavoriteListItem = ({ item }: { item: IFavoriteItem }) => {
         <span className={styles.favorites__list__item__info__name}>{item.name}</span>
         <span className={styles.favorites__list__item__info__size}>
           {/* если товар с размером, показываем размер */}
-          {item.size.length ? `${translations[lang].catalog.size}: ${item.size.toUpperCase()}` : ''}
+          {/* {item.size.length ? `${translations[lang].catalog.size}: ${item.size.toUpperCase()}` : ''} */}
         </span>
         <span className={styles.favorites__list__item__info__price}>
           {formatPrice(+item.price)} P

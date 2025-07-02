@@ -18,8 +18,8 @@
   }
 
   &__photo {
-    background-color: rgba(245, 235, 235, 0);
-    background-image: url(/img/add-photo.svg);
+    background-color: rgba(245, 235, 235, 0.188);
+    background-image: url(/img/add_photo.svg);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -28,7 +28,7 @@
     display: block;
     height: 207px;
     margin: 0 auto;
-    opacity: 0.2;
+    opacity: 0.5;
     -webkit-transition: opacity 0.1s;
     -o-transition: opacity 0.1s;
     transition: opacity 0.1s;

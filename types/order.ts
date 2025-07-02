@@ -1,4 +1,5 @@
 import { ICartItem } from './cart';
+import { IImage } from './comparison';
 
 export interface IOrderTitleProps {
   orderNumber: string;
@@ -8,6 +9,7 @@ export interface IOrderTitleProps {
 export interface IOrderCartItemProps {
   item: ICartItem;
   position: number;
+  url?: string;
 }
 
 export interface IGetGreenworldShopByCityFx {

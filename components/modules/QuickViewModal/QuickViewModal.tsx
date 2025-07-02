@@ -5,10 +5,7 @@ import styles from '@/styles/quick-view-modal/index.module.scss';
 import QuickViewModalSlider from './QuickViewModalSlider';
 import { useCartAction } from '@/hooks/useCartAction';
 import ProductAvailable from '@/components/elements/ProductAvailable/ProductAvailable';
-import ProductComposition from '../ProductListItem/ProductComposition';
 import { useLang } from '@/hooks/useLang';
-import ProductSizeTableBtn from '../ProductListItem/ProductSizeTableBtn';
-import ProductSizesItem from '../ProductListItem/ProductSizesItem';
 import ProductCounter from '../ProductListItem/ProductCounter';
 import AddToCartBtn from '../ProductListItem/AddToCartBtn';
 import Link from 'next/link';
@@ -23,8 +20,8 @@ const QuickViewModal = () => {
   const { lang, translations } = useLang();
   const {
     product,
-    selectedSize,
-    setSelectedSize,
+    // selectedSize,
+    // setSelectedSize,
     // cartItemBySize,
     handleAddToCart,
     addToCartSpinner,
@@ -128,7 +125,7 @@ const QuickViewModal = () => {
             </span>
             <div className={styles.modal__right__bottom__inner}>
               {/* если не пустая строчка, если юзер не выбрал размер показываем по дефолту*/}
-              {!!selectedSize ? (
+              {/* {!!selectedSize ? (
                 // @ts-ignore
                 <ProductCounter
                   className={`counter ${styles.modal__right__bottom__counter}`}
@@ -139,7 +136,7 @@ const QuickViewModal = () => {
                   cartItem={existingItem as ICartItem}
                   updateCountAsync={false}
                 />
-              ) : (
+              ) : ( */}
                 <div
                   className={`counter ${styles.modal__right__bottom__counter}`}
                   style={{ justifyContent: 'center' }}
@@ -148,7 +145,7 @@ const QuickViewModal = () => {
                     {translations[lang].product.total_in_cart} {allCurrentCartItemCount}
                   </span>
                 </div>
-              )}
+              {/* )} */}
               <AddToCartBtn
                 className={styles.modal__right__bottom__add}
                 text={translations[lang].product.to_cart}
