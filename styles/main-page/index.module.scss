@@ -683,6 +683,13 @@
       }
 
       &__link {
+        // display: block;          // Или inline-block, если нужно обтекание
+        // width: 200px;           // Фиксированная ширина
+        // height: 200px;          // Фиксированная высота = квадрат
+        // overflow: hidden;       // Обрезаем всё, что выходит за границы
+        // position: relative;     // Для позиционирования дочерних элементов
+        // border-radius: 0;       // Убедитесь, что нет скругления (или задайте нужное)
+        // text-decoration: none;
         &__title {
           font-size: 3px;
         }
@@ -828,3 +835,36 @@
     transition: color 0.2s ease-in-out;
   }
 }
+
+.thumb {
+  position: relative;
+  display: block;
+  width: 100%;        // наследует ширину ячейки сетки
+  padding-top: 100%;  // делает квадрат за счёт внутреннего отступа
+  overflow: hidden;   // обрезаем «лишнее»
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   // главное! не растягиваем, а кадрируем
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);  // цвет «затемнения»
+    opacity: 0;                       // по умолчанию невидим
+    transition: opacity .3s ease;
+  }
+
+  /* эффект при наведении */
+  &:hover {
+    img { transform: scale(1.03); }   // лёгкое увеличение (убери, если не нужно)
+    &::after { opacity: 1; }          // показываем тёмный слой
+  }
+}
+

@@ -33,7 +33,6 @@ const NewsPageContent = () => {
           <img
             className={styles.news_content_left_img_image}
             src={currentNews.images[0].url}
-
           />
         </div>
 

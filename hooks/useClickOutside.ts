@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
-// хук для обощения логики открытия-закрытия селекта
+// хук для обобщения логики открытия-закрытия селекта
 export const useClickOutside = () => {
   const ref = useRef() as MutableRefObject<HTMLDivElement>;
   const [open, setOpen] = useState(false);

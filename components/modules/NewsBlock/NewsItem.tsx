@@ -56,11 +56,14 @@ const NewsItem = () => {
                 href={`/news/${item._id}`}
                 className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
               >
-                <img
-                  src={item.images[0].url}
-                  alt={translations[lang].main_page.brand_nature}
-                  onLoad={handleLoadingImageComplete}
-                />
+                <div className={styles.thumb}>
+                  <img
+                    src={item.images[0].url}
+                    alt={translations[lang].main_page.brand_nature}
+                    onLoad={handleLoadingImageComplete}
+                  />
+                </div>
+
                 <span className={`${styles.brands__list__item__link__title}`}>{item.title}</span>
               </Link>
             </div>

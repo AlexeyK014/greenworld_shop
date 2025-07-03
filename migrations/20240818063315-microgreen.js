@@ -20,24 +20,6 @@ const images = [
   '/img/microgreen/sunflower.png',
 ];
 
-// const images = [
-//   '/img/microgreen/arugulas.png',
-//   '/img/microgreen/arugulas-1.png',
-//   '/img/microgreen/arugulas-2.png',
-//   '/img/microgreen/cabbage.png',
-//   '/img/microgreen/cabbage-1.png',
-//   '/img/microgreen/cabbage-2.png',
-//   '/img/microgreen/peas.png',
-//   '/img/microgreen/peas-1.png',
-//   '/img/microgreen/peas-2.png',
-//   '/img/microgreen/radish.png',
-//   '/img/microgreen/radish-1.png',
-//   '/img/microgreen/radish-2.png',
-//   '/img/microgreen/sunflower.png',
-//   '/img/microgreen/sunflower-1.png',
-//   '/img/microgreen/sunflower-2.png',
-// ]
-
 module.exports = {
   async up(db) {
     return db.collection('microgreen').insertMany(
