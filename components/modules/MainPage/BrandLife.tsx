@@ -5,6 +5,7 @@ import useImagePreloader from '@/hooks/useImagePreloader';
 import { useLang } from '@/hooks/useLang';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import styles from '@/styles/main-page/index.module.scss';
+import stylesAll from '@/styles/main-page/index.module.scss';
 import img1 from '@/public/img/news1.jpg';
 import img2 from '@/public/img/news2.jpg';
 import img3 from '@/public/img/news3.jpg';
@@ -13,6 +14,7 @@ import { $news } from '@/context/news/state';
 import NewsItem from '../NewsBlock/NewsItem';
 import { getNewsFx } from '@/context/news';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 const BrandLife = () => {
   const news = useUnit($news)
@@ -37,10 +39,13 @@ const BrandLife = () => {
     <section className={styles.brands}>
       <div className={`container ${styles.brands__container}`}>
         <h2 className={`container ${styles.brands__title}`}>
-          {translations[lang].main_page.our_news}
+          {translations[lang].main_page.articles}
         </h2>
         <div className={styles.brands__inner}>
           <AllLink />
+          <Link href={`/news`} className={stylesAll.all}>
+            {translations[lang].common.all_link}
+          </Link>
         </div>
         <div>
           <NewsItem />

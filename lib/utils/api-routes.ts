@@ -28,15 +28,30 @@ export const getNewAndBestsellerGoods = async (db: Db, fieldName: string) => {
   ]);
 };
 
+// export const getNews = async (db: Db) => {
+//   // Забираем максимум 3 элемента
+//   const news = await db
+//     .collection('news')
+//     .find({ type: 'news' }) // фильтр по категории, если нужно
+//     .limit(8)
+//     .toArray();
+
+//   // Убеждаемся, что у всех есть поле category: 'news'
+//   return news.map((item) => ({
+//     ...item,
+//     category: 'news',
+//   }));
+// };
+
 export const getNews = async (db: Db) => {
-  // Забираем максимум 3 элемента
+  // Сортируем по дате создания (новые сначала) и берём 8 последних
   const news = await db
     .collection('news')
-    .find({ type: 'news' }) // фильтр по категории, если нужно
-    .limit(8)
+    .find({ type: 'news' })
+    // .sort({ createdAt: -1 }) // Сортировка по убыванию даты (новые сначала)
+    // .limit(8) // Берем только 8 самых новых
     .toArray();
 
-  // Убеждаемся, что у всех есть поле category: 'news'
   return news.map((item) => ({
     ...item,
     category: 'news',

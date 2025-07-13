@@ -122,7 +122,7 @@
       "violet": "violet",
       "orange": "orange",
       "black": "black",
-      "our_news": "Our news"
+      "articles": "Articles"
     },
     "product": {
       "available": "Available",
@@ -418,7 +418,7 @@
       "violet": "фиолетовая",
       "orange": "оранжевая",
       "black": "черная",
-      "our_news": "Наши новости"
+      "articles": "Статьи"
     },
     "product": {
       "available": "Есть в наличии",

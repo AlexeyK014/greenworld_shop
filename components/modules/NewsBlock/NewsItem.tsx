@@ -48,29 +48,60 @@ const NewsItem = () => {
           ))}
         </motion.ul>
       )}
-      {!spinner && !isMedia490 && (
+      {!spinner && (
         <div className={`list-reset ${styles.brands__list}`}>
-          {news?.map((item) => (
-            <div key={item._id} className={`${styles.brands__list__item}`}>
+          {/* Левый блок (последний элемент) */}
+          {news?.length > 0 && (
+            <div key={news[news.length - 1]._id} className={`${styles.brands__list__item} ${styles.bigItem}`}>
               <Link
-                href={`/news/${item._id}`}
+                href={`/news/${news[news.length - 1]._id}`}
                 className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
               >
                 <div className={styles.thumb}>
                   <img
-                    src={item.images[0].url}
+                    src={news[news.length - 1].images[0].url}
                     alt={translations[lang].main_page.brand_nature}
                     onLoad={handleLoadingImageComplete}
                   />
                 </div>
-
-                <span className={`${styles.brands__list__item__link__title}`}>{item.title}</span>
+                <span className={`${styles.brands__list__item__link__title}`}>
+                  {news[news.length - 1].title}
+                </span>
               </Link>
             </div>
-          ))}
+          )}
+
+          {/* Правый блок (7 предыдущих элементов) */}
+          <div className={styles.smallItemsContainer}>
+            {news?.slice(
+              Math.max(news.length - 8, 0), // Начинаем с `length - 8` (чтобы взять 7 элементов + последний уже слева)
+              news.length - 1                // Исключаем последний элемент (он уже слева)
+            ).reverse()                      // Разворачиваем массив, чтобы шли от новых к старым
+              .map((item) => (
+                <div key={item._id} className={`${styles.brands__list__item} ${styles.smallItem}`}>
+                  <Link
+                    href={`/news/${item._id}`}
+                    className={`${styles.brands__list__item__link} ${styles.categories__img} ${imgSpinnerClass}`}
+                  >
+                    <div className={styles.thumb}>
+                      <img
+                        src={item.images[0].url}
+                        alt={translations[lang].main_page.brand_nature}
+                        onLoad={handleLoadingImageComplete}
+                      />
+                      <div className={styles.overlay}></div>
+                      <div className={styles.titleItem}>
+                        {item.title}
+                      </div>
+                    </div>
+
+                  </Link>
+                </div>
+              ))}
+          </div>
         </div>
       )}
-      {isMedia490 && <MainSlider images={images} />}
+      {/* {isMedia490 && <MainSlider images={images} />} */}
     </>
   )
 }
