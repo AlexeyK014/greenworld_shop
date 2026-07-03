@@ -1,6 +1,6 @@
 # 🌱 GreenShop
 
-Full-stack интернет-магазин растений, разработанный на Next.js и TypeScript.
+Full-stack интернет-магазин микрозелени, разработанный на Next.js и TypeScript.
 
 ## О проекте
 
