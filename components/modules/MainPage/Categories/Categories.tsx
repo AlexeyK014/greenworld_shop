@@ -56,7 +56,7 @@ const Categories = () => {
               >
                 <Image
                   src={img1}
-                  alt="Cloth"
+                  alt="Microgreen"
                   className="transition-opacity opacity-0 duration"
                   onLoad={handleLoadingImageComplete}
                 />

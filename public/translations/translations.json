@@ -20,7 +20,7 @@
       "loading": "Loading...",
       "ad": "Ad",
       "accept": "Accept",
-      "cookie_text": "Rostelecom processes <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> for the correct operation of the site and personalization of services, incl. using metric programs and analytics systems. You can prevent the processing of <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> in your browser settings.",
+      "cookie_text": "GreenShop processes <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> for the correct operation of the site and personalization of services, incl. using metric programs and analytics systems. You can prevent the processing of <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> in your browser settings.",
       "not_found_title": "Looks like someone stole the page!",
       "ops": "Oops...",
       "not_found_subtitle": "Our <a href=\"https://support.google.com/accounts/answer/61416\">secret service</a> is already investigating",
@@ -93,7 +93,7 @@
       "news": "News"
     },
     "footer": {
-      "copyright": "«Rostelecom» All rights reserved",
+      "copyright": "«GreenShop» All rights reserved",
       "policy": "Data processing policy",
       "privacy": "Privacy policy",
       "mobile_version": "Mobile version",
@@ -316,7 +316,7 @@
       "loading": "Загрузка...",
       "ad": "Реклама",
       "accept": "Принять",
-      "cookie_text": "ПАО «Ростелеком» обрабатывает <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> для корректной работы сайта и персонализации сервисов, в т.ч. с использованием метрических программ и систем аналитик. Вы можете запретить обработку <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> в настройках браузера.",
+      "cookie_text": "ИП «ГринШоп» обрабатывает <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> для корректной работы сайта и персонализации сервисов, в т.ч. с использованием метрических программ и систем аналитик. Вы можете запретить обработку <a href=\"https://support.google.com/accounts/answer/61416\">Cookies</a> в настройках браузера.",
       "not_found_title": "Кажется кто то украл страницу!",
       "ops": "Упс...",
       "not_found_subtitle": "Наша <a href=\"/\">секретная служба</a> уже ведет расследование",
@@ -389,7 +389,7 @@
       "news": "Новости"
     },
     "footer": {
-      "copyright": "«Ростелеком» Все права защищены",
+      "copyright": "«ГринШоп» Все права защищены",
       "policy": "Политика обработки данных",
       "privacy": "Политика конфиденциальности",
       "mobile_version": "Мобильная версия",

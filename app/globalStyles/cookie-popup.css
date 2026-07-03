@@ -3,8 +3,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px 0;
-  background-color: #101828;
+  padding: 20px 0;
+  background-color: #14481d;
   z-index: 200;
 }
 
@@ -50,8 +50,8 @@
   border-radius: 32px;
   padding: 12px 24px !important;
   font-weight: 500;
-  color: #fff;
-  background-color: #9466ff !important;
+  color: #007000;
+  background-color: #ffffff !important;
 }
 
 @media (max-width: 560px) {
